@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Google Maps Demo',
       home: MapSample(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
