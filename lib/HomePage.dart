@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
                   shadows: <Shadow>[
                     Shadow(
                       offset: Offset(2, 2),
-                      blurRadius: 5.0,
+                      blurRadius: 10.0,
                       color: Color.fromARGB(255, 0, 0, 0),
                     ),
                   ],
