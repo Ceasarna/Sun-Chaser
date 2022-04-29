@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Map.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Container()), //Replace Container() with call to account-page.
+                    MaterialPageRoute(builder: (context) => Map()), //Replace Container() with call to account-page.
                   );
                 },
                 child: const Text(
