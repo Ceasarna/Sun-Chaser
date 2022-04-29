@@ -9,10 +9,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Color buttonColor = const Color.fromARGB(204, 172, 123, 132);
+  Color pinkBackgroundColor = const Color.fromARGB(255, 245, 229, 229);
+  Color textColor = const Color.fromARGB(255, 79, 98, 114);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[100],
+      backgroundColor: pinkBackgroundColor,
       body: SafeArea(
         child: Center(
           child: Column(children: <Widget>[
@@ -22,6 +25,7 @@ class _HomePageState extends State<HomePage> {
                 'Sun Chasers',
                 style: TextStyle(
                   fontSize: 50,
+                  color: textColor,
                   fontFamily: 'Sacramento',
                   shadows: <Shadow>[
                     Shadow(
@@ -38,6 +42,7 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(
                   fontSize: 32,
                   fontFamily: 'Sacramento',
+                  color: textColor,
                   shadows: <Shadow>[
                     Shadow(
                       offset: Offset(2, 2),
@@ -52,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(200, 200),
-                  primary: Colors.black54,
+                  primary: buttonColor,
                   elevation: 100,
                   shape: const CircleBorder(),
                 ),
@@ -63,11 +68,11 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: const Text(
-                  'Find your sunshine',
+                  'FIND SPOT BY LOCATION',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 26,
-                      color: Colors.yellow,
+                      fontSize: 18,
+                      color: Colors.white,
                       shadows: <Shadow> [
                         Shadow(
                           offset: Offset(2, 2),
@@ -82,7 +87,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(200, 50),
-                primary: Colors.black54,
+                primary: buttonColor,
                 elevation: 100,
               ),
               onPressed: () {
@@ -91,10 +96,10 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => Container()), //Replace Container() with call to Map-page.
                 );
               },
-              child: const Text('Create account',
+              child: const Text('Sign in',
                   style: TextStyle(
                       fontSize: 18,
-                      color: Colors.yellow,
+                      color: Colors.white,
                       shadows: <Shadow> [
                         Shadow(
                           offset: Offset(2, 2),
