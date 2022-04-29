@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Color buttonColor = const Color.fromARGB(204, 172, 123, 132);
-  Color pinkBackgroundColor = const Color.fromARGB(255, 245, 229, 229);
+  Color pinkBackgroundColor = const Color.fromARGB(255, 240, 229, 229);
   Color textColor = const Color.fromARGB(255, 79, 98, 114);
   @override
   Widget build(BuildContext context) {
