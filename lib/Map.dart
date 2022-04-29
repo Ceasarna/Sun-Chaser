@@ -16,50 +16,44 @@ class MapState extends State<Map> {
     zoom: 14.4746,
   );
 
-  static const Marker _kGooglePlexMarker = Marker(
-    markerId:MarkerId('_kGooglePlex'),
-    infoWindow: InfoWindow(title: 'Gustavsberg'),
-    icon: BitmapDescriptor.defaultMarker,
-    position: LatLng(59.322092, 18.388238),
-    );
-  static const CameraPosition _kLake = CameraPosition(
-     // bearing: 192.8334901395799,
-      target: LatLng(59.40675254370429, 17.94530832905887),
-     // tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
-
-  static const Marker _kKistaMarker = Marker(
-    markerId:MarkerId('_kGooglePlex'),
-    infoWindow: InfoWindow(title: 'DSV Kista'),
-    icon: BitmapDescriptor.defaultMarker,
-    position: LatLng(59.40675254370429, 17.94530832905887),
-    );
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        //leading: IconButton(icon: Icon(Icons.search), onPressed:() {},),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.search), onPressed:() {},),
+        ],
+        title: TextField(),
+        backgroundColor: Color.fromARGB(255, 190, 146, 160),
+      ),
       body: GoogleMap(
         mapType: MapType.normal,
-       /* markers: {
-          _kGooglePlexMarker,
-          _kKistaMarker,
-        },*/
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To Kista!'),
-        icon: const Icon(Icons.directions_boat),
-      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromARGB(255, 190, 146, 160),
+        selectedItemColor: Colors.black,
+        items: const[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: "Liked",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings",
+          ),
+        ]),
     );
-  }
-
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
 
