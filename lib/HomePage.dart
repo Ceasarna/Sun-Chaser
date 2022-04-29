@@ -1,0 +1,111 @@
+import 'package:flutter/material.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.pink[100],
+      body: SafeArea(
+        child: Center(
+          child: Column(children: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(80, 80, 80, 0),
+              child: Text(
+                'Sun Chasers',
+                style: TextStyle(
+                  fontSize: 50,
+                  fontFamily: 'Sacramento',
+                  shadows: <Shadow>[
+                    Shadow(
+                      offset: Offset(2, 2),
+                      blurRadius: 5.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Text(
+              'The #1 Sunny Spot Finder',
+              style: TextStyle(
+                  fontSize: 32,
+                  fontFamily: 'Sacramento',
+                  shadows: <Shadow>[
+                    Shadow(
+                      offset: Offset(2, 2),
+                      blurRadius: 12.5,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ]
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(80, 100, 80, 80),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(200, 200),
+                  primary: Colors.black54,
+                  elevation: 100,
+                  shape: const CircleBorder(),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Container()), //Replace Container() with call to account-page.
+                  );
+                },
+                child: const Text(
+                  'Find your sunshine',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 26,
+                      color: Colors.yellow,
+                      shadows: <Shadow> [
+                        Shadow(
+                          offset: Offset(2, 2),
+                          blurRadius: 10.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ]
+                  ),
+                ),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(200, 50),
+                primary: Colors.black54,
+                elevation: 100,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Container()), //Replace Container() with call to Map-page.
+                );
+              },
+              child: const Text('Create account',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.yellow,
+                      shadows: <Shadow> [
+                        Shadow(
+                          offset: Offset(2, 2),
+                          blurRadius: 10.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ])
+              ),
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}

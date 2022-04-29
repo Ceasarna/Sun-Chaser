@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'Map.dart';
+import 'HomePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/*
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => HomePageState();
@@ -40,4 +42,4 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-}
+}*/
