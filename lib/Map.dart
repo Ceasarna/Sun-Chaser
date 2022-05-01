@@ -16,8 +16,10 @@ class MapState extends State<Map> {
     zoom: 14.4746,
   );
 
-  
-
+  int currentIndex = 0;
+  final screens =[
+    Map(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,23 +38,6 @@ class MapState extends State<Map> {
           _controller.complete(controller);
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255, 190, 146, 160),
-        selectedItemColor: Colors.black,
-        items: const[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: "Liked",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
-          ),
-        ]),
     );
   }
 }
