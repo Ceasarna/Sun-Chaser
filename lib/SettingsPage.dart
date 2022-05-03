@@ -1,10 +1,224 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:settings_ui/settings_ui.dart';
 
-class SettingsPage extends StatelessWidget {
-   @override
+// Standard color of app
+Color _backgroundColor = const Color.fromARGB(255, 190, 146, 160);
+
+// Color status of priceRange
+Color _colorContainerLow = Colors.yellow;
+Color _colorContainerMedium = _backgroundColor;
+Color _colorContainerHigh = _backgroundColor;
+
+// Logic status of priceRange
+Map<String, bool> _priceRangeBool = {
+  "LowPriceRange": true,
+  "MediumPriceRange": false,
+  "HighPriceRange": false
+};
+
+// Status of switches
+bool _cafeSwitch = true;
+bool _barSwitch = true;
+bool _restaurantSwitch = true;
+
+// Standard
+@override
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
+
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('SettingsPage',style: TextStyle(fontSize: 60),)),
-    );
+        appBar: AppBar(
+          //leading: IconButton(icon: Icon(Icons.search), onPressed:() {},),
+          centerTitle: true,
+          title: const Text(
+            'Settings',
+            style: TextStyle(
+              fontSize: 30,
+              color: Colors.grey,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(2, 2),
+                  blurRadius: 10.0,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ],
+            ),
+          ),
+          backgroundColor: _backgroundColor,
+        ),
+        body: SettingsList(
+          sections: [
+            SettingsSection(
+              title: const Text(
+                'Filter preferences',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ),
+              tiles: <SettingsTile>[
+                SettingsTile.switchTile(
+                  onToggle: (value) {
+                    setState(() {
+                      _cafeSwitch = value;
+                    });
+                  },
+                  initialValue: _cafeSwitch,
+                  leading: const Icon(Icons.local_cafe),
+                  title: const Text('Cafe'),
+                ),
+                SettingsTile.switchTile(
+                  onToggle: (value) {
+                    setState(() {
+                      _barSwitch = value;
+                    });
+                  },
+                  initialValue: _barSwitch,
+                  leading: const Icon(Icons.local_bar),
+                  title: const Text('Bar'),
+                ),
+                SettingsTile.switchTile(
+                  onToggle: (value) {
+                    setState(() {
+                      _restaurantSwitch = value;
+                    });
+                  },
+                  initialValue: _restaurantSwitch,
+                  leading: const Icon(Icons.local_restaurant),
+                  title: const Text('Restaurant'),
+                ),
+                SettingsTile(
+                  title: const Text(""),
+                  value: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              onClickPriceColor("LowPriceRange");
+                            });
+                            print("Tapped single dollarSign");
+                          },
+                          child: Container(
+                            height: 75,
+                            color: _colorContainerLow,
+                            margin:
+                                const EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: Expanded(
+                              flex:1,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const <Widget>[
+                                  Icon(
+                                    Icons.attach_money,
+                                    size:50,
+                                    textDirection: TextDirection.ltr,
+                                    semanticLabel: 'Icon',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              onClickPriceColor("MediumPriceRange");
+                            });
+                            print("Tapped double dollarSign");
+                          },
+                          child: Container(
+                            color: _colorContainerMedium,
+                            margin:
+                                const EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: const <Widget>[
+                                Icon(
+                                  Icons.attach_money,
+                                ),
+                                Icon(
+                                  Icons.attach_money,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              onClickPriceColor("HighPriceRange");
+                            });
+                            print("Tapped Tripple dollarSign");
+                          },
+                          child: Container(
+                            color: _colorContainerHigh,
+                            margin:
+                                const EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: const <Widget>[
+                                Icon(
+                                  Icons.attach_money,
+                                ),
+                                Icon(
+                                  Icons.attach_money,
+                                ),
+                                Icon(
+                                  Icons.attach_money,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ));
+  }
+}
+
+void onClickPriceColor(String priceRange) {
+  if (priceRange == "LowPriceRange") {
+    if (_priceRangeBool["LowPriceRange"] == true) {
+      _priceRangeBool["LowPriceRange"] = false;
+      _colorContainerLow = _backgroundColor;
+    } else {
+      _priceRangeBool["LowPriceRange"] = true;
+      _colorContainerLow = Colors.yellow;
+    }
+  } else if (priceRange == "MediumPriceRange") {
+    if (_priceRangeBool["MediumPriceRange"] == true) {
+      _priceRangeBool["MediumPriceRange"] = false;
+      _colorContainerMedium = _backgroundColor;
+    } else {
+      _priceRangeBool["MediumPriceRange"] = true;
+      _colorContainerMedium = Colors.yellow;
+    }
+  } else {
+    if (_priceRangeBool["HighPriceRange"] == true) {
+      _priceRangeBool["HighPriceRange"] = false;
+      _colorContainerHigh = _backgroundColor;
+    } else {
+      _priceRangeBool["HighPriceRange"] = true;
+      _colorContainerHigh = Colors.yellow;
+    }
   }
 }
