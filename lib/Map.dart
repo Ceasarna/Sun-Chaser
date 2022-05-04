@@ -9,7 +9,9 @@ class Map extends StatefulWidget {
 }
 
 class MapState extends State<Map> {
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
+
+  final TextEditingController _searchController =  TextEditingController();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(55.427320, 13.819257),
@@ -26,18 +28,30 @@ class MapState extends State<Map> {
       appBar: AppBar(
         //leading: IconButton(icon: Icon(Icons.search), onPressed:() {},),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.search), onPressed:() {},),
+          IconButton(icon: const Icon(Icons.search), onPressed:() {},),
         ],
-        title: TextField(),
-        backgroundColor: Color.fromARGB(255, 190, 146, 160),
+        title: TextFormField(
+          controller: _searchController,
+          textCapitalization: TextCapitalization.words,
+          decoration: const InputDecoration(hintText: 'Find your place'),
+          onChanged: (value) {
+            print(value);
+          },
+        ),
+        backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
+      body: Stack (
+        children: [
+          GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: _kGooglePlex,
+            onMapCreated: (GoogleMapController controller) {
+           _controller.complete(controller);
+           },
+          ),
+         // ElevatedButton(onPressed: () {},child: const Text("Search Placses"))
+        ],
+      )
     );
   }
 }
