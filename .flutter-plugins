@@ -2,3 +2,9 @@
 flutter_native_splash=/Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.1.6/
 flutter_plugin_android_lifecycle=/Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.5/
 google_maps_flutter=/Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.4/
+path_provider=/Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.9/
+path_provider_android=/Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.13/
+path_provider_ios=/Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.8/
+path_provider_linux=/Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.5/
+path_provider_macos=/Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.5/
+path_provider_windows=/Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.5/
