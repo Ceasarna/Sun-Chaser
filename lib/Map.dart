@@ -29,7 +29,7 @@ class MapState extends State<Map> {
 
   late GoogleMapController googleMapController;
 
-  final Mode _mode = Mode.overlay;
+  final Mode _mode = Mode.fullscreen;
 
   int currentIndex = 0;
   final screens =[
@@ -85,7 +85,7 @@ class MapState extends State<Map> {
                             focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: Colors.white))
                           ),
                           types: [""],
-                          components: [Component(Component.country, "usa")]);
+                          components: [Component(Component.country, "se")]);
     if (p != null) {
       displayPrediction(p,homeSacffoldKey.currentState);
     }
