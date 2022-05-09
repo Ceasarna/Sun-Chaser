@@ -94,7 +94,6 @@ class FormForFeedbackState extends State<FormForFeedback> {
 
       body: SafeArea(
         child: Center(
-    child: Flexible(
           child: Column(children: <Widget>[
           Container(
           padding: const EdgeInsets.fromLTRB(80, 20, 80, 0),
@@ -357,7 +356,6 @@ class FormForFeedbackState extends State<FormForFeedback> {
         ),
       ),
     ),
-    )
     );
   }
 }
