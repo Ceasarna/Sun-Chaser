@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'FeedbackPage.dart';
 import 'ManageAccountPage.dart';
 
 // Standard color of app
@@ -253,7 +254,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BottomNavPage()),
+                                builder: (context) => FormForFeedback()),
                           );
                         },
                         child: Container(

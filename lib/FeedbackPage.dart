@@ -63,7 +63,6 @@ class FormForFeedbackState extends State<FormForFeedback> {
             child: Text("Close",
               style: TextStyle(
                 fontSize: 25,
-                fontFamily: 'Sacramento',
                 color: appBarColor),
             ),
           ),
@@ -76,7 +75,6 @@ class FormForFeedbackState extends State<FormForFeedback> {
             child: Text("Send feedback",
                 style: TextStyle(
                 fontSize: 25,
-                fontFamily: 'Sacramento',
                 color: appBarColor),
             ),
             onPressed: () {
@@ -96,27 +94,26 @@ class FormForFeedbackState extends State<FormForFeedback> {
 
       body: SafeArea(
         child: Center(
+    child: Flexible(
           child: Column(children: <Widget>[
           Container(
-          padding: const EdgeInsets.fromLTRB(80, 50, 80, 0),
+          padding: const EdgeInsets.fromLTRB(80, 20, 80, 0),
             child: Text(
               'Give us feedback',
               style: TextStyle(
                 fontSize: 26,
-                fontFamily: 'Sacramento',
                 color: textColor,
 
               ),
             ),
           ),
 
-            const SizedBox(height: 50),
+            const SizedBox(height: 20),
 
             Text(
               'What do you think about our app?',
               style: TextStyle(
                 fontSize: 20,
-                fontFamily: 'Sacramento',
                 color: textColor,
               ),
             ),
@@ -240,30 +237,18 @@ class FormForFeedbackState extends State<FormForFeedback> {
           ],
         ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
 
             Text(
               'What is on your mind? 💕',
               style: TextStyle(
                 fontSize: 20,
-                fontFamily: 'Sacramento',
                 color: textColor,
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
 
-            Text(
-              'please select only one',
-              style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 10,
-                fontFamily: 'Sacramento',
-                color: textColor,
-              ),
-            ),
-
-            const SizedBox(height: 40),
 
             CheckboxListTile(
               title: const Text("Compliment"),
@@ -363,7 +348,6 @@ class FormForFeedbackState extends State<FormForFeedback> {
                   ),
                keyboardType: TextInputType.text,
                style: const TextStyle(
-               fontFamily: "Sacramento",
                 ),
               ),
             ),
@@ -373,6 +357,7 @@ class FormForFeedbackState extends State<FormForFeedback> {
         ),
       ),
     ),
+    )
     );
   }
 }
