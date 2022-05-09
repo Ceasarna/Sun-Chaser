@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'BottomNavPage.dart';
+import 'signInPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -93,7 +94,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Container()), //Replace Container() with call to Map-page.
+                  MaterialPageRoute(builder: (context) => SignInPage()), //Replace Container() with call to Map-page.
                 );
               },
               child: const Text('Sign in',
