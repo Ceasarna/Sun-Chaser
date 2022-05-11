@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+
 import 'Map.dart';
 import 'HomePage.dart';
+import 'user.dart';
+import 'globals.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       title: 'Flutter Google Maps Demo',
-      home: HomePage(),
+      home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

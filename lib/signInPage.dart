@@ -1,11 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'mysql.dart';
-
 import 'HomePage.dart';
 import 'main.dart';
+import 'user.dart';
+import 'package:flutter_applicationdemo/globals.dart';
 
 class SignInPage extends StatefulWidget{
   @override
@@ -14,22 +14,20 @@ class SignInPage extends StatefulWidget{
 
 class _SignInPageState extends State<SignInPage> {
   var db = mysql();
-  int loggedId = 0;
+  int loggedInID = 0;
+  late user loggedInUser;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   Future<void> loginVerification(String email, String password) async{
-    bool isValid = false;
     await db.getConnection().then((conn) async {
-      String sql = "select id from maen0574.user where email = '$email' and password = '$password'";
+      String sql = "select id, email, password from maen0574.user where email = '$email' and password = '$password'";
       await conn.query(sql).then((results){
         for(var row in results){
           setState(() {
           });
-          loggedId = row[0];
-          isValid = true;
-
-          //break;
+          loggedInUser = new user(row[0], row[1], row[2]);
+          loggedInID = loggedInUser.getID();
         }
       });
     });
@@ -37,6 +35,7 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
@@ -81,12 +80,14 @@ class _SignInPageState extends State<SignInPage> {
               ),
               onPressed: () async {
                 await loginVerification(emailController.text, passwordController.text);
-                if(loggedId != 0){
+                if(loggedInID != 0){
+                  LOGGED_IN_USER = loggedInUser;
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => HomePage()), //Replace Container() with call to account-page.
                   );
                 }
+                //print(loggedInUser.email + " " + loggedInUser.userID.toString());
               },
               child: Text('Sign In'),
             ),
