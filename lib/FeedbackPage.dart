@@ -52,30 +52,30 @@ class FormForFeedbackState extends State<FormForFeedback> {
         backgroundColor: buttonColor,
         title: Row(
 
-        children: <Widget>[
-          FlatButton(
-            textColor: Colors.white,
-            onPressed: () => Navigator.push(
+          children: <Widget>[
+            FlatButton(
+              textColor: Colors.white,
+              onPressed: () => Navigator.push(
                 context,
-              MaterialPageRoute(builder: (context) => BottomNavPage()),
-            ),
+                MaterialPageRoute(builder: (context) => BottomNavPage()),
+              ),
 
-            child: Text("Close",
-              style: TextStyle(
-                fontSize: 25,
-                color: appBarColor),
+              child: Text("Close",
+                style: TextStyle(
+                    fontSize: 25,
+                    color: appBarColor),
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
 
         actions: <Widget>[
           FlatButton(
             textColor: Colors.white,
             child: Text("Send feedback",
-                style: TextStyle(
-                fontSize: 25,
-                color: appBarColor),
+              style: TextStyle(
+                  fontSize: 25,
+                  color: appBarColor),
             ),
             onPressed: () {
               if (_formKey.currentState!.validate()) {
@@ -95,17 +95,17 @@ class FormForFeedbackState extends State<FormForFeedback> {
       body: SafeArea(
         child: Center(
           child: Column(children: <Widget>[
-          Container(
-          padding: const EdgeInsets.fromLTRB(80, 20, 80, 0),
-            child: Text(
-              'Give us feedback',
-              style: TextStyle(
-                fontSize: 26,
-                color: textColor,
+            Container(
+              padding: const EdgeInsets.fromLTRB(80, 20, 80, 0),
+              child: Text(
+                'Give us feedback',
+                style: TextStyle(
+                  fontSize: 26,
+                  color: textColor,
 
+                ),
               ),
             ),
-          ),
 
             const SizedBox(height: 20),
 
@@ -119,122 +119,122 @@ class FormForFeedbackState extends State<FormForFeedback> {
 
             const SizedBox(height: 10),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  pressedEmojiColor("VeryHappy");
-                });
-                print("Very happy");
-              },
-              child: Container(
-                color: _colorContainerVeryHappy,
-                height: 60,
-                margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Text(
-                    '😀',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 40,
-                    ),),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-            Expanded(
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    pressedEmojiColor("Happy");
-                  });
-                  print("Happy");
-                },
-                child: Container(
-                  color: _colorContainerHappy,
-                  height: 60,
-                  margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Text(
-                        '🙂',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 40,
-                        ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        pressedEmojiColor("VeryHappy");
+                      });
+                      print("Very happy");
+                    },
+                    child: Container(
+                      color: _colorContainerVeryHappy,
+                      height: 60,
+                      margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const <Widget>[
+                          Text(
+                            '😀',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 40,
+                            ),),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
 
-            Expanded(
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    pressedEmojiColor("MediumHappy");
-                  });
-                  print("MediumHappy");
-                },
-                child: Container(
-                  color: _colorContainerMediumHappy,
-                  height: 60,
-                  margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Text(
-                        '😑',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 40,
-                        ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        pressedEmojiColor("Happy");
+                      });
+                      print("Happy");
+                    },
+                    child: Container(
+                      color: _colorContainerHappy,
+                      height: 60,
+                      margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const <Widget>[
+                          Text(
+                            '🙂',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 40,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
 
-
-            Expanded(
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    pressedEmojiColor("Upset");
-                  });
-                  print("Upset");
-                },
-                child: Container(
-                  color: _colorContainerUpset,
-                  height: 60,
-                  margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Text(
-                        '😞',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 40,
-                        ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        pressedEmojiColor("MediumHappy");
+                      });
+                      print("MediumHappy");
+                    },
+                    child: Container(
+                      color: _colorContainerMediumHappy,
+                      height: 60,
+                      margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const <Widget>[
+                          Text(
+                            '😑',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 40,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+
+
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        pressedEmojiColor("Upset");
+                      });
+                      print("Upset");
+                    },
+                    child: Container(
+                      color: _colorContainerUpset,
+                      height: 60,
+                      margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const <Widget>[
+                          Text(
+                            '😞',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 40,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
 
             const SizedBox(height: 20),
 
@@ -269,7 +269,7 @@ class FormForFeedbackState extends State<FormForFeedback> {
 
             ),
 
-          Column(children: <Widget>[
+            Column(children: <Widget>[
               CheckboxListTile(
                 title: const Text("Complaint"),
                 value: check2,
@@ -290,50 +290,50 @@ class FormForFeedbackState extends State<FormForFeedback> {
 
               ),
 
-            CheckboxListTile(
-              title: const Text("Bug"),
-              value: check3,
-              onChanged: (newValue) {
-                setState(() {
+              CheckboxListTile(
+                title: const Text("Bug"),
+                value: check3,
+                onChanged: (newValue) {
+                  setState(() {
 
-                  check3 = newValue!;
-                  print("Bug");
+                    check3 = newValue!;
+                    print("Bug");
 
-                  if(check1 || check2 || check4){
-                    check1 = false;
-                    check2 = false;
-                    check4 = false;
-                  }
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,  //lägger checkboxen på vänster sida om texten
+                    if(check1 || check2 || check4){
+                      check1 = false;
+                      check2 = false;
+                      check4 = false;
+                    }
+                  });
+                },
+                controlAffinity: ListTileControlAffinity.leading,  //lägger checkboxen på vänster sida om texten
 
-            ),
+              ),
 
-            CheckboxListTile(
-              title: const Text("Mistake in sun accuracy"),
-              value: check4,
-              onChanged: (newValue) {
-                setState(() {
+              CheckboxListTile(
+                title: const Text("Mistake in sun accuracy"),
+                value: check4,
+                onChanged: (newValue) {
+                  setState(() {
 
-                  check4 = newValue!;
-                  print("Mistake in sun accuracy");
+                    check4 = newValue!;
+                    print("Mistake in sun accuracy");
 
-                  if(check1 || check2 || check3){
-                    check1 = false;
-                    check2 = false;
-                    check3 = false;
-                  }
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,  //lägger checkboxen på vänster sida om texten
+                    if(check1 || check2 || check3){
+                      check1 = false;
+                      check2 = false;
+                      check3 = false;
+                    }
+                  });
+                },
+                controlAffinity: ListTileControlAffinity.leading,  //lägger checkboxen på vänster sida om texten
 
-            ),
+              ),
 
-            const SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-            Padding(
-              padding: const EdgeInsets.all(40.0),
+              Padding(
+                padding: const EdgeInsets.all(40.0),
                 child: TextFormField(
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(20.0),
@@ -345,17 +345,17 @@ class FormForFeedbackState extends State<FormForFeedback> {
                       ),
                     ), //fillColor: Colors.green
                   ),
-               keyboardType: TextInputType.text,
-               style: const TextStyle(
+                  keyboardType: TextInputType.text,
+                  style: const TextStyle(
+                  ),
                 ),
               ),
-            ),
             ]
+            ),
+          ],
           ),
-        ],
         ),
       ),
-    ),
     );
   }
 }
