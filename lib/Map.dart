@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
+import 'package:http/http.dart' as http;
+
+
 
 
 class Map extends StatefulWidget {
@@ -15,17 +20,88 @@ const kGoogleApiKey = "AIzaSyAUmhd6Xxud8SwgDxJ4LlYlcntm01FGoSk";
 
 final homeSacffoldKey = GlobalKey<ScaffoldState>();
 
+List<_Marker> markers = [];
+
+
 class MapState extends State<Map> {
+
+  Future getMerkerData() async {
+    var url = Uri.parse('https://openstreetgs.stockholm.se/geoservice/api/b8e20fd7-5654-465e-8976-35b4de902b41/wfs?service=wfs&version=1.1.0&request=GetFeature&typeNames=od_gis:Markupplatelse&srsName=EPSG:4326&outputFormat=json');
+    var response = await http.get(url);
+
+    print('Response status: ${response.statusCode}');
+   // print('Response body: ${response.body.toString()}');
+    var jsonData = jsonDecode(response.body);
+
+   /* print(jsonData['features'][0]);
+
+    print(jsonData['features'][1]['properties']['Plats_1']);
+
+    print(jsonData['features'][0]['properties']['Gatunr_1']);
+
+    print(jsonData['features'][0]['properties']['Kategorityp']);
+
+    /*String data = jsonData['features'][0]['properties']['Kategorityp'];
+    print(data.contains('Tillfälliga bostäder'));*/
+    
+
+    print(jsonData['features'][1]['geometry']['coordinates']);*/
+
+    //print(jsonData['features'][0]['properties']['MAIN_ATTRIBUTE_VALUE']);
+  
+   // List<_Marker> markers = [];
+
+    for(var m in jsonData['features']) {
+      String data = m['properties']['Kategorityp'];
+      String typ = m['properties']['MAIN_ATTRIBUTE_VALUE'];
+      if(m['properties']['Kategorityp'] == "1.400I, Uteservering A-läge") {
+        print(m['properties']['Kategorityp']);
+        _Marker marker = _Marker(m['properties']['Plats_1'],m['properties']['Gatunr_1'],m['geometry']['coordinates']);
+        markers.add(marker);
+      }
+
+      print(markers.length);
+      
+      
+      /*for (var mar in markers) {
+        print(mar.Plats_1);
+        print(mar.Gatunr_1);
+        print(mar.coordinates[1]);
+        print(mar.coordinates[0]);
+      }*/
+
+      //print(m['properties']['Kategorityp']);
+    } 
+  }
+
   final Completer<GoogleMapController> _controller = Completer();
 
   final TextEditingController _searchController =  TextEditingController();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(55.427320, 13.819257),
+    target: LatLng(59.325027,18.068516),
     zoom: 14.4746,
   );
 
-  Set<Marker> markersList = {};
+  List<Marker> markersList = [];
+
+  @override
+  void initState() {
+    intilize();
+    super.initState();
+  }
+
+  intilize() {
+    Marker newMarker;
+    //for(var marker in markers) {
+      newMarker = Marker(
+        markerId: MarkerId(''),
+        position: LatLng(59.325027,18.068516),
+        );
+      markersList.add(newMarker);
+   // }
+  }
+
 
   late GoogleMapController googleMapController;
 
@@ -60,12 +136,12 @@ class MapState extends State<Map> {
           GoogleMap(
             mapType: MapType.normal,
             initialCameraPosition: _kGooglePlex,
-            markers: markersList,
+            markers: markersList.map((e) => e).toSet(),
             onMapCreated: (GoogleMapController controller) {
            _controller.complete(controller);
            },
           ),
-          ElevatedButton(onPressed: _handelPressButton
+          ElevatedButton(onPressed: getMerkerData
           ,child: const Text("Search Placses"))
         ],
       )
@@ -112,3 +188,12 @@ class MapState extends State<Map> {
   }
 }
 
+class _Marker {
+
+  var Plats_1;
+  var Gatunr_1;
+  var coordinates;
+
+  _Marker(this.Plats_1, this.Gatunr_1, this.coordinates);
+
+}
