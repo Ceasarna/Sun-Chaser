@@ -17,7 +17,6 @@ class _HomePageState extends State<HomePage> {
   Color textColor = const Color.fromARGB(255, 79, 98, 114);
   @override
   Widget build(BuildContext context) {
-    print(globals.LOGGED_IN_USER.userID);
     return Scaffold(
       backgroundColor: pinkBackgroundColor,
       body: SafeArea(
