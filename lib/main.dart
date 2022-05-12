@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_applicationdemo/GoogleSignInProvider.dart';
 import 'package:provider/provider.dart';
+
 import 'Map.dart';
 import 'HomePage.dart';
+import 'user.dart';
+import 'globals.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  
+
   runApp(MyApp());
 }
 

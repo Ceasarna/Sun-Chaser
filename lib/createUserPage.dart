@@ -1,81 +1,46 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
-import 'package:flutter_applicationdemo/GoogleSignInProvider.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_applicationdemo/HomePage.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:provider/provider.dart';
-import 'GoogleSignInProvider.dart';
 
-class LoginPage extends StatefulWidget {
-  _LoginPageState createState() => _LoginPageState();
+import 'package:flutter_applicationdemo/HomePage.dart';
+
+class createUserPage extends StatefulWidget {
+  _createUserPageState createState() => _createUserPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _createUserPageState extends State<createUserPage> {
   Color pinkBackgroundColor = const Color.fromARGB(255, 240, 229, 229);
   Color textColor = const Color.fromARGB(255, 79, 98, 114);
-
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: pinkBackgroundColor,
       body: SafeArea(
-        child: createLoginPageContent(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            createBackButton(),
+            createTitleText(),
+            Text(
+              "Create Log in:",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+            createUsernameField(),
+            createEmailField(),
+            createPasswordField(),
+            createCreateAccountButton(),
+            Padding(
+              padding: EdgeInsets.only(top: 100),
+              child: createContinueWithoutLoggingInButton(),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  // Builds all the components of the page
-  Column createLoginPageContent() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        createBackButton(),
-        createTitleText(),
-        Text(
-          "Create Log in:",
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-        ),
-        createUsernameField(),
-        createEmailField(),
-        createPasswordField(),
-        createCreateAccountButton(),
-        Text("or"),
-        createGoogleButton(),
-        Padding(
-          padding: EdgeInsets.only(top: 100),
-          child: createContinueWithoutLoggingInButton(),
-        ),
-      ],
-    );
-  }
-
-  SignInButton createGoogleButton() {
-    return SignInButton(Buttons.Google, onPressed: () async {
-      final provider =
-          Provider.of<GoogleSignInProvider>(context, listen: false);
-      await provider.logIn();
-      if (provider.user == null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  LoginPage()), //Replace Container() with call to Map-page.
-        );
-      } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  HomePage()), //Replace Container() with call to Map-page.
-        );
-      }
-    });
-  }
 
   Text createTitleText() {
     return Text(
@@ -160,7 +125,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 } // _LoginPageState
-
 class InputField extends StatelessWidget {
   final Icon icon;
   final String text;
