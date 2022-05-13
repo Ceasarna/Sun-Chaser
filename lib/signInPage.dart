@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'mysql.dart';
 
 import 'HomePage.dart';
-import 'main.dart';
 
 class SignInPage extends StatefulWidget{
   @override
