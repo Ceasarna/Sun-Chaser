@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'BottomNavPage.dart';
 import 'package:flutter_applicationdemo/CreateAccountPage.dart';
+import 'globals.dart';
 import 'signInPage.dart';
 import 'user.dart';
 import 'globals.dart' as globals;
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   Color textColor = const Color.fromARGB(255, 79, 98, 114);
   @override
   Widget build(BuildContext context) {
+    print(LOGGED_IN_USER.userID);
     return Scaffold(
       backgroundColor: pinkBackgroundColor,
       body: SafeArea(
@@ -136,7 +138,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LoginPage()), //Replace Container() with call to Map-page.
+              MaterialPageRoute(builder: (context) => CreateAccountPage()), //Replace Container() with call to Map-page.
             );
           },
           child: const Text('Create account',
