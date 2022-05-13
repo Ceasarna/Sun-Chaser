@@ -41,12 +41,12 @@ class FormForFeedbackState extends State<FormForFeedback> {
   Future<void> feedbackVerification(String satisfaction, String typeOfFeedback, String writtenFeedback ) async {
     await dataBase.getConnection().then((conn) async {
       print("här");
-      String sql = "select * from maen0574.user";
+      String sql = "INSERT INTO maen0574.User_feedback (id, Satisfaction, Type_of_feedback, Written_feedback) VALUES (null, '$satisfaction', '$typeOfFeedback', '$writtenFeedback');";
       await conn.query(sql).then((results) {
         for(var row in results) {
           print(row[0].toString());
           setState(() {});
-          form(row[0], row[1], row[2]);
+          form(row[0].toString(), row[1].toString(), row[2].toString());
         }
     });
     });
@@ -71,18 +71,7 @@ class FormForFeedbackState extends State<FormForFeedback> {
         backgroundColor: buttonColor,
         title: Row(
           children: <Widget>[
-            FlatButton(
-              textColor: Colors.white,
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => BottomNavPage()),
-              ),
-              child: Text("Close",
-                style: TextStyle(
-                    fontSize: 25,
-                    color: appBarColor),
-              ),
-            ),
+
 
           FlatButton(
             child: Text("Send feedback",
@@ -92,7 +81,7 @@ class FormForFeedbackState extends State<FormForFeedback> {
             ),
               onPressed: () async {
                 await feedbackVerification(satisfaction.text, typeOfFeedback.text, writtenFeedback.text);
-                  if (_formKey.currentState!.validate()) {
+                  /*if (_formKey.currentState!.validate()) {
 
                     print(satisfaction.text);
                     print(typeOfFeedback.text);
@@ -103,7 +92,7 @@ class FormForFeedbackState extends State<FormForFeedback> {
                       MaterialPageRoute(builder: (context) =>
                           BottomNavPage()), //Replace Container() with call to account-page.
                     );
-                   }
+                   }*/
               }
           ),
         ],
@@ -342,7 +331,7 @@ class FormForFeedbackState extends State<FormForFeedback> {
                   setState(() {
 
                     check4 = newValue!;
-                    typeOfFeedback.text = "Upset";
+                    typeOfFeedback.text = "Mistake in sun accuracy";
                     print(typeOfFeedback.text);
 
                     if(check1 || check2 || check3){
