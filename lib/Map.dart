@@ -62,13 +62,18 @@ class MapState extends State<Map> {
 
       print(markers.length);
       
-      
-      /*for (var mar in markers) {
+      int count = 0;
+      for (var mar in markers) {
         print(mar.Plats_1);
         print(mar.Gatunr_1);
         print(mar.coordinates[1]);
         print(mar.coordinates[0]);
-      }*/
+        count++;
+        print(count);
+        if (count == 100) {
+          break;
+        }
+      }
 
       //print(m['properties']['Kategorityp']);
     } 
@@ -92,13 +97,128 @@ class MapState extends State<Map> {
   }
 
   intilize() {
-    Marker newMarker;
+    Marker marker_1;
     //for(var marker in markers) {
-      newMarker = Marker(
-        markerId: MarkerId(''),
-        position: LatLng(59.325027,18.068516),
+      marker_1 = const Marker(
+        markerId: MarkerId('id_1'),
+        position: LatLng(59.320671571444514, 18.055854162299937),
+        infoWindow: InfoWindow(
+          title: 'Münchenbryggeriet Beer Garden',
+          snippet: 'Uteservering',
+        )
         );
-      markersList.add(newMarker);
+
+      Marker marker_2 = const Marker(
+        markerId: MarkerId('id_2'),
+        position: LatLng(59.33115735285231, 18.074432570090742),
+        infoWindow: InfoWindow(
+          title: 'Le Hibou',
+          snippet: 'Uteservering',
+        )
+        );
+
+      Marker marker_3 = const Marker(
+        markerId: MarkerId('id_3'),
+        position: LatLng(59.3315552932853, 18.092751076985277),
+        infoWindow: InfoWindow(
+          title: 'Strandbryggan',
+          snippet: 'Uteservering',
+        )
+        );
+
+      Marker marker_4 = const Marker(
+        markerId: MarkerId('id_4'),
+        position: LatLng(59.33632582609118, 18.072980646196587),
+        infoWindow: InfoWindow(
+          title: 'Stureplan 1',
+          snippet: 'Uteservering',
+        )
+        );
+
+      Marker marker_5 = const Marker(
+        markerId: MarkerId('id_5'),
+        position: LatLng(59.3240158318325, 18.070690101341437),
+        infoWindow: InfoWindow(
+          title: 'Bågspännaren Bar & Cafe',
+          snippet: 'Uteservering',
+        )
+        );
+
+      Marker marker_6 = const Marker(
+        markerId: MarkerId('id_6'),
+        position: LatLng(59.31905195030728, 18.075349015415547),
+        infoWindow: InfoWindow(
+          title: 'Mosebacketerrassen',
+          snippet: 'Uteservering',
+        )
+        );
+
+      Marker marker_7 = const Marker(
+        markerId: MarkerId('id_7'),
+        position: LatLng(59.31583756143469, 18.072591381467536),
+        infoWindow: InfoWindow(
+          title: 'Snaps Bar & Bistro',
+          snippet: 'Uteservering',
+        )
+        );
+      
+      Marker marker_8 = const Marker(
+        markerId: MarkerId('id_8'),
+        position: LatLng(59.315129508641505, 18.074243159987006),
+        infoWindow: InfoWindow(
+          title: 'Kvarnen',
+          snippet: 'Uteservering',
+        )
+        );
+      
+      Marker marker_9 = const Marker(
+        markerId: MarkerId('id_9'),
+        position: LatLng(59.31533181094423, 18.070972638518455),
+        infoWindow: InfoWindow(
+          title: 'Neverland Pub & Restaurang',
+          snippet: 'Uteservering',
+        )
+        );
+
+      Marker marker_10 = const Marker(
+        markerId: MarkerId('id_10'),
+        position: LatLng(59.31578389646754, 18.071146819010995),
+        infoWindow: InfoWindow(
+          title: 'Baras Imperium',
+          snippet: 'Uteservering',
+        )
+        );
+
+      Marker marker_11 = const Marker(
+        markerId: MarkerId('id_11'),
+        position: LatLng(59.31549103673382, 18.035425964557245),
+        infoWindow: InfoWindow(
+          title: 'YUC Tanto',
+          snippet: 'Uteservering',
+        )
+        );
+
+      Marker marker_12 = const Marker(
+        markerId: MarkerId('id_12'),
+        position: LatLng(59.314826329005506, 18.03317611771755),
+        infoWindow: InfoWindow(
+          title: 'Loopen',
+          snippet: 'Uteservering',
+        )
+        );
+    
+      markersList.add(marker_1);
+      markersList.add(marker_2);
+      markersList.add(marker_3);
+      markersList.add(marker_4);
+      markersList.add(marker_5);
+      markersList.add(marker_6);
+      markersList.add(marker_7);
+      markersList.add(marker_8);
+      markersList.add(marker_9);
+      markersList.add(marker_10);
+      markersList.add(marker_11);
+      markersList.add(marker_12);
    // }
   }
 
@@ -141,7 +261,7 @@ class MapState extends State<Map> {
            _controller.complete(controller);
            },
           ),
-          ElevatedButton(onPressed: getMerkerData
+          ElevatedButton(onPressed: _handelPressButton
           ,child: const Text("Search Placses"))
         ],
       )
