@@ -133,13 +133,13 @@ class _VenuePageState extends State<VenuePage> {
                 child: Image.network(validateAndGetImageLink()),
               ),
             ]),
-            Row(
-              children: const [
-                Text(
-                  'Placeholder for image',
-                ),
-              ],
-            ),
+            // Row(
+            //   children: const [
+            //     Text(
+            //       'Placeholder for image',
+            //     ),
+            //   ],
+            // ),
             Row(children: [
               Expanded(
                   child: Column(
