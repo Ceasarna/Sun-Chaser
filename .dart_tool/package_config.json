@@ -111,7 +111,7 @@
     },
     {
       "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.5",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -122,6 +122,12 @@
       "languageVersion": "2.1"
     },
     {
+      "name": "flutter_signin_button",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_signin_button-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/marahzeibak/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -130,6 +136,12 @@
     {
       "name": "flutter_web_plugins",
       "rootUri": "file:///Users/marahzeibak/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "font_awesome_flutter",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-9.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -183,7 +195,7 @@
     },
     {
       "name": "google_maps_flutter",
-      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.4",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.5",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -196,6 +208,36 @@
     {
       "name": "google_maps_webservice",
       "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_webservice-0.0.20-nullsafety.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_sign_in",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_sign_in_android",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_android-5.2.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_sign_in_ios",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_ios-5.2.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_sign_in_platform_interface",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_platform_interface-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_sign_in_web",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.10.1+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -303,31 +345,31 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.9",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.10",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.13",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.14",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "path_provider_ios",
-      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.8",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.9",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "path_provider_linux",
-      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.5",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider_macos",
-      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.5",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -339,7 +381,7 @@
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.5",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -366,6 +408,12 @@
       "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/process-4.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "quiver",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "rxdart",
@@ -476,7 +524,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-05-05T19:51:06.339214Z",
+  "generated": "2022-05-11T08:59:18.372523Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

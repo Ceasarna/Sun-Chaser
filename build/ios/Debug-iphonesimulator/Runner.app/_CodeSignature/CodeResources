@@ -110,7 +110,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		3CXB+Yqcx62Hid4WQ3OZqZWp0H0=
+		xd1emxG9pYWw/kK3HAwzO+tVVDY=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -118,19 +118,19 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		aOsqU4R9qmfrxYPXVlC/50hJijM=
+		1PwSsrCtTE29pUAlOog5THq7nc0=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		/yVOqyac0nxDoHXHHOwHMbJkdIA=
+		xiM2HurphezPKccJ7pS9KOf4758=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
-		9zhfsIyAn5ryhK3N0l3p9tr+GGE=
+		nvolsdw14/yVLCY3gpVeLg+xhDs=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		TXmTSbevGMNJFFaqFJ6M8KOdsuM=
+		uwcr//r/x6yLnjdKTZWwn2APBr4=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/Courgette-Regular.ttf</key>
 		<data>
@@ -158,7 +158,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		2UIgHIohv/00blD5reP+b6aK9l4=
+		8j1Z81plqhGrL9lr/CLOZ0UZDZo=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -172,13 +172,73 @@
 		<data>
 		/EjTyBzj/nusE+LbwLayR22clfo=
 		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/2.0x/facebook_new.png</key>
+		<data>
+		wsvjgJWTRgfpc2dHMHwZPKkyZGs=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/2.0x/google_dark.png</key>
+		<data>
+		rpAxPEeBl3sL+Bt0aHp2hDmiONs=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/2.0x/google_light.png</key>
+		<data>
+		yFU/skGVK140i1TenTibYoow7cQ=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/3.0x/facebook_new.png</key>
+		<data>
+		C8ShmQ9LsdcExbbsghUpxj4h5Oo=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/3.0x/google_dark.png</key>
+		<data>
+		ZxQ7Ofrt7UMTpSfPzye7CTJycXI=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/3.0x/google_light.png</key>
+		<data>
+		7tff4P+ysEgljcgzmErrqfjcsWw=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/facebook_new.png</key>
+		<data>
+		XG2mV8SALzXfOu+sSsNb3CZwnZc=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/google_dark.png</key>
+		<data>
+		MjWIqUgu7liLZWzQeMGn8FFBd5Y=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/google_light.png</key>
+		<data>
+		AKzmlW2KCuNghpE/NjMH07X42V8=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf</key>
+		<data>
+		9K4M4LFRtO0XT/e548Ht8/ou2QU=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf</key>
+		<data>
+		TwxaL9PbSu7YG4pf8JX5PQN7/ow=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf</key>
+		<data>
+		qCSzIeujm7QkMIhEZjtJuPn4xMA=
+		</data>
 		<key>Frameworks/App.framework/flutter_assets/vm_snapshot_data</key>
 		<data>
 		kzk1wp8qHso+VmYD8lJ5+HidZCw=
 		</data>
+		<key>Frameworks/AppAuth.framework/AppAuth</key>
+		<data>
+		JWS22Twb1+ZD0eeE9zd0baQ0pJg=
+		</data>
+		<key>Frameworks/AppAuth.framework/Info.plist</key>
+		<data>
+		KdKDUXtFzO0B/Bm1hs95mVgdD/8=
+		</data>
+		<key>Frameworks/AppAuth.framework/_CodeSignature/CodeResources</key>
+		<data>
+		fd9GjmKeQRNvAb0hJzCJhEAIUW0=
+		</data>
 		<key>Frameworks/Flutter.framework/Flutter</key>
 		<data>
-		JP3RaUQ0lnmiDatc3JPZr4GOrWA=
+		oDFnEsCdhT2214sYo4yPnk9D4Jc=
 		</data>
 		<key>Frameworks/Flutter.framework/Headers/Flutter.h</key>
 		<data>
@@ -260,6 +320,30 @@
 		<data>
 		1QumeTTkdhWvmY7i40QoJewEapE=
 		</data>
+		<key>Frameworks/GTMAppAuth.framework/GTMAppAuth</key>
+		<data>
+		t7ydw8RbFIQKKIixDinO/wECJcA=
+		</data>
+		<key>Frameworks/GTMAppAuth.framework/Info.plist</key>
+		<data>
+		QMZODh4/ydwcQG1NCp9RGnJlGzs=
+		</data>
+		<key>Frameworks/GTMAppAuth.framework/_CodeSignature/CodeResources</key>
+		<data>
+		K4UvCKcb74bFIwic9r51e+folFg=
+		</data>
+		<key>Frameworks/GTMSessionFetcher.framework/GTMSessionFetcher</key>
+		<data>
+		uEj/idLg+wx8CizUAoTmKwEMAsI=
+		</data>
+		<key>Frameworks/GTMSessionFetcher.framework/Info.plist</key>
+		<data>
+		JG+p3Ak1iikIuErH+4symuROcts=
+		</data>
+		<key>Frameworks/GTMSessionFetcher.framework/_CodeSignature/CodeResources</key>
+		<data>
+		Om9u0MGV7Ui9/zJvBBOjrfuLDHE=
+		</data>
 		<key>Frameworks/flutter_native_splash.framework/Info.plist</key>
 		<data>
 		BIs80x8r+Vwk78PviDb0CsUcybk=
@@ -306,7 +390,7 @@
 		</data>
 		<key>Frameworks/path_provider_ios.framework/path_provider_ios</key>
 		<data>
-		jy7kAre661Uug38OvkE0RcF7vPo=
+		IH4h4IpdvTgS1GFL/P887Sr8+KY=
 		</data>
 		<key>GoogleMaps.bundle/GMSCacheStorage.momd/Storage.mom</key>
 		<data>
@@ -1097,6 +1181,368 @@
 		<data>
 		bZO83sDIgdLBtWxZ7jRBvY17C6A=
 		</data>
+		<key>GoogleSignIn.bundle/Info.plist</key>
+		<data>
+		BfmsbcfBh93cy6vWTriZJESBAgw=
+		</data>
+		<key>GoogleSignIn.bundle/Roboto-Bold.ttf</key>
+		<data>
+		RzJ98PNefNfIZFh0iXp0SWl1RK4=
+		</data>
+		<key>GoogleSignIn.bundle/ar.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			303DoAw6564UTefSVQ1oZYc3qnw=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ca.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			G87CCeyLbBFluKtputCXLyuuMFM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/cs.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yFnW3qoQvx46nta2ymtpqQcq3kM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/da.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Ps1UjJkLPJU1KVqjKIGo3C/7o7A=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/de.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ayCZ7alU/ec+sI+A6TSoEyqytdw=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/el.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			DCfi3yQuhPGwql7/NJZ4HjVQneE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/en.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			abhi3BU5/ZWaUMKlntWlHWqGpfk=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/en_GB.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0lsu4RiFCdBf8Jvk0BvK8EACUHo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/es.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			N8jwyrIyE56IdfegOMV4asFxW5k=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/es_MX.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aW1OHqFSDghXrYPHIFlBVTwJs5Y=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/fi.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VmFMBw4CJIpFOwClRBqL7M7FBmg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/fr.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GfZi7uaUI9sYh+7mPilol9r1hns=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/fr_CA.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FHV7Rjb8AIowCXoy2OZVlHb/f5M=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/google.png</key>
+		<data>
+		guERtxRSG8LklxczLu47JIwLjiU=
+		</data>
+		<key>GoogleSignIn.bundle/google@2x.png</key>
+		<data>
+		4UwXGGzo+UtMgR0hUDrtRbq4Wqk=
+		</data>
+		<key>GoogleSignIn.bundle/google@3x.png</key>
+		<data>
+		A1wRWy89eRjMuVCP4K7S0AClNTw=
+		</data>
+		<key>GoogleSignIn.bundle/he.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KpqYgBkto9rluXPKrjZMpQO5rx4=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/hi.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			TBYaSGGlRvqRJYv2Kp26nqOug0E=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/hr.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			IfwrDBVvNQHoLgfylkonWUcZNyw=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/hu.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			kBhoMRUFxGHRLNiFpEZ6F5Ss+Vw=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/id.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RJdzuwS/ac96dBhObcP4BM4Fwoo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/it.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HUlbmaWbTum+Cuk6x/CJLIO9NYI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ja.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			hp126s/hAvYhLqiKQo9XYCxRksM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ko.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			U1k8TNgQtnA7sqZDbCG9hODqcqs=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ms.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+4Dym+NckmP4noUr0CSqCbc0DXM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/nb.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xTn1/cRwzAuhLazLKMcL3WdVGdQ=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/nl.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vMMA/ULgN4wr0uzD6/9j84tywmE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/pl.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dWSBN/AfZa1Wdb7Cd5/OqqXRPa8=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/pt.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rORKnVPWt6r1ZtGBFsnFaNI0f54=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/pt_BR.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rORKnVPWt6r1ZtGBFsnFaNI0f54=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/pt_PT.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dY1FGrGECitvn/y9S5LwPkkyGeA=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ro.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7d+jdeQAgxcUy2KxbDZw25mX6jE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ru.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ezAKOmDrat+UKBRDBg63jgk/XyA=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/sk.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rPDfLvFNuLQq3PlkUwdPwIXAJ/0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/sv.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZvZcrRs9Ld5yDPosiRUbUwdRbUM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/th.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XeneSLZ52p7BzSK0TSnzrfK6Z4Y=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/tr.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Dy7YJ0fhqKACNUlwxSJCl+hVDa0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/uk.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			raNg10FOgBNPkQvTQcozG4NmEz4=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/vi.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			L7KEHwv3/ug+48NgPX4SD9zzTBo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/zh_CN.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dEjKhPIu8fVYLc+86C5X6d/q4QE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/zh_TW.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2inFk+W2tYud0UBxzrhL8R+cDAc=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Info.plist</key>
 		<data>
 		lrnHk9Td3YwxVYZRjXGLm9s1En8=
@@ -1398,11 +1844,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3CXB+Yqcx62Hid4WQ3OZqZWp0H0=
+			xd1emxG9pYWw/kK3HAwzO+tVVDY=
 			</data>
 			<key>hash2</key>
 			<data>
-			OpeHP3hvq69a9Nqw3xYFHHTZgLLQQ0SidC8MDLEFP1w=
+			Ub4NyOzV8sWQG3OjOJtBiB9WzTljtnhoNLuhbKCdkaM=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -1420,44 +1866,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aOsqU4R9qmfrxYPXVlC/50hJijM=
+			1PwSsrCtTE29pUAlOog5THq7nc0=
 			</data>
 			<key>hash2</key>
 			<data>
-			ufhpamv3UaCF3yI+C3ECHp/GIQ6GjPAN3gBv3zy6qW0=
+			BR8yg8qvd/8ykV9KVxQoVc1xPBHWbgYeSYzdVYj0VG0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/yVOqyac0nxDoHXHHOwHMbJkdIA=
+			xiM2HurphezPKccJ7pS9KOf4758=
 			</data>
 			<key>hash2</key>
 			<data>
-			OAQ20DUVA2wr6Fb0yrQnAHTPZbJG8Ag/GCdac/DdLEY=
+			RyYhF/x/wm+G6MZocFgvAO19LMjMemccfn0a0rghUJ0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			9zhfsIyAn5ryhK3N0l3p9tr+GGE=
+			nvolsdw14/yVLCY3gpVeLg+xhDs=
 			</data>
 			<key>hash2</key>
 			<data>
-			80+MxP70da6sFNf4EbE38KUnPun0arkNI37puI8bA7I=
+			3osED0JtIrnO/fLMgMteC7/ZcTHqyc+hk1ZDnZrqDDI=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TXmTSbevGMNJFFaqFJ6M8KOdsuM=
+			uwcr//r/x6yLnjdKTZWwn2APBr4=
 			</data>
 			<key>hash2</key>
 			<data>
-			CUUAR6PJnXENWQZNKkxUQsz/3QcCZajwxDViV0hF+dE=
+			q8GjpdBfXbP9h1HIdrGdo7YiZoG/fNPZ4TtPenV7P4Y=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/Courgette-Regular.ttf</key>
@@ -1530,11 +1976,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2UIgHIohv/00blD5reP+b6aK9l4=
+			8j1Z81plqhGrL9lr/CLOZ0UZDZo=
 			</data>
 			<key>hash2</key>
 			<data>
-			opzgxq5GLCBIxILhczKK7u1jAGPuXillG06aRagyN6g=
+			vGmbNkeIaJTAq5oyv3p31ZuWtpWO6qBu+IoOBehmveQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -1570,6 +2016,138 @@
 			Baqn3AhGOQS1CMlsNaXeNDA+oQ+naYgqA+4heYl97iw=
 			</data>
 		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/2.0x/facebook_new.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wsvjgJWTRgfpc2dHMHwZPKkyZGs=
+			</data>
+			<key>hash2</key>
+			<data>
+			pxnNpeFWC8M+w0qsOisMJySqQlMqHFzIrzWC3NYWhJE=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/2.0x/google_dark.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rpAxPEeBl3sL+Bt0aHp2hDmiONs=
+			</data>
+			<key>hash2</key>
+			<data>
+			xqAdoh5ef6DNW8CurveVgMot1bkwmdZRbAOwGkHrf9Q=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/2.0x/google_light.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yFU/skGVK140i1TenTibYoow7cQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			JIlZJwqXe8WyW9aq4kCb5secdhxkh7BXbILq4um+pc8=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/3.0x/facebook_new.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			C8ShmQ9LsdcExbbsghUpxj4h5Oo=
+			</data>
+			<key>hash2</key>
+			<data>
+			MWoizFjctw7wKOyXpv7J6j/S3vqqtZT7M4aMZ5S03VM=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/3.0x/google_dark.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZxQ7Ofrt7UMTpSfPzye7CTJycXI=
+			</data>
+			<key>hash2</key>
+			<data>
+			XODgPvRzzyvJITR9YTn71eiz479/YDlg2i0XJO4MFec=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/3.0x/google_light.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7tff4P+ysEgljcgzmErrqfjcsWw=
+			</data>
+			<key>hash2</key>
+			<data>
+			4PWajBy+Yu+sO1ZSH5Ey46Q00l1Mb9Hp5hE1dUD+ZMY=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/facebook_new.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XG2mV8SALzXfOu+sSsNb3CZwnZc=
+			</data>
+			<key>hash2</key>
+			<data>
+			vz5RfgC+MGor2SKuMWaCJwbJ2RTdTT6jxIZwzceF/gs=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/google_dark.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MjWIqUgu7liLZWzQeMGn8FFBd5Y=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZHcAi3UokXzMpeOUL0n4xUhkJFAefVH5lGql2DQdU64=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_signin_button/assets/logos/google_light.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			AKzmlW2KCuNghpE/NjMH07X42V8=
+			</data>
+			<key>hash2</key>
+			<data>
+			bXLPjBfQxF0mJKnumt7b+egkIvA6byvWCu7bqUODgXc=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9K4M4LFRtO0XT/e548Ht8/ou2QU=
+			</data>
+			<key>hash2</key>
+			<data>
+			5OdoB6IaKslj5wfd/7NiMoNhjAQ0VySya9wj0Nr9/eY=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			TwxaL9PbSu7YG4pf8JX5PQN7/ow=
+			</data>
+			<key>hash2</key>
+			<data>
+			GmpZWgL5Po3urukCH4vQxdxDoXd8w56sQDVWoOBwCmk=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qCSzIeujm7QkMIhEZjtJuPn4xMA=
+			</data>
+			<key>hash2</key>
+			<data>
+			+daTPQTFmkKsowvYjuw4u5y+tpsVR/1VDvc+ugvOeho=
+			</data>
+		</dict>
 		<key>Frameworks/App.framework/flutter_assets/vm_snapshot_data</key>
 		<dict>
 			<key>hash</key>
@@ -1581,15 +2159,48 @@
 			SWudSb+UjFAbtsuvOflVVEzSQrNcWWVHTwGa+DH02Gs=
 			</data>
 		</dict>
+		<key>Frameworks/AppAuth.framework/AppAuth</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			JWS22Twb1+ZD0eeE9zd0baQ0pJg=
+			</data>
+			<key>hash2</key>
+			<data>
+			z5/EQ9Om9hq/BqBbLCeY3peOWGhDltFpwUNDMwoZ3oo=
+			</data>
+		</dict>
+		<key>Frameworks/AppAuth.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KdKDUXtFzO0B/Bm1hs95mVgdD/8=
+			</data>
+			<key>hash2</key>
+			<data>
+			sS7KE2l9SAPy02g1XAhND0bPuNjfpsc+0R+f/KBWtj0=
+			</data>
+		</dict>
+		<key>Frameworks/AppAuth.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fd9GjmKeQRNvAb0hJzCJhEAIUW0=
+			</data>
+			<key>hash2</key>
+			<data>
+			0DABlTkStPAK/Sb709/wBXDrSleyWFyvh4AdGeWhkTo=
+			</data>
+		</dict>
 		<key>Frameworks/Flutter.framework/Flutter</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JP3RaUQ0lnmiDatc3JPZr4GOrWA=
+			oDFnEsCdhT2214sYo4yPnk9D4Jc=
 			</data>
 			<key>hash2</key>
 			<data>
-			cXU7JGEXaLdXWkI+2GR11Tq9ar1li6iqIvY7l9fpqxQ=
+			9SP3tAjE7WMRE8CLBoaNv8/TBQFIJqQ8CkKuaV7U6yU=
 			</data>
 		</dict>
 		<key>Frameworks/Flutter.framework/Headers/Flutter.h</key>
@@ -1812,6 +2423,72 @@
 			Y7sS66zRuTsBvhoY8E7AmSrn+3DMMIOCUocmE2apBcw=
 			</data>
 		</dict>
+		<key>Frameworks/GTMAppAuth.framework/GTMAppAuth</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			t7ydw8RbFIQKKIixDinO/wECJcA=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZRgddkfedLmw8P0xWEIRIk2azVx4Qgt3ldEYzX45mbQ=
+			</data>
+		</dict>
+		<key>Frameworks/GTMAppAuth.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			QMZODh4/ydwcQG1NCp9RGnJlGzs=
+			</data>
+			<key>hash2</key>
+			<data>
+			Wyl7wjeo2gRgRH5HIXYupIJxzo/PvDJ2to+bg6jCzGs=
+			</data>
+		</dict>
+		<key>Frameworks/GTMAppAuth.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			K4UvCKcb74bFIwic9r51e+folFg=
+			</data>
+			<key>hash2</key>
+			<data>
+			CaSBa3L/3we2wuRfK3n1u25WAbRbHPdY7k5OF2xuqYQ=
+			</data>
+		</dict>
+		<key>Frameworks/GTMSessionFetcher.framework/GTMSessionFetcher</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			uEj/idLg+wx8CizUAoTmKwEMAsI=
+			</data>
+			<key>hash2</key>
+			<data>
+			1iimdLv5CUZI0DFAzQUEyT6OCm6HFbnCFdrpIt8Vt2s=
+			</data>
+		</dict>
+		<key>Frameworks/GTMSessionFetcher.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			JG+p3Ak1iikIuErH+4symuROcts=
+			</data>
+			<key>hash2</key>
+			<data>
+			kbNr2IbABHeCqzkW2cp1luIAimizNOV+Bx9GqEHyd80=
+			</data>
+		</dict>
+		<key>Frameworks/GTMSessionFetcher.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Om9u0MGV7Ui9/zJvBBOjrfuLDHE=
+			</data>
+			<key>hash2</key>
+			<data>
+			u7GmIkJV0jQRtsyvSHtjFytLhk6jrZ0WJyKRfF7tvjk=
+			</data>
+		</dict>
 		<key>Frameworks/flutter_native_splash.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
@@ -1937,11 +2614,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jy7kAre661Uug38OvkE0RcF7vPo=
+			IH4h4IpdvTgS1GFL/P887Sr8+KY=
 			</data>
 			<key>hash2</key>
 			<data>
-			/dahvXpPvXky4+ICK/k++TWFyPVPT4P7ivhaVJ21cs0=
+			MNWkGTeOyivms5KgfMzGDWPz3RpeR1BnVZgpiR+Hl1I=
 			</data>
 		</dict>
 		<key>GoogleMaps.bundle/GMSCacheStorage.momd/Storage.mom</key>
@@ -3537,6 +4214,555 @@
 			<data>
 			TG27/WEkvRk8KdilyJ2xFtLiBk1Jb6bKoZaMwXgsIpo=
 			</data>
+		</dict>
+		<key>GoogleSignIn.bundle/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			BfmsbcfBh93cy6vWTriZJESBAgw=
+			</data>
+			<key>hash2</key>
+			<data>
+			cHPgF7KYTJP00yku/fna1q7LCMLLQQkAHvGCVjllTs0=
+			</data>
+		</dict>
+		<key>GoogleSignIn.bundle/Roboto-Bold.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RzJ98PNefNfIZFh0iXp0SWl1RK4=
+			</data>
+			<key>hash2</key>
+			<data>
+			WU10pJ4we+fMnh7l8QI2hOaCDPEbzJaL7lkDkeGtWlo=
+			</data>
+		</dict>
+		<key>GoogleSignIn.bundle/ar.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			303DoAw6564UTefSVQ1oZYc3qnw=
+			</data>
+			<key>hash2</key>
+			<data>
+			KNO3JIRtAADRoTuu3mvww+RVjxCmhlOfUUTcxi08ceU=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ca.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			G87CCeyLbBFluKtputCXLyuuMFM=
+			</data>
+			<key>hash2</key>
+			<data>
+			s8Wt8ese0XU9Kf7ZLWsViTohv6iDD6XnbxqMknNTUdI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/cs.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yFnW3qoQvx46nta2ymtpqQcq3kM=
+			</data>
+			<key>hash2</key>
+			<data>
+			grRhao13psbFXFvzFYjE6gaKQTAyGPqa6aL4VtkaEIs=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/da.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Ps1UjJkLPJU1KVqjKIGo3C/7o7A=
+			</data>
+			<key>hash2</key>
+			<data>
+			R3Xth7Clc4M9pYY7YcxqAawywLuwfzpSdsUxZKxFsKM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/de.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ayCZ7alU/ec+sI+A6TSoEyqytdw=
+			</data>
+			<key>hash2</key>
+			<data>
+			a0HJyV4PCHfnqXYlBuBEgRaOlTWWoLocVNIoJl+Mkdg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/el.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			DCfi3yQuhPGwql7/NJZ4HjVQneE=
+			</data>
+			<key>hash2</key>
+			<data>
+			GRXMFiSib2rq5qlOV24XS8V9RkSuhcnkdMfmV/cDpv0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/en.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			abhi3BU5/ZWaUMKlntWlHWqGpfk=
+			</data>
+			<key>hash2</key>
+			<data>
+			xyajnDguPxp8H1js9HD4EtomN0n5MNqH98DDqg7GSMI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/en_GB.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0lsu4RiFCdBf8Jvk0BvK8EACUHo=
+			</data>
+			<key>hash2</key>
+			<data>
+			H4rGbc5dSorMe4OvH/SAvFyJUZuVIOXDhSPkiBJkAXI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/es.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			N8jwyrIyE56IdfegOMV4asFxW5k=
+			</data>
+			<key>hash2</key>
+			<data>
+			y2jfJNF51B7UmWYq6C3Pg1/5X5kdUxjLlfr4VDrrqcc=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/es_MX.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aW1OHqFSDghXrYPHIFlBVTwJs5Y=
+			</data>
+			<key>hash2</key>
+			<data>
+			A28DAztx+XHvkjbLDn+HiAb0vXSBWshwSQFJdLyjlho=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/fi.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VmFMBw4CJIpFOwClRBqL7M7FBmg=
+			</data>
+			<key>hash2</key>
+			<data>
+			hR16DchibH+j5GSk7wifO82UK9IiC6jiDZTR+wCAKnY=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/fr.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GfZi7uaUI9sYh+7mPilol9r1hns=
+			</data>
+			<key>hash2</key>
+			<data>
+			lmyB0b6qyH7JS5JXNzH/I1PpXx/V6ulZVUB7o+cK1EM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/fr_CA.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FHV7Rjb8AIowCXoy2OZVlHb/f5M=
+			</data>
+			<key>hash2</key>
+			<data>
+			PMigMa40InYEJFfEsRtP9dXCGtGUvwjL9/zx8zSjnt0=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/google.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			guERtxRSG8LklxczLu47JIwLjiU=
+			</data>
+			<key>hash2</key>
+			<data>
+			H2IokCB8oNkRwgBLBEZLd0w6oN+iN1BU/iAZdGyDMKU=
+			</data>
+		</dict>
+		<key>GoogleSignIn.bundle/google@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4UwXGGzo+UtMgR0hUDrtRbq4Wqk=
+			</data>
+			<key>hash2</key>
+			<data>
+			Mjq4n6IBYa2yGeFxUDX5MS6Ty2kwi1TyDkPS11aFwLI=
+			</data>
+		</dict>
+		<key>GoogleSignIn.bundle/google@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			A1wRWy89eRjMuVCP4K7S0AClNTw=
+			</data>
+			<key>hash2</key>
+			<data>
+			vuNrWCRZeBKrexqD2NEDZOScuuIxG5X6EYoYNxvcJlU=
+			</data>
+		</dict>
+		<key>GoogleSignIn.bundle/he.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			KpqYgBkto9rluXPKrjZMpQO5rx4=
+			</data>
+			<key>hash2</key>
+			<data>
+			asYDzbh0rOcEzCjiDUCxZ4oyVjRIOmGy5wHO3NNrpho=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/hi.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			TBYaSGGlRvqRJYv2Kp26nqOug0E=
+			</data>
+			<key>hash2</key>
+			<data>
+			dwdhCrCblaIUVSgP0lyOwd459FLopwPSD9qJ9HGAfLk=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/hr.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			IfwrDBVvNQHoLgfylkonWUcZNyw=
+			</data>
+			<key>hash2</key>
+			<data>
+			BK4KT3F5RVf2YlVMVG++JqbcflwFQi0Rjke/smHthlE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/hu.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			kBhoMRUFxGHRLNiFpEZ6F5Ss+Vw=
+			</data>
+			<key>hash2</key>
+			<data>
+			cLGWZk9Qcbn9pGeCNRDyyhWMYhoAmsTfIgqipoBInw8=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/id.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RJdzuwS/ac96dBhObcP4BM4Fwoo=
+			</data>
+			<key>hash2</key>
+			<data>
+			uSEOCy2UklAu/gzOALazKOx3VsGIvCkqGreowBoMJoo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/it.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HUlbmaWbTum+Cuk6x/CJLIO9NYI=
+			</data>
+			<key>hash2</key>
+			<data>
+			miGwcNcC9TRryOjkcfxr2zvq/Ubx6QFJZL82vjPf8Ro=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ja.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			hp126s/hAvYhLqiKQo9XYCxRksM=
+			</data>
+			<key>hash2</key>
+			<data>
+			z/YvQ9A7xFwpMyY9ZlvhjRGDwIZ9FFudO7JUdhEpWqw=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ko.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			U1k8TNgQtnA7sqZDbCG9hODqcqs=
+			</data>
+			<key>hash2</key>
+			<data>
+			m73EettZyAJNRtL6T4AbE2OkGdvuKlbV0l9vH0T727s=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ms.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+4Dym+NckmP4noUr0CSqCbc0DXM=
+			</data>
+			<key>hash2</key>
+			<data>
+			VOn9SOT9NxUWhmiAoRo2nX3SJVVmyss3MEmlaws6NGg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/nb.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xTn1/cRwzAuhLazLKMcL3WdVGdQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			BOCdsApXhDA24rYbv0ti9MPi5AWW8KHviz9ycB095O8=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/nl.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vMMA/ULgN4wr0uzD6/9j84tywmE=
+			</data>
+			<key>hash2</key>
+			<data>
+			R+T9Rx/4bbXTCAn06NWBR1eztrPKZWdUxlBtMNftEls=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/pl.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dWSBN/AfZa1Wdb7Cd5/OqqXRPa8=
+			</data>
+			<key>hash2</key>
+			<data>
+			zNH8p3wW8JoSHyiRWsKmgz0Psl9kwSs8HwHXJYR99kY=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/pt.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rORKnVPWt6r1ZtGBFsnFaNI0f54=
+			</data>
+			<key>hash2</key>
+			<data>
+			cF9iHZQORY6eH4d1WWBpRFdj7mxrJhaEY+ep6BuqR0A=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/pt_BR.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rORKnVPWt6r1ZtGBFsnFaNI0f54=
+			</data>
+			<key>hash2</key>
+			<data>
+			cF9iHZQORY6eH4d1WWBpRFdj7mxrJhaEY+ep6BuqR0A=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/pt_PT.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dY1FGrGECitvn/y9S5LwPkkyGeA=
+			</data>
+			<key>hash2</key>
+			<data>
+			yWtduerMD1bp3wsxfOw7vFYhO3/Fjm3m0ezovSvo2lI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ro.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7d+jdeQAgxcUy2KxbDZw25mX6jE=
+			</data>
+			<key>hash2</key>
+			<data>
+			zOF1NKzBlmy5bcqJpatF3LbjIa1A20wTIj2fOUxcMiU=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/ru.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ezAKOmDrat+UKBRDBg63jgk/XyA=
+			</data>
+			<key>hash2</key>
+			<data>
+			vYL57zuVoE5wcmXccT18uj5CxYeSZ/AmCDvb2cqJbX8=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/sk.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rPDfLvFNuLQq3PlkUwdPwIXAJ/0=
+			</data>
+			<key>hash2</key>
+			<data>
+			TyJVkOpZWA+1NdW5sUsJYzV62114kw60S6TNOqBKDeI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/sv.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZvZcrRs9Ld5yDPosiRUbUwdRbUM=
+			</data>
+			<key>hash2</key>
+			<data>
+			CjpGx3IiWrjXkZrnS6d50Vkm5m0JCjGxZyRe9TueG3w=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/th.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XeneSLZ52p7BzSK0TSnzrfK6Z4Y=
+			</data>
+			<key>hash2</key>
+			<data>
+			FiikaGGs1hnprfaZc2lnXvDb90lV4cCWJDgs0W09BcY=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/tr.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Dy7YJ0fhqKACNUlwxSJCl+hVDa0=
+			</data>
+			<key>hash2</key>
+			<data>
+			CbfQqVMO21KPOGDEDaxYsc/AQhaL2huVJoGxRo2slto=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/uk.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			raNg10FOgBNPkQvTQcozG4NmEz4=
+			</data>
+			<key>hash2</key>
+			<data>
+			j5BzBuaNs43vjWx4GiPJOalX1rCuaxQWdhqSVSmviyg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/vi.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			L7KEHwv3/ug+48NgPX4SD9zzTBo=
+			</data>
+			<key>hash2</key>
+			<data>
+			K8iDKoEdE6UrsvhROa0EKEQvY0ocj4GCJrdfBh0DWQI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/zh_CN.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dEjKhPIu8fVYLc+86C5X6d/q4QE=
+			</data>
+			<key>hash2</key>
+			<data>
+			UU0kPjdfPx/vOlciuOYMInqRlKwQdobcnRbwJNKNdSk=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>GoogleSignIn.bundle/zh_TW.lproj/GoogleSignIn.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2inFk+W2tYud0UBxzrhL8R+cDAc=
+			</data>
+			<key>hash2</key>
+			<data>
+			SY4/vsMPSildtR+izeTRLcFZdlnjWY99oRTZ9WIlA5M=
+			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>rules</key>
