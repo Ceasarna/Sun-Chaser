@@ -1,8 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
+import 'package:flutter_applicationdemo/GoogleSignInProvider.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'ManageAccountPage.dart';
+import 'GoogleSignInProvider.dart';
+import 'package:provider/provider.dart';
 
 // Standard color of app
 Color _backgroundColor = const Color.fromARGB(255, 190, 146, 160);
@@ -284,12 +289,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   Center(
                     child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BottomNavPage()),
-                        );
+                      onTap: () async {
+                          final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+                          provider.logOut();
                       },
                       child: Container(
                         margin: const EdgeInsets.only(top: 10, right: 15),
