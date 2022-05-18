@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -37,26 +37,111 @@ class WeatherData {
     return temperature;
   }
 
+  String getCurrentWeatherStatus() {
+    String weatherStatus;
+    switch (weatherValue) {
+      case 0:
+        weatherStatus = 'Undefined';
+        break;
+      case 1:
+        weatherStatus = 'Clear sky';
+        break;
+      case 2:
+        weatherStatus = 'Nearly clear sky';
+        break;
+      case 3:
+        weatherStatus = 'Variable cloudiness';
+        break;
+      case 4:
+        weatherStatus = 'Halfclear sky';
+        break;
+      case 5:
+        weatherStatus = 'Cloudy sky';
+        break;
+      case 6:
+        weatherStatus = 'Overcast';
+        break;
+      case 7:
+        weatherStatus = 'Fog';
+        break;
+      case 8:
+        weatherStatus = 'Light rain showers';
+        break;
+      case 9:
+        weatherStatus = 'Moderate rain showers';
+        break;
+      case 10:
+        weatherStatus = 'Heavy rain showers';
+        break;
+      case 11:
+        weatherStatus = 'Thunderstorm';
+        break;
+      case 12:
+        weatherStatus = 'Light sleet showers';
+        break;
+      case 13:
+        weatherStatus = 'Moderate sleet showers';
+        break;
+      case 14:
+        weatherStatus = 'Heavy sleet showers';
+        break;
+      case 15:
+        weatherStatus = 'Light snow showers';
+        break;
+      case 16:
+        weatherStatus = 'Moderate snow showers';
+        break;
+      case 17:
+        weatherStatus = 'Heavy snow showers';
+        break;
+      default:
+        weatherStatus = 'Undefined';
+    }
+    return weatherStatus;
+  }
+
   Widget getCurrentWeatherIcon() {
     switch (weatherValue) {
       case 1:
-        return const Icon(Icons.sunny);
+        return const Icon(
+          Icons.sunny,
+          color: Color.fromARGB(255, 251, 183, 9),
+        );
       case 2:
-        return const Icon(Icons.wb_sunny_outlined);
+        return const Icon(
+          Icons.sunny,
+          color: Color.fromARGB(255, 251, 183, 9),
+        );
       case 3:
-        return const Icon(Icons.sunny);
+        return const FaIcon(FontAwesomeIcons.cloudSun);
       case 4:
-        return const Icon(Icons.sunny);
+        return const FaIcon(FontAwesomeIcons.cloudSun);
       case 5:
-        return const Icon(Icons.cloud);
+        return const FaIcon(FontAwesomeIcons.cloud);
       case 6:
-        return const Icon(Icons.cloud);
+        return const FaIcon(FontAwesomeIcons.cloud);
       case 7:
-        return const Icon(Icons.sunny);
+        return const FaIcon(FontAwesomeIcons.smog);
       case 8:
-        return const Icon(Icons.sunny);
+        return const FaIcon(FontAwesomeIcons.umbrella);
       case 9:
-        return const Icon(Icons.sunny);
+        return const FaIcon(FontAwesomeIcons.cloudRain);
+      case 10:
+        return const FaIcon(FontAwesomeIcons.cloudShowersHeavy);
+      case 11:
+        return const FaIcon(FontAwesomeIcons.cloudflare);
+      case 12:
+        return const FaIcon(FontAwesomeIcons.cloudRain);
+      case 13:
+        return const FaIcon(FontAwesomeIcons.cloudShowersHeavy);
+      case 14:
+        return const FaIcon(FontAwesomeIcons.cloudShowersHeavy);
+      case 15:
+        return const FaIcon(FontAwesomeIcons.snowflake);
+      case 16:
+        return const FaIcon(FontAwesomeIcons.snowflake);
+      case 17:
+        return const FaIcon(FontAwesomeIcons.snowflake);
       default:
         return const Icon(Icons.not_accessible);
     }
@@ -149,13 +234,40 @@ class _VenuePageState extends State<VenuePage> {
                 ],
               )),
               Expanded(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Container(
+                  // decoration: BoxDecoration(
+                  //   border: Border.all(color: const Color(0xffaaaaaa)),
+                  // ),
+                  // color: const Color(0xffe9e9e9),
+                  child: Column(
                     children: [
-                      currentWeather.getCurrentWeatherIcon(),
-                      Text(currentWeather.getCurrentTemperature().toString() +
-                          '\u2103'),
-                    ]),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text('Weather Status:',
+                            style: GoogleFonts.robotoCondensed(
+                              textStyle: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              children: [
+                                currentWeather.getCurrentWeatherIcon(),
+                                Text(currentWeather.getCurrentWeatherStatus()),
+                              ],
+                            ),
+                            Text(currentWeather
+                                    .getCurrentTemperature()
+                                    .toString() +
+                                '\u2103'),
+                          ]),
+                    ],
+                  ),
+                ),
               )
             ]),
             const AboutTheSpotTable(),

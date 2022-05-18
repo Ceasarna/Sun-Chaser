@@ -45,6 +45,7 @@ dependencies:
   settings_ui: ^2.0.2
   google_fonts: ^2.3.2
   flutter_signin_button: ^2.0.0
+  font_awesome_flutter: ^9.2.0
   provider: ^5.0.0
 
   #Google Sign-in
@@ -83,6 +84,7 @@ flutter:
   assets:
     - assets/images/outdoor.png
     - assets/images/flutter.png
+    - assets/images/bild.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
