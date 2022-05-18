@@ -86,6 +86,42 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "firebase_auth",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-1.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "firebase_auth_platform_interface",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-4.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "firebase_auth_web",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-1.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "firebase_core",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_core_platform_interface",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_core_web",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.6.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///Users/marahzeibak/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -194,6 +230,12 @@
       "languageVersion": "2.15"
     },
     {
+      "name": "get",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "google_api_headers",
       "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/google_api_headers-1.2.0+1",
       "packageUri": "lib/",
@@ -272,6 +314,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
       "packageUri": "lib/",
@@ -314,6 +362,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "logging",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/logging-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11",
       "packageUri": "lib/",
@@ -328,6 +382,18 @@
     {
       "name": "meta",
       "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "mysql1",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/mysql1-0.19.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "nested",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/nested-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -434,10 +500,22 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "pool",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/pool-1.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "process",
       "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/process-4.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/provider-5.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "quiver",
@@ -554,7 +632,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-05-18T11:36:03.631027Z",
+  "generated": "2022-05-18T11:44:41.921165Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }
