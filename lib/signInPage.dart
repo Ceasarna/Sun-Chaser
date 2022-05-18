@@ -23,7 +23,7 @@ class _SignInPageState extends State<SignInPage> {
 
   Future<void> loginVerification(String email, String password) async{
     await db.getConnection().then((conn) async {
-      String sql = "select id, email, password from maen0574.user where email = '$email' and password = '$password'";
+      String sql = "select id, username, email from maen0574.user where email = '$email' and password = '$password'";
       await conn.query(sql).then((results){
         for(var row in results){
           setState(() {
