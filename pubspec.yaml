@@ -85,6 +85,7 @@ flutter:
   assets:
     - assets/images/outdoor.png
     - assets/images/flutter.png
+    - assets/images/bild.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
