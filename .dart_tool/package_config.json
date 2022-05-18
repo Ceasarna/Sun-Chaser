@@ -182,6 +182,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "geocoding",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/geocoding-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "geocoding_platform_interface",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/geocoding_platform_interface-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "geolocator",
       "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-8.2.1",
       "packageUri": "lib/",
@@ -328,6 +340,24 @@
     {
       "name": "lints",
       "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "location",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/location-4.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "location_platform_interface",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/location_platform_interface-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "location_web",
+      "rootUri": "file:///Users/marahzeibak/flutter/.pub-cache/hosted/pub.dartlang.org/location_web-3.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -602,7 +632,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-05-17T10:16:49.270831Z",
+  "generated": "2022-05-18T11:28:36.389254Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

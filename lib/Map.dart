@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
-import 'package:google_maps_webservice/places.dart';
+//import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:http/http.dart' as http;
+import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
+
 
 
 
@@ -81,6 +84,8 @@ class MapState extends State<Map> {
 
   final Completer<GoogleMapController> _controller = Completer();
 
+  LocationData? _currentPosition;
+
   final TextEditingController _searchController =  TextEditingController();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
@@ -93,17 +98,19 @@ class MapState extends State<Map> {
   @override
   void initState() {
     intilize();
+    _getUserLocation();
     super.initState();
   }
 
   intilize() {
     Marker marker_1;
     //for(var marker in markers) {
-      marker_1 = const Marker(
+      marker_1 = Marker(
         markerId: MarkerId('id_1'),
         position: LatLng(59.320671571444514, 18.055854162299937),
         infoWindow: InfoWindow(
           title: 'Münchenbryggeriet Beer Garden',
+          onTap: () => setState(() {}),
           snippet: 'Uteservering',
         )
         );
@@ -223,6 +230,40 @@ class MapState extends State<Map> {
   }
 
 
+  Future<LocationData> _getLocationPermission() async {
+    Location location = Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return Future.error('Service not enable');
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return Future.error('Permission Denied');
+      }
+    }
+
+    _locationData = await location.getLocation();
+
+    return _locationData;
+  }
+
+  _getUserLocation() async {
+    _currentPosition = await _getLocationPermission();
+    _goToCurrentPosition(
+        LatLng(_currentPosition!.latitude!, _currentPosition!.longitude!));
+  }
+
   late GoogleMapController googleMapController;
 
   final Mode _mode = Mode.fullscreen;
@@ -261,14 +302,23 @@ class MapState extends State<Map> {
            _controller.complete(controller);
            },
           ),
-          ElevatedButton(onPressed: _handelPressButton
+          ElevatedButton(onPressed: () {} //_handelPressButton
           ,child: const Text("Search Placses"))
         ],
       )
     );
   }
 
-  Future<void> _handelPressButton() async {
+  Future<void> _goToCurrentPosition(LatLng latlng) async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        bearing: 192.8334901395799,
+        target: LatLng(latlng.latitude, latlng.longitude),
+        //tilt: 59.440717697143555,
+        zoom: 14.4746)));
+  }
+
+ /* Future<void> _handelPressButton() async {
 
     Prediction? p = await PlacesAutocomplete.show(
                           context: context,
@@ -305,7 +355,7 @@ class MapState extends State<Map> {
     setState(() {});
 
     googleMapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat,lng), 14.0));
-  }
+  }*/
 }
 
 class _Marker {
