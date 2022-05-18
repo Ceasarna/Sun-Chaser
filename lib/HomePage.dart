@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'BottomNavPage.dart';
-import 'package:flutter_applicationdemo/CreateAccountPage.dart';
+import 'package:flutter_applicationdemo/login/CreateAccountPage.dart';
 import 'globals.dart';
-import 'signInPage.dart';
-import 'user.dart';
+import 'login/signInPage.dart';
+import '../login/user.dart';
 import 'globals.dart' as globals;
 
 class HomePage extends StatefulWidget {
