@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'BottomNavPage.dart';
-import 'package:flutter_applicationdemo/LoginPage.dart';
+import 'package:flutter_applicationdemo/CreateAccountPage.dart';
+import 'globals.dart';
+import 'signInPage.dart';
+import 'user.dart';
+import 'globals.dart' as globals;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   Color textColor = const Color.fromARGB(255, 79, 98, 114);
   @override
   Widget build(BuildContext context) {
+    print(LOGGED_IN_USER.userID);
     return Scaffold(
       backgroundColor: pinkBackgroundColor,
       body: SafeArea(
@@ -54,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(80, 100, 80, 80),
+              padding: EdgeInsets.fromLTRB(80, 40, 80, 80),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(200, 200),
@@ -85,33 +90,100 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(200, 50),
-                primary: buttonColor,
-                elevation: 100,
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()), //Replace Container() with call to Map-page.
-                );
-              },
-              child: const Text('Sign in',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      shadows: <Shadow> [
-                        Shadow(
-                          offset: Offset(2, 2),
-                          blurRadius: 10.0,
-                          color: Color.fromARGB(255, 0, 0, 0),
-                        ),
-                      ])
-              ),
-            ),
+
+            globals.LOGGED_IN_USER.userID == 0 ?
+            buildLoginAndCreateUserButton() : buildLogOutButton()
           ]),
         ),
+      ),
+    );
+  }
+
+  Container buildLoginAndCreateUserButton() {
+      return Container(
+          child: Column(
+          children: <Widget> [
+            ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          fixedSize: const Size(200, 50),
+          primary: buttonColor,
+          elevation: 100,
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SignInPage()), //Replace Container() with call to Map-page.
+          );
+        },
+        child: const Text('Sign in',
+            style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                shadows: <Shadow> [
+                  Shadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 10.0,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ])
+        ),
+      ),
+        Padding(padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5)),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            fixedSize: const Size(200, 50),
+            primary: buttonColor,
+            elevation: 100,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CreateAccountPage()), //Replace Container() with call to Map-page.
+            );
+          },
+          child: const Text('Create account',
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  shadows: <Shadow> [
+                    Shadow(
+                      offset: Offset(2, 2),
+                      blurRadius: 10.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ])
+          ),
+        )
+        ]
+          ),
+      );
+  }
+
+  ElevatedButton buildLogOutButton() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        fixedSize: const Size(200, 50),
+        primary: buttonColor,
+        elevation: 100,
+      ),
+      onPressed: () {
+        globals.LOGGED_IN_USER = user(0, "", "");
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()), //Replace Container() with call to Map-page.
+        );
+      },
+      child: const Text('Log out',
+          style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              shadows: <Shadow> [
+                Shadow(
+                  offset: Offset(2, 2),
+                  blurRadius: 10.0,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ])
       ),
     );
   }
