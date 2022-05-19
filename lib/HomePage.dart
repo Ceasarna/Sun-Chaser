@@ -5,6 +5,7 @@ import 'globals.dart';
 import 'signInPage.dart';
 import 'user.dart';
 import 'globals.dart' as globals;
+import 'ShadowDetector.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,8 +18,11 @@ class _HomePageState extends State<HomePage> {
   Color buttonColor = const Color.fromARGB(204, 172, 123, 132);
   Color pinkBackgroundColor = const Color.fromARGB(255, 240, 229, 229);
   Color textColor = const Color.fromARGB(255, 79, 98, 114);
+
+
   @override
   Widget build(BuildContext context) {
+    var shadow = ShadowDetector(55, 44);
     print(LOGGED_IN_USER.userID);
     return Scaffold(
       backgroundColor: pinkBackgroundColor,
