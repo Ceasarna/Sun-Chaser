@@ -12,6 +12,9 @@ Color _colorContainerHappy = _backgroundColor;
 Color _colorContainerMediumHappy = _backgroundColor;
 Color _colorContainerUpset = _backgroundColor;
 
+var timestamp;
+
+
 Map<String, bool> _satisfactionBoolean = {
 "VeryHappy": false,
 "Happy": false,
@@ -51,14 +54,14 @@ class FormForFeedbackState extends State<FormForFeedback> {
   var dataBase = mysql();
 
 
-  Future<void> feedbackVerification(String satisfaction, String typeOfFeedback, String writtenFeedback ) async {
+  Future<void> feedbackVerification(String satisfaction, String typeOfFeedback, String writtenFeedback, String timestamp ) async {
     await dataBase.getConnection().then((conn) async {
-      String sql = "INSERT INTO maen0574.User_feedback (id, Satisfaction, Type_of_feedback, Written_feedback) VALUES (null, '$satisfaction', '$typeOfFeedback', '$writtenFeedback');";
+      String sql = "INSERT INTO maen0574.User_feedback (id, Satisfaction, Type_of_feedback, Written_feedback, timestamp) VALUES (null, '$satisfaction', '$typeOfFeedback', '$writtenFeedback', '$timestamp);";
         await conn.query(sql).then((results) {
           for(var row in results) {
             print(row[0].toString());
             setState(() {});
-            form(row[0].toString(), row[1].toString(), row[2].toString());
+            form(row[0].toString(), row[1].toString(), row[2].toString(), row[3]);
           }
         });
     });
@@ -73,7 +76,7 @@ Color appBarColor = Colors.white;
 
 return Scaffold(
 backgroundColor: pinkBackgroundColor,
-resizeToAvoidBottomInset: false, //för att undvika RenderFlex overflow när man får upp skrivbordet
+resizeToAvoidBottomInset: true, //för att undvika RenderFlex overflow när man får upp skrivbordet
 appBar: AppBar(
 backgroundColor: buttonColor,
 title: Row(
@@ -93,29 +96,6 @@ fontSize: 25,
 color: appBarColor),
 ),
 ),
-
-FlatButton(
-child: Text("Send feedback",
-style: TextStyle(
-fontSize: 25,
-color: appBarColor),
-),
-onPressed: () async {
-await feedbackVerification(satisfaction.text, typeOfFeedback.text, writtenFeedback.text);
-if (_formKey.currentState!.validate()) {
-
-print(satisfaction.text);
-print(typeOfFeedback.text);
-print(writtenFeedback.text);
-
-Navigator.push(
-context,
-MaterialPageRoute(builder: (context) =>
-BottomNavPage()), //Replace Container() with call to account-page.
-);
-}
-}
-),
 ],
 ),
 ),
@@ -134,7 +114,7 @@ color: textColor,
 ),
 ),
 
-const SizedBox(height: 60),
+const SizedBox(height: 30),
 
 Text(
 'What do you think about our app?',
@@ -244,8 +224,6 @@ onTap: () {
 setState(() {
 satisfaction.text = "Upset";
 pressedEmojiColor(satisfaction.text);
-//var timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-//print(timestamp);
 });
 print(satisfaction.text);
 },
@@ -356,7 +334,7 @@ const SizedBox(height: 10),
 
 Padding(
 padding: const EdgeInsets.all(40.0),
-child: TextFormField(
+  child: TextFormField(
 keyboardType: TextInputType.text,
 controller: writtenFeedback,
 decoration: InputDecoration(
@@ -371,13 +349,61 @@ borderSide: const BorderSide(
 ),
 ),
 ),
+
+  InkWell(
+
+    onTap: () async {
+
+      if(writtenFeedback.text.contains("'")) {
+        print('not allowed to use atrophies');
+        return;
+      }
+
+      timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+      await feedbackVerification(satisfaction.text, typeOfFeedback.text, writtenFeedback.text, timestamp);
+      if (_formKey.currentState!.validate()) {
+
+        print(satisfaction.text);
+        print(typeOfFeedback.text);
+        print(writtenFeedback.text);
+        print(timestamp);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>
+              BottomNavPage()), //Replace Container() with call to account-page.
+        );
+      }
+    },
+
+    child: Container(
+      color: _colorContainerHappy,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const <Widget>[
+         Text("Send feedback",
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.white),
+        ),
+        ],
+      ),
+    ),
+  ),
 ],
 ),
+
+  const SizedBox(height: 30),
+
 ],
 ),
+
 ),
+
+
 ),
 );
+
 }
 }
 
@@ -431,9 +457,8 @@ _colorContainerUpset = _backgroundColor;
 }
 }
 
-void pressedTypeOfFeedback(String s){
-
-  if(s == "Compliment"){
+void pressedTypeOfFeedback(String s) {
+  if (s == "Compliment") {
     _typeOfFeedback["Compliment"] == true;
     check1 = true;
     _typeOfFeedback["Complaint"] == false;
@@ -444,7 +469,7 @@ void pressedTypeOfFeedback(String s){
     check4 = false;
   }
 
-  if(s == "Complaint"){
+  if (s == "Complaint") {
     _typeOfFeedback["Complaint"] == true;
     check2 = true;
     _typeOfFeedback["Compliment"] == false;
@@ -455,7 +480,7 @@ void pressedTypeOfFeedback(String s){
     check4 = false;
   }
 
-  if(s == "Bug"){
+  if (s == "Bug") {
     _typeOfFeedback["Bug"] == true;
     check3 = true;
     _typeOfFeedback["Complaint"] == false;
@@ -466,7 +491,7 @@ void pressedTypeOfFeedback(String s){
     check4 = false;
   }
 
-  if(s == "Mistake in sun accuracy"){
+  if (s == "Mistake in sun accuracy") {
     _typeOfFeedback["Mistake in sun accuracy"] == true;
     check4 = true;
     _typeOfFeedback["Complaint"] == false;
