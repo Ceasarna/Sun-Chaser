@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
 
+import 'package:flutter_applicationdemo/login/user.dart';
+import 'Venue.dart';
 
 
 
@@ -17,6 +19,7 @@ import 'package:geolocator/geolocator.dart';
 class Map extends StatefulWidget {
   @override
   State<Map> createState() => MapState();
+
 }
 
 const kGoogleApiKey = "AIzaSyAUmhd6Xxud8SwgDxJ4LlYlcntm01FGoSk";
@@ -32,23 +35,14 @@ class MapState extends State<Map> {
     var url = Uri.parse('https://openstreetgs.stockholm.se/geoservice/api/b8e20fd7-5654-465e-8976-35b4de902b41/wfs?service=wfs&version=1.1.0&request=GetFeature&typeNames=od_gis:Markupplatelse&srsName=EPSG:4326&outputFormat=json');
     var response = await http.get(url);
 
-    print('Response status: ${response.statusCode}');
+    //print('Response status: ${response.statusCode}');
    // print('Response body: ${response.body.toString()}');
     var jsonData = jsonDecode(response.body);
 
-   /* print(jsonData['features'][0]);
 
-    print(jsonData['features'][1]['properties']['Plats_1']);
-
-    print(jsonData['features'][0]['properties']['Gatunr_1']);
-
-    print(jsonData['features'][0]['properties']['Kategorityp']);
-
-    /*String data = jsonData['features'][0]['properties']['Kategorityp'];
-    print(data.contains('Tillfälliga bostäder'));*/
     
 
-    print(jsonData['features'][1]['geometry']['coordinates']);*/
+    //print(jsonData['features'][1]['geometry']['coordinates']);*/
 
     //print(jsonData['features'][0]['properties']['MAIN_ATTRIBUTE_VALUE']);
   
@@ -58,25 +52,13 @@ class MapState extends State<Map> {
       String data = m['properties']['Kategorityp'];
       String typ = m['properties']['MAIN_ATTRIBUTE_VALUE'];
       if(m['properties']['Kategorityp'] == "1.400I, Uteservering A-läge") {
-        print(m['properties']['Kategorityp']);
+        //print(m['properties']['Kategorityp']);
         _Marker marker = _Marker(m['properties']['Plats_1'],m['properties']['Gatunr_1'],m['geometry']['coordinates']);
         markers.add(marker);
       }
 
-      print(markers.length);
-      
-      int count = 0;
-      for (var mar in markers) {
-        print(mar.Plats_1);
-        print(mar.Gatunr_1);
-        print(mar.coordinates[1]);
-        print(mar.coordinates[0]);
-        count++;
-        print(count);
-        if (count == 100) {
-          break;
-        }
-      }
+      //print(markers.length);
+
 
       //print(m['properties']['Kategorityp']);
     } 
@@ -118,7 +100,7 @@ class MapState extends State<Map> {
                           child: const Text('Close BottomSheet'),
                           onPressed: () {Navigator.pop(context);})*/
                         Image(image: AssetImage('assets/images/bild.png'))
-                          
+
                       ],
                     )
                     ),
@@ -128,6 +110,7 @@ class MapState extends State<Map> {
   }
 
   intilize() {
+    List<Venue> venues;
     Marker marker_1;
     //for(var marker in markers) {
       marker_1 = Marker(
@@ -136,7 +119,7 @@ class MapState extends State<Map> {
         position: const LatLng(59.320671571444514, 18.055854162299937),
         infoWindow: const InfoWindow(
           title: 'Münchenbryggeriet Beer Garden',
-         
+
           snippet: 'Uteservering',
         )
         );
@@ -324,7 +307,7 @@ class MapState extends State<Map> {
           textCapitalization: TextCapitalization.words,
           decoration: const InputDecoration(hintText: 'Find your place'),
           onChanged: (value) {
-            print(value);
+            //print(value);
           },
         ),
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
@@ -354,6 +337,8 @@ class MapState extends State<Map> {
         //tilt: 59.440717697143555,
         zoom: 14.4746)));
   }
+
+
 
  /* Future<void> _handelPressButton() async {
 
