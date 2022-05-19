@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_applicationdemo/GoogleSignInProvider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
 import 'package:provider/provider.dart';
 
 import 'Map.dart';
@@ -12,6 +13,7 @@ import 'HomePage.dart';
 import 'Venue.dart';
 import 'mysql.dart';
 import 'user.dart';
+import 'login/user.dart';
 import 'globals.dart';
 
 void main() async {

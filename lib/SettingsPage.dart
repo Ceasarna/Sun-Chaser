@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
-import 'package:flutter_applicationdemo/GoogleSignInProvider.dart';
+import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'ManageAccountPage.dart';
-import 'GoogleSignInProvider.dart';
+import 'login/GoogleSignInProvider.dart';
 import 'package:provider/provider.dart';
 
 // Standard color of app

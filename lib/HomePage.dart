@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'BottomNavPage.dart';
+import 'package:flutter_applicationdemo/login/CreateAccountPage.dart';
 import 'package:flutter_applicationdemo/CreateAccountPage.dart';
 import 'Venue.dart';
 import 'globals.dart';
+import 'login/signInPage.dart';
+import '../login/user.dart';
 import 'mysql.dart';
 import 'signInPage.dart';
 import 'user.dart';
@@ -189,6 +192,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-
 }
