@@ -11,6 +11,7 @@ import 'mysql.dart';
 import 'package:flutter_applicationdemo/login/user.dart';
 import 'globals.dart' as globals;
 
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -19,13 +20,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Color buttonColor = const Color.fromARGB(204, 172, 123, 132);
-  Color pinkBackgroundColor = const Color.fromARGB(255, 240, 229, 229);
-  Color textColor = const Color.fromARGB(255, 79, 98, 114);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: pinkBackgroundColor,
+      backgroundColor: globals.PINKBACKGROUND,
       body: SafeArea(
         child: Center(
           child: Column(children: <Widget>[
@@ -35,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                 'Sun Chasers',
                 style: TextStyle(
                   fontSize: 50,
-                  color: textColor,
+                  color: globals.TEXTCOLOR,
                   fontFamily: 'Sacramento',
                   shadows: <Shadow>[
                     Shadow(
@@ -52,12 +50,12 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(
                   fontSize: 32,
                   fontFamily: 'Sacramento',
-                  color: textColor,
+                  color: globals.TEXTCOLOR,
                   shadows: <Shadow>[
                     Shadow(
                       offset: Offset(2, 2),
                       blurRadius: 12.5,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: globals.SHADOWCOLOR,
                     ),
                   ]
               ),
@@ -67,7 +65,7 @@ class _HomePageState extends State<HomePage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(200, 200),
-                  primary: buttonColor,
+                  primary: globals.BUTTONCOLOR,
                   elevation: 100,
                   shape: const CircleBorder(),
                 ),
@@ -77,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(builder: (context) => BottomNavPage()), //Replace Container() with call to account-page.
                   );
                 },
-                child: const Text(
+                child: Text(
                   'FIND SPOT BY LOCATION',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -87,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                         Shadow(
                           offset: Offset(2, 2),
                           blurRadius: 10.0,
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          color: globals.SHADOWCOLOR,
                         ),
                       ]
                   ),
@@ -110,7 +108,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(200, 50),
-          primary: buttonColor,
+          primary: globals.BUTTONCOLOR,
           elevation: 100,
         ),
         onPressed: () {
@@ -119,7 +117,7 @@ class _HomePageState extends State<HomePage> {
             MaterialPageRoute(builder: (context) => SignInPage()), //Replace Container() with call to Map-page.
           );
         },
-        child: const Text('Sign in',
+        child: Text('Sign in',
             style: TextStyle(
                 fontSize: 18,
                 color: Colors.white,
@@ -127,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                   Shadow(
                     offset: Offset(2, 2),
                     blurRadius: 10.0,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: globals.SHADOWCOLOR,
                   ),
                 ])
         ),
@@ -136,7 +134,7 @@ class _HomePageState extends State<HomePage> {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             fixedSize: const Size(200, 50),
-            primary: buttonColor,
+            primary: globals.BUTTONCOLOR,
             elevation: 100,
           ),
           onPressed: () {
@@ -167,7 +165,7 @@ class _HomePageState extends State<HomePage> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(200, 50),
-        primary: buttonColor,
+        primary: globals.BUTTONCOLOR,
         elevation: 100,
       ),
       onPressed: () {
@@ -177,7 +175,7 @@ class _HomePageState extends State<HomePage> {
           MaterialPageRoute(builder: (context) => HomePage()), //Replace Container() with call to Map-page.
         );
       },
-      child: const Text('Log out',
+      child: Text('Log out',
           style: TextStyle(
               fontSize: 18,
               color: Colors.white,
@@ -185,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                 Shadow(
                   offset: Offset(2, 2),
                   blurRadius: 10.0,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: globals.SHADOWCOLOR,
                 ),
               ])
       ),

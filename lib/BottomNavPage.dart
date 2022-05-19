@@ -3,6 +3,7 @@ import 'package:google_maps_flutter_platform_interface/src/types/camera.dart';
 import 'Map.dart';
 import 'FavoritePage.dart';
 import 'SettingsPage.dart';
+import 'globals.dart' as globals;
 
 
 class BottomNavPage extends StatefulWidget {
@@ -24,8 +25,8 @@ class BottomNavPageState extends State<BottomNavPage> {
     return Scaffold(
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255, 190, 146, 160),
-        selectedItemColor: Colors.black,
+        backgroundColor: globals.BACKGROUNDCOLOR,
+        selectedItemColor: globals.ITEMCOLOR,
         currentIndex: currentIndex,
         onTap: (index) => setState( () => currentIndex = index),
         items: const[
