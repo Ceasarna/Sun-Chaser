@@ -8,6 +8,7 @@ import 'package:settings_ui/settings_ui.dart';
 import 'ManageAccountPage.dart';
 import 'GoogleSignInProvider.dart';
 import 'package:provider/provider.dart';
+import 'FeedbackPage.dart';
 
 // Standard color of app
 Color _backgroundColor = const Color.fromARGB(255, 190, 146, 160);
@@ -258,7 +259,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BottomNavPage()),
+                                builder: (context) => FormForFeedback()),
                           );
                         },
                         child: Container(
