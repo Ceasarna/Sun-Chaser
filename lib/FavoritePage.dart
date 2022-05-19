@@ -12,7 +12,7 @@ import 'package:settings_ui/settings_ui.dart';
 import 'ManageAccountPage.dart';
 import 'package:provider/provider.dart';
 import 'Venue.dart';
-import 'globals.dart';
+import 'globals.dart' as globals;
 import 'Map.dart';
 import 'package:flutter_applicationdemo/login/user.dart';
 import 'HomePage.dart';
@@ -35,7 +35,7 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  List likedVenuesList = LOGGED_IN_USER.likedVenuesList;
+  List likedVenuesList = globals.LOGGED_IN_USER.likedVenuesList;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,10 @@ class _FavoritePageState extends State<FavoritePage> {
               delegate: SliverChildBuilderDelegate(
                 // The builder function returns a ListTile with a title that
                 // displays the index of the current item.
-                    (context, index) => ListTile(title: Text('Item #$index'), trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.red), onPressed: (){
+                    (context, index) => ListTile(
+                      title: Text(globals.getVenueByID(likedVenuesList[index])!.venueName.toString()),
+                      trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.red),
+                        onPressed: (){
                       setState(() {
                       });
                       print("tabort");
@@ -80,9 +83,13 @@ class _FavoritePageState extends State<FavoritePage> {
                       setState(() {
                       });
                       print("gå till venue");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Map())
+                      );
                     },),
                 // Builds 1000 ListTiles
-                childCount: 20,
+                childCount: likedVenuesList.length,
               ),
             ),
           ],

@@ -17,3 +17,11 @@ Color TEXTCOLOR = const Color.fromARGB(255, 79, 98, 114);
 Color SHADOWCOLOR = const Color.fromARGB(255, 0, 0, 0);
 Color TEXTWHITE = const Color.fromARGB(0, 0, 0, 0);
 late List<Venue> VENUES;
+
+Venue? getVenueByID(int searchedVenueID){
+  for(var V in VENUES){
+    if(V.venueID == searchedVenueID){
+      return V;
+    }
+  }return null;
+}

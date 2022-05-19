@@ -19,6 +19,7 @@ import 'Venue.dart';
 class Map extends StatefulWidget {
   @override
   State<Map> createState() => MapState();
+
 }
 
 const kGoogleApiKey = "AIzaSyAUmhd6Xxud8SwgDxJ4LlYlcntm01FGoSk";
@@ -336,6 +337,8 @@ class MapState extends State<Map> {
         //tilt: 59.440717697143555,
         zoom: 14.4746)));
   }
+
+
 
  /* Future<void> _handelPressButton() async {
 
