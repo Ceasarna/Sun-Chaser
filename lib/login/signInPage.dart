@@ -5,13 +5,13 @@ import '../mysql.dart';
 import '../HomePage.dart';
 import '../main.dart';
 import 'user.dart';
-import 'package:flutter_applicationdemo/globals.dart';
 import '../reusables/InputField.dart';
 import '../reusables/returnButton.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'GoogleSignInProvider.dart';
 import 'CreateAccountPage.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_applicationdemo/globals.dart' as globals;
 
 class SignInPage extends StatefulWidget {
   @override
@@ -19,8 +19,6 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  Color pinkBackgroundColor = const Color.fromARGB(255, 240, 229, 229);
-  Color textColor = const Color.fromARGB(255, 79, 98, 114);
   var db = mysql();
   int loggedInID = 0;
   late user loggedInUser;
@@ -43,10 +41,11 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: globals.PINKBACKGROUND,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: pinkBackgroundColor,
+        backgroundColor: globals.PINKBACKGROUND,
         leading: ReturnButton(
           onPressed: () {
             Navigator.push(
@@ -56,10 +55,7 @@ class _SignInPageState extends State<SignInPage> {
           },
         ),
       ),
-      //resizeToAvoidBottomPadding: false,
-      resizeToAvoidBottomInset: false,
-      backgroundColor: pinkBackgroundColor,
-      body: SafeArea(
+      body: Center(child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +78,8 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ],
         ),
-      ),
+      ),)
+
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -110,13 +107,13 @@ class _SignInPageState extends State<SignInPage> {
       'Sun Chasers',
       style: TextStyle(
         fontSize: 50,
-        color: textColor,
+        color: globals.TEXTCOLOR,
         fontFamily: 'Sacramento',
-        shadows: const <Shadow>[
+        shadows: <Shadow>[
           Shadow(
             offset: Offset(2, 2),
             blurRadius: 10.0,
-            color: Color.fromARGB(255, 0, 0, 0),
+            color: globals.SHADOWCOLOR,
           ),
         ],
       ),
@@ -149,7 +146,7 @@ class _SignInPageState extends State<SignInPage> {
         }
         await loginVerification(emailController.text, passwordController.text);
         if (loggedInID != 0) {
-          LOGGED_IN_USER = loggedInUser;
+          globals.LOGGED_IN_USER = loggedInUser;
           Navigator.push(
             context,
             MaterialPageRoute(

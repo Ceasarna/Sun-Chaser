@@ -6,7 +6,7 @@ import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import 'package:flutter_applicationdemo/mysql.dart';
 
 import 'package:flutter_applicationdemo/HomePage.dart';
-import '../globals.dart';
+import '../globals.dart' as globals;
 import '../reusables/InputField.dart';
 import 'user.dart';
 import '../reusables/returnButton.dart';
@@ -28,7 +28,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: pinkBackgroundColor,
+        backgroundColor: globals.PINKBACKGROUND,
         leading: ReturnButton(
           onPressed: () {
             Navigator.push(
@@ -39,9 +39,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         ),
       ),
       backgroundColor: pinkBackgroundColor,
-      body: SafeArea(
+
+      body: Center(child: SingleChildScrollView(
         child: createLoginPageContent(),
-      ),
+      ))
     );
   }
 
@@ -129,10 +130,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       },
       child: Text(
         "Create Account",
-        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
       ),
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.white),
+        backgroundColor: MaterialStateProperty.all(globals.BUTTONCOLOR),
       ),
     );
   }
@@ -150,7 +151,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         for (var row in results) {
           setState(() {});
           loggedInUser = new user(row[0], row[1], row[2]);
-          LOGGED_IN_USER.userID = loggedInUser.userID;
+          globals.LOGGED_IN_USER.userID = loggedInUser.userID;
         }
       });
     });
