@@ -7,7 +7,7 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:http/http.dart' as http;
-import 'user.dart';
+import 'package:flutter_applicationdemo/login/user.dart';
 import 'Venue.dart';
 
 

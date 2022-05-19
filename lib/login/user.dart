@@ -1,7 +1,6 @@
-import 'package:flutter_applicationdemo/user.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'Venue.dart';
-import 'mysql.dart';
+import 'package:flutter_applicationdemo/Venue.dart';
+import 'package:flutter_applicationdemo/mysql.dart';
 
 class user{
   late int userID;

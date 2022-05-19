@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
-import 'package:flutter_applicationdemo/GoogleSignInProvider.dart';
+import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
 import 'package:flutter_applicationdemo/Map.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -10,12 +10,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'ManageAccountPage.dart';
-import 'GoogleSignInProvider.dart';
 import 'package:provider/provider.dart';
 import 'Venue.dart';
 import 'globals.dart';
 import 'Map.dart';
-import 'user.dart';
+import 'package:flutter_applicationdemo/login/user.dart';
 import 'HomePage.dart';
 
 // Standard color of app

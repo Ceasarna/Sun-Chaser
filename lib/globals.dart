@@ -1,5 +1,5 @@
 import 'Venue.dart';
-import 'user.dart';
+import 'package:flutter_applicationdemo/login/user.dart';
 import '../login/user.dart';
 import 'HomePage.dart';
 import 'main.dart';
