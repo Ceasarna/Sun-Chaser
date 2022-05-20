@@ -8,12 +8,13 @@ import 'package:settings_ui/settings_ui.dart';
 import 'ManageAccountPage.dart';
 import 'GoogleSignInProvider.dart';
 import 'package:provider/provider.dart';
+import 'FeedbackPage.dart';
 
 // Standard color of app
 Color _backgroundColor = const Color.fromARGB(255, 190, 146, 160);
 
 // Color status of priceRange
-Color _colorContainerLow = Colors.yellow;
+Color _colorContainerLow = Colors.purple;
 Color _colorContainerMedium = _backgroundColor;
 Color _colorContainerHigh = _backgroundColor;
 
@@ -112,6 +113,21 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             setState(() {
                               onClickPriceColor("LowPriceRange");
+
+                              if (_priceRangeBool["LowPriceRange"] == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  behavior: SnackBarBehavior.floating,
+                                  content: Text('Selected £'),
+                                ));
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  content: Text('Unselected £'),
+                                  behavior: SnackBarBehavior.floating,
+                                ));
+                              }
+
                             });
                             print("Tapped single dollarSign");
                           },
@@ -138,6 +154,21 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             setState(() {
                               onClickPriceColor("MediumPriceRange");
+
+                              if (_priceRangeBool["MediumPriceRange"] == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  behavior: SnackBarBehavior.floating,
+                                  content: Text('Selected ££'),
+                                ));
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  content: Text('Unselected ££'),
+                                  behavior: SnackBarBehavior.floating,
+                                ));
+                              }
+
                             });
                             print("Tapped double dollarSign");
                           },
@@ -168,6 +199,21 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             setState(() {
                               onClickPriceColor("HighPriceRange");
+
+                              if (_priceRangeBool["HighPriceRange"] == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  behavior: SnackBarBehavior.floating,
+                                  content: Text('Selected £££'),
+                                ));
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  content: Text('Unselected £££'),
+                                  behavior: SnackBarBehavior.floating,
+                                ));
+                              }
+
                             });
                             print("Tapped Tripple dollarSign");
                           },
@@ -238,16 +284,9 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Text(
                               'Manage account',
                               style: TextStyle(
-                                fontSize: 25,
-                                fontFamily: 'Sacramento',
+                                fontSize: 20,
+                                fontWeight: FontWeight. bold,
                                 color: Colors.black,
-                                shadows: <Shadow>[
-                                  Shadow(
-                                    offset: Offset(2, 2),
-                                    blurRadius: 12.5,
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
-                                ],
                               ),
                             ),
                           ),
@@ -258,7 +297,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BottomNavPage()),
+                                builder: (context) => FormForFeedback()),
                           );
                         },
                         child: Container(
@@ -270,16 +309,9 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Text(
                               'Leave feedback',
                               style: TextStyle(
-                                fontSize: 32,
-                                fontFamily: 'Sacramento',
+                                fontSize: 20,
+                                fontWeight: FontWeight. bold,
                                 color: Colors.black,
-                                shadows: <Shadow>[
-                                  Shadow(
-                                    offset: Offset(2, 2),
-                                    blurRadius: 12.5,
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
-                                ],
                               ),
                             ),
                           ),
@@ -302,16 +334,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             'Log out',
                             style: TextStyle(
-                              fontSize: 32,
-                              fontFamily: 'Sacramento',
+                              fontSize: 20,
+                              fontWeight: FontWeight. bold,
                               color: Colors.black,
-                              shadows: <Shadow>[
-                                Shadow(
-                                  offset: Offset(2, 2),
-                                  blurRadius: 12.5,
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ],
                             ),
                           ),
                         ),
@@ -333,7 +358,7 @@ void onClickPriceColor(String priceRange) {
       _colorContainerLow = _backgroundColor;
     } else {
       _priceRangeBool["LowPriceRange"] = true;
-      _colorContainerLow = Colors.yellow;
+      _colorContainerLow = Colors.purple;
     }
   } else if (priceRange == "MediumPriceRange") {
     if (_priceRangeBool["MediumPriceRange"] == true) {
@@ -341,7 +366,7 @@ void onClickPriceColor(String priceRange) {
       _colorContainerMedium = _backgroundColor;
     } else {
       _priceRangeBool["MediumPriceRange"] = true;
-      _colorContainerMedium = Colors.yellow;
+      _colorContainerMedium = Colors.purple;
     }
   } else {
     if (_priceRangeBool["HighPriceRange"] == true) {
@@ -349,7 +374,7 @@ void onClickPriceColor(String priceRange) {
       _colorContainerHigh = _backgroundColor;
     } else {
       _priceRangeBool["HighPriceRange"] = true;
-      _colorContainerHigh = Colors.yellow;
+      _colorContainerHigh = Colors.purple;
     }
   }
 }
