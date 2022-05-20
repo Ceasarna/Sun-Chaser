@@ -117,7 +117,7 @@ class FormForFeedbackState extends State<FormForFeedback> {
             const SizedBox(height: 30),
 
             Text(
-              'What do you think about our app?',
+              'Tell us what you think',
               style: TextStyle(
                 fontSize: 20,
                 color: textColor,
@@ -247,16 +247,6 @@ class FormForFeedbackState extends State<FormForFeedback> {
                   ),
                 ),
               ],
-            ),
-
-            const SizedBox(height: 20),
-
-            Text(
-              'What is on your mind? 💕',
-              style: TextStyle(
-                fontSize: 20,
-                color: textColor,
-              ),
             ),
 
             const SizedBox(height: 20),

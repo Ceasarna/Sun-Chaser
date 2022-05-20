@@ -14,7 +14,7 @@ import 'FeedbackPage.dart';
 Color _backgroundColor = const Color.fromARGB(255, 190, 146, 160);
 
 // Color status of priceRange
-Color _colorContainerLow = Colors.yellow;
+Color _colorContainerLow = Colors.purple;
 Color _colorContainerMedium = _backgroundColor;
 Color _colorContainerHigh = _backgroundColor;
 
@@ -239,8 +239,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Text(
                               'Manage account',
                               style: TextStyle(
-                                fontSize: 25,
-                                fontFamily: 'Sacramento',
+                                fontSize: 20,
                                 color: Colors.black,
                                 shadows: <Shadow>[
                                   Shadow(
@@ -271,8 +270,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Text(
                               'Leave feedback',
                               style: TextStyle(
-                                fontSize: 32,
-                                fontFamily: 'Sacramento',
+                                fontSize: 20,
                                 color: Colors.black,
                                 shadows: <Shadow>[
                                   Shadow(
@@ -303,8 +301,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             'Log out',
                             style: TextStyle(
-                              fontSize: 32,
-                              fontFamily: 'Sacramento',
+                              fontSize: 20,
                               color: Colors.black,
                               shadows: <Shadow>[
                                 Shadow(
@@ -334,7 +331,7 @@ void onClickPriceColor(String priceRange) {
       _colorContainerLow = _backgroundColor;
     } else {
       _priceRangeBool["LowPriceRange"] = true;
-      _colorContainerLow = Colors.yellow;
+      _colorContainerLow = Colors.purple;
     }
   } else if (priceRange == "MediumPriceRange") {
     if (_priceRangeBool["MediumPriceRange"] == true) {
@@ -342,7 +339,7 @@ void onClickPriceColor(String priceRange) {
       _colorContainerMedium = _backgroundColor;
     } else {
       _priceRangeBool["MediumPriceRange"] = true;
-      _colorContainerMedium = Colors.yellow;
+      _colorContainerMedium = Colors.purple;
     }
   } else {
     if (_priceRangeBool["HighPriceRange"] == true) {
@@ -350,7 +347,7 @@ void onClickPriceColor(String priceRange) {
       _colorContainerHigh = _backgroundColor;
     } else {
       _priceRangeBool["HighPriceRange"] = true;
-      _colorContainerHigh = Colors.yellow;
+      _colorContainerHigh = Colors.purple;
     }
   }
 }
