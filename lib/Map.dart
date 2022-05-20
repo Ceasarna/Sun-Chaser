@@ -11,9 +11,6 @@ import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
 
 
-
-
-
 class Map extends StatefulWidget {
   @override
   State<Map> createState() => MapState();
@@ -135,10 +132,12 @@ class MapState extends State<Map> {
         onTap: createBottomSheet,
         position: const LatLng(59.320671571444514, 18.055854162299937),
         infoWindow: const InfoWindow(
-          title: 'Münchenbryggeriet Beer Garden',
-         
+          title: 'Münchenbryggeriet Beer Garden',        
           snippet: 'Uteservering',
-        )
+        ),
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+            BitmapDescriptor.hueGreen,
+        ),
         );
 
       Marker marker_2 = Marker(
@@ -339,10 +338,90 @@ class MapState extends State<Map> {
            _controller.complete(controller);
            },
           ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 20.0),
+              height: 250.0,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  SizedBox(width: 10.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _boxes(59.320671571444514 , 18.055854162299937, 'Münchenbryggeriet Beer Garden') ,
+                    ),
+                  SizedBox(width: 10.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _boxes(59.33115735285231, 18.074432570090742, 'Le Hibou') ,
+                    ),
+                  SizedBox(width: 10.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _boxes(59.3315552932853, 18.092751076985277, 'Strandbryggan') ,
+                    ),
+                  SizedBox(width: 10.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _boxes(59.33632582609118, 18.072980646196587, 'Stureplan 1') ,
+                    ),
+                  SizedBox(width: 10.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _boxes(59.3240158318325, 18.070690101341437, 'Bågspännaren Bar & Cafe') ,
+                    ),
+                ],
+              ),
+            ),
+          )
          // ElevatedButton(onPressed: () {} //_handelPressButton
         //  ,child: const Text("Search Placses"))
         ],
       )
+    );
+  }
+
+
+  Future<void> _gotoLocation(double lat, double lng) async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat,lng), zoom: 15)));
+  }
+
+  Widget _boxes(double lat, double lng, String resturantName) {
+    return GestureDetector(
+      onTap: () { _gotoLocation(lat, lng);},
+      child: Container(
+        child: FittedBox(
+          child: Material(
+            color: Colors.white,
+            elevation: 14.0,
+            borderRadius: BorderRadius.circular(24.0),
+            shadowColor: Color(0x802196F3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  width: 250,
+                  height: 200,
+                  child: ClipRRect(
+                    borderRadius: new BorderRadius.circular(24.0),
+                    child: const Image(
+                      image: AssetImage('assets/images/bild.png')
+                    ),
+                    ),
+                ),
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(resturantName),
+                    ),
+                )
+              ],
+              ),
+            ),
+        ) 
+        ),
     );
   }
 
