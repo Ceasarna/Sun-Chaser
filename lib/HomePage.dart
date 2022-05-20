@@ -27,9 +27,8 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 'Sun Chasers',
                 style: TextStyle(
-                  fontSize: 50,
+                  fontSize: 40,
                   color: globals.TEXTCOLOR,
-                  fontFamily: 'Sacramento',
                   shadows: <Shadow>[
                     Shadow(
                       offset: Offset(2, 2),
@@ -40,11 +39,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+
+            const SizedBox(height: 10),
+
             Text(
               'The #1 Sunny Spot Finder',
               style: TextStyle(
-                  fontSize: 32,
-                  fontFamily: 'Sacramento',
+                  fontSize: 25,
                   color: globals.TEXTCOLOR,
                   shadows: <Shadow>[
                     Shadow(
