@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'BottomNavPage.dart';
 import 'package:flutter_applicationdemo/CreateAccountPage.dart';
 import 'globals.dart';
@@ -26,36 +27,25 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.fromLTRB(80, 80, 80, 0),
               child: Text(
                 'Sun Chasers',
-                style: TextStyle(
-                  fontSize: 40,
+                style: GoogleFonts.libreBaskerville(
+                  fontSize: 35,
                   color: globals.TEXTCOLOR,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 10.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                  ],
                 ),
-              ),
+      ),
             ),
+
 
             const SizedBox(height: 10),
 
             Text(
               'The #1 Sunny Spot Finder',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: globals.TEXTCOLOR,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 12.5,
-                      color: globals.SHADOWCOLOR,
-                    ),
-                  ]
+              style: GoogleFonts.libreBaskerville(
+              fontSize: 20,
+              fontWeight: FontWeight. bold,
+              color: globals.TEXTCOLOR,
               ),
             ),
+
             Container(
               padding: EdgeInsets.fromLTRB(80, 40, 80, 80),
               child: ElevatedButton(

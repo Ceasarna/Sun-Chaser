@@ -240,14 +240,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               'Manage account',
                               style: TextStyle(
                                 fontSize: 20,
+                                fontWeight: FontWeight. bold,
                                 color: Colors.black,
-                                shadows: <Shadow>[
-                                  Shadow(
-                                    offset: Offset(2, 2),
-                                    blurRadius: 12.5,
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
-                                ],
                               ),
                             ),
                           ),
@@ -271,14 +265,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               'Leave feedback',
                               style: TextStyle(
                                 fontSize: 20,
+                                fontWeight: FontWeight. bold,
                                 color: Colors.black,
-                                shadows: <Shadow>[
-                                  Shadow(
-                                    offset: Offset(2, 2),
-                                    blurRadius: 12.5,
-                                    color: Color.fromARGB(255, 0, 0, 0),
-                                  ),
-                                ],
                               ),
                             ),
                           ),
@@ -302,14 +290,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             'Log out',
                             style: TextStyle(
                               fontSize: 20,
+                              fontWeight: FontWeight. bold,
                               color: Colors.black,
-                              shadows: <Shadow>[
-                                Shadow(
-                                  offset: Offset(2, 2),
-                                  blurRadius: 12.5,
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ],
                             ),
                           ),
                         ),
