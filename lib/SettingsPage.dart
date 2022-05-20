@@ -113,6 +113,21 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             setState(() {
                               onClickPriceColor("LowPriceRange");
+
+                              if (_priceRangeBool["LowPriceRange"] == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  behavior: SnackBarBehavior.floating,
+                                  content: Text('Selected £'),
+                                ));
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  content: Text('Unselected £'),
+                                  behavior: SnackBarBehavior.floating,
+                                ));
+                              }
+
                             });
                             print("Tapped single dollarSign");
                           },
@@ -139,6 +154,21 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             setState(() {
                               onClickPriceColor("MediumPriceRange");
+
+                              if (_priceRangeBool["MediumPriceRange"] == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  behavior: SnackBarBehavior.floating,
+                                  content: Text('Selected ££'),
+                                ));
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  content: Text('Unselected ££'),
+                                  behavior: SnackBarBehavior.floating,
+                                ));
+                              }
+
                             });
                             print("Tapped double dollarSign");
                           },
@@ -169,6 +199,21 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             setState(() {
                               onClickPriceColor("HighPriceRange");
+
+                              if (_priceRangeBool["HighPriceRange"] == true) {
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  behavior: SnackBarBehavior.floating,
+                                  content: Text('Selected £££'),
+                                ));
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  duration: Duration(milliseconds: 1000),
+                                  content: Text('Unselected £££'),
+                                  behavior: SnackBarBehavior.floating,
+                                ));
+                              }
+
                             });
                             print("Tapped Tripple dollarSign");
                           },
