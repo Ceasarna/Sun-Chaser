@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter_platform_interface/src/types/camera.dart';
 import 'Map.dart';
 import 'FavoritePage.dart';
 import 'SettingsPage.dart';
@@ -6,6 +7,7 @@ import 'globals.dart' as globals;
 
 
 class BottomNavPage extends StatefulWidget {
+
   @override
   State<BottomNavPage> createState() => BottomNavPageState();
 }
