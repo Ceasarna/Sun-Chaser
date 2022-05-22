@@ -6,6 +6,8 @@ class Venue {
   late VenueType typeOfVenue;
   late LatLng position;
   late InfoWindow infoWindow;
+  bool inShade = false;
+
 
   Venue(this.venueName,
       this.venueID, this.typeOfVenue, this.position);
