@@ -62,8 +62,9 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: Text(
-                  'FIND SPOT BY LOCATION',
-                  textAlign: TextAlign.center,
+              (globals.LOGGED_IN_USER.userID == 0 ? 'FIND SPOT BY LOCATION \n \n without signing in' : 'FIND SPOT BY LOCATION'),
+
+              textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
