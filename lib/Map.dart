@@ -9,6 +9,7 @@ import 'package:google_api_headers/google_api_headers.dart';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
+import 'SettingsPage.dart';
 
 
 class Map extends StatefulWidget {
@@ -378,9 +379,24 @@ class MapState extends State<Map> {
          // ElevatedButton(onPressed: () {} //_handelPressButton
         //  ,child: const Text("Search Placses"))
         ],
-      )
-    );
-  }
+      ),
+
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(top: 100.0),
+          child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                builder: (context) => const SettingsPage()));
+          },
+            backgroundColor: Colors.purple,
+            child: const Icon(Icons.filter_alt),
+            ),
+          ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+            );
+          }
 
 
   Future<void> _gotoLocation(double lat, double lng) async {
