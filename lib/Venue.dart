@@ -11,7 +11,20 @@ class Venue {
 
   Venue(this.venueName,
       this.venueID, this.typeOfVenue, this.position);
+
+  BitmapDescriptor drawIconColor() {
+    if(inShade) {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure);
+    }
+    else {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow);
+    }
+  }
+
+
 }
+
+
 
 enum VenueType{
   cafe, restaurant, bar

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/WebScraper.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
@@ -10,6 +11,8 @@ import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
 import 'SettingsPage.dart';
+import 'Venue.dart';
+import 'globals.dart' as globals;
 
 
 class Map extends StatefulWidget {
@@ -20,9 +23,6 @@ class Map extends StatefulWidget {
 const kGoogleApiKey = "AIzaSyAUmhd6Xxud8SwgDxJ4LlYlcntm01FGoSk";
 
 final homeSacffoldKey = GlobalKey<ScaffoldState>();
-
-List<_Marker> markers = [];
-
 
 class MapState extends State<Map> {
 
@@ -52,33 +52,10 @@ class MapState extends State<Map> {
   
    // List<_Marker> markers = [];
 
-    for(var m in jsonData['features']) {
-      String data = m['properties']['Kategorityp'];
-      String typ = m['properties']['MAIN_ATTRIBUTE_VALUE'];
-      if(m['properties']['Kategorityp'] == "1.400I, Uteservering A-läge") {
-        print(m['properties']['Kategorityp']);
-        _Marker marker = _Marker(m['properties']['Plats_1'],m['properties']['Gatunr_1'],m['geometry']['coordinates']);
-        markers.add(marker);
-      }
-
-      print(markers.length);
-      
-      int count = 0;
-      for (var mar in markers) {
-        print(mar.Plats_1);
-        print(mar.Gatunr_1);
-        print(mar.coordinates[1]);
-        print(mar.coordinates[0]);
-        count++;
-        print(count);
-        if (count == 100) {
-          break;
-        }
-      }
 
       //print(m['properties']['Kategorityp']);
     } 
-  }
+
 
   final Completer<GoogleMapController> _controller = Completer();
 
@@ -95,12 +72,14 @@ class MapState extends State<Map> {
 
   @override
   void initState() {
-    intilize();
-    _getUserLocation();
+    initialize();
+    //_getUserLocation();
     super.initState();
   }
 
-  void createBottomSheet() {
+  void createBottomSheet(String venueName) async {
+    var webScraper = WebScraper();
+    await webScraper.getWebsiteData(venueName);
     Scaffold.of(context).showBottomSheet<void>(
               ((context) {
                 return Container(
@@ -110,12 +89,14 @@ class MapState extends State<Map> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
-                      children: const <Widget>[
+                      children:  <Widget>[
                         /*const Text('BottomSheet'),
                         ElevatedButton(
                           child: const Text('Close BottomSheet'),
                           onPressed: () {Navigator.pop(context);})*/
-                        Image(image: AssetImage('assets/images/bild.png'))
+                        Container(
+                          child: Text(webScraper.openingHoursThisWeek.length.toString()),
+                        ),
                           
                       ],
                     )
@@ -125,145 +106,17 @@ class MapState extends State<Map> {
             );
   }
 
-  intilize() {
-    Marker marker_1;
-    //for(var marker in markers) {
-      marker_1 = Marker(
-        markerId: const MarkerId('id_1'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.320671571444514, 18.055854162299937),
-        infoWindow: const InfoWindow(
-          title: 'Münchenbryggeriet Beer Garden',        
-          snippet: 'Uteservering',
-        ),
-        icon: BitmapDescriptor.defaultMarkerWithHue(
-            BitmapDescriptor.hueGreen,
-        ),
-        );
-
-      Marker marker_2 = Marker(
-        markerId: const MarkerId('id_2'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.33115735285231, 18.074432570090742),
-        infoWindow: const InfoWindow(
-          title: 'Le Hibou',
-          snippet: 'Uteservering',
-        )
-        );
-
-      Marker marker_3 = Marker(
-        markerId: const MarkerId('id_3'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.3315552932853, 18.092751076985277),
-        infoWindow: const InfoWindow(
-          title: 'Strandbryggan',
-          snippet: 'Uteservering',
-        )
-        );
-
-      Marker marker_4 = Marker(
-        markerId: const MarkerId('id_4'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.33632582609118, 18.072980646196587),
-        infoWindow: const InfoWindow(
-          title: 'Stureplan 1',
-          snippet: 'Uteservering',
-        )
-        );
-
-      Marker marker_5 = Marker(
-        markerId: const MarkerId('id_5'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.3240158318325, 18.070690101341437),
-        infoWindow: const InfoWindow(
-          title: 'Bågspännaren Bar & Cafe',
-          snippet: 'Uteservering',
-        )
-        );
-
-      Marker marker_6 = Marker(
-        markerId: const MarkerId('id_6'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.31905195030728, 18.075349015415547),
-        infoWindow: const InfoWindow(
-          title: 'Mosebacketerrassen',
-          snippet: 'Uteservering',
-        )
-        );
-
-      Marker marker_7 = Marker(
-        markerId: const MarkerId('id_7'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.31583756143469, 18.072591381467536),
-        infoWindow: const InfoWindow(
-          title: 'Snaps Bar & Bistro',
-          snippet: 'Uteservering',
-        )
-        );
-      
-      Marker marker_8 = Marker(
-        markerId: const MarkerId('id_8'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.315129508641505, 18.074243159987006),
-        infoWindow: const InfoWindow(
-          title: 'Kvarnen',
-          snippet: 'Uteservering',
-        )
-        );
-      
-      Marker marker_9 = Marker(
-        markerId: const MarkerId('id_9'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.31533181094423, 18.070972638518455),
-        infoWindow: const InfoWindow(
-          title: 'Neverland Pub & Restaurang',
-          snippet: 'Uteservering',
-        )
-        );
-
-      Marker marker_10 = Marker(
-        markerId: const MarkerId('id_10'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.31578389646754, 18.071146819010995),
-        infoWindow: const InfoWindow(
-          title: 'Baras Imperium',
-          snippet: 'Uteservering',
-        )
-        );
-
-      Marker marker_11 = Marker(
-        markerId: const MarkerId('id_11'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.31549103673382, 18.035425964557245),
-        infoWindow: const InfoWindow(
-          title: 'YUC Tanto',
-          snippet: 'Uteservering',
-        )
-        );
-
-      Marker marker_12 = Marker(
-        markerId: const MarkerId('id_12'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.314826329005506, 18.03317611771755),
-        infoWindow: const InfoWindow(
-          title: 'Loopen',
-          snippet: 'Uteservering',
-        )
-        );
-    
-      markersList.add(marker_1);
-      markersList.add(marker_2);
-      markersList.add(marker_3);
-      markersList.add(marker_4);
-      markersList.add(marker_5);
-      markersList.add(marker_6);
-      markersList.add(marker_7);
-      markersList.add(marker_8);
-      markersList.add(marker_9);
-      markersList.add(marker_10);
-      markersList.add(marker_11);
-      markersList.add(marker_12);
-   // }
+  initialize() {
+    List<Venue> allVenues = globals.VENUES;
+    for(var venue in allVenues) {
+      Marker marker = Marker(
+          markerId: MarkerId(venue.venueID.toString()),
+          position: venue.position,
+          onTap: () => createBottomSheet(venue.venueName),
+          icon: venue.drawIconColor(),
+          );
+      markersList.add(marker);
+    }
   }
 
 
@@ -339,43 +192,6 @@ class MapState extends State<Map> {
            _controller.complete(controller);
            },
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 20.0),
-              height: 250.0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  SizedBox(width: 10.0),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.320671571444514 , 18.055854162299937, 'Münchenbryggeriet Beer Garden') ,
-                    ),
-                  SizedBox(width: 10.0),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.33115735285231, 18.074432570090742, 'Le Hibou') ,
-                    ),
-                  SizedBox(width: 10.0),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.3315552932853, 18.092751076985277, 'Strandbryggan') ,
-                    ),
-                  SizedBox(width: 10.0),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.33632582609118, 18.072980646196587, 'Stureplan 1') ,
-                    ),
-                  SizedBox(width: 10.0),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.3240158318325, 18.070690101341437, 'Bågspännaren Bar & Cafe') ,
-                    ),
-                ],
-              ),
-            ),
-          )
          // ElevatedButton(onPressed: () {} //_handelPressButton
         //  ,child: const Text("Search Placses"))
         ],
@@ -490,12 +306,3 @@ class MapState extends State<Map> {
   }*/
 }
 
-class _Marker {
-
-  var Plats_1;
-  var Gatunr_1;
-  var coordinates;
-
-  _Marker(this.Plats_1, this.Gatunr_1, this.coordinates);
-
-}
