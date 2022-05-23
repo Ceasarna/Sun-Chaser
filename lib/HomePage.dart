@@ -61,8 +61,10 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(builder: (context) => BottomNavPage()), //Replace Container() with call to account-page.
                   );
                 },
-                child: Text(
-                  'FIND SPOT BY LOCATION',
+
+                  child: Text(
+                  (globals.LOGGED_IN_USER.userID == 0 ? 'FIND SPOT BY LOCATION \n \n without signing in' : 'FIND SPOT BY LOCATION'),
+
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18,
