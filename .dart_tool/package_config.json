@@ -237,9 +237,9 @@
     },
     {
       "name": "get",
-      "rootUri": "file:///C:/src/flutter_windows_2.10.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.3",
+      "rootUri": "file:///C:/src/flutter_windows_2.10.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.5",
       "packageUri": "lib/",
-      "languageVersion": "2.16"
+      "languageVersion": "2.15"
     },
     {
       "name": "google_api_headers",
@@ -668,7 +668,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-05-23T09:29:15.931213Z",
+  "generated": "2022-05-23T10:34:27.611134Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }
