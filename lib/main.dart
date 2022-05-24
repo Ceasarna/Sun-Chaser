@@ -3,17 +3,24 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_applicationdemo/GoogleSignInProvider.dart';
+import 'package:flutter_applicationdemo/ShadowDetector.dart';
+import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
 import 'package:provider/provider.dart';
 
 import 'Map.dart';
 import 'HomePage.dart';
-import 'user.dart';
-import 'globals.dart';
+import 'Venue.dart';
+import 'mysql.dart';
+import 'package:flutter_applicationdemo/login/User.dart';
+import 'login/User.dart';
+import 'globals.dart' as globals;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- // await Firebase.initializeApp();
+  await Firebase.initializeApp();
+  await loadAllVenues();
 
   runApp(MyApp());
 }
@@ -34,26 +41,19 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+Future<void> loadAllVenues() async{
+  globals.VENUES = [];
+  var db = mysql();
+  await db.getConnection().then((conn) async {
+    String sql = "select venueName, venueID, latitude, longitude from maen0574.venue";
+    await conn.query(sql).then((results){
+      for(var row in results){
+        globals.VENUES.add(Venue(row[0], row[1], VenueType.restaurant, LatLng(row[2], row[3])));
+      }
+    });
+  });
 
-/*
-class HomePage extends StatefulWidget {
-  @override
-  State<HomePage> createState() => HomePageState();
+  var sd = ShadowDetector();
+  await sd.evaluateShadowsForAllVenues(globals.VENUES);
+
 }
-
-class HomePageState extends State<HomePage> {
- 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Map()));
-        },
-        label: const Text('To Karta'),
-        icon: const Icon(Icons.directions_boat),
-        ),
-    );
-  }
-
-}*/
