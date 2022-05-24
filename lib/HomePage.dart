@@ -10,6 +10,7 @@ import 'mysql.dart';
 import 'package:flutter_applicationdemo/login/User.dart' as User;
 import 'login/user.dart';
 import 'globals.dart' as globals;
+import 'ManageAccountPage.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -103,7 +104,7 @@ class _HomePageState extends State<HomePage> {
         ),
         onPressed: () {
           Navigator.push(
-            context,
+            context, //SignInPage()
             MaterialPageRoute(builder: (context) => SignInPage()), //Replace Container() with call to Map-page.
           );
         },
