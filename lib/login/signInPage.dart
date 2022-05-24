@@ -20,7 +20,6 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   var db = mysql();
-  int loggedInID = 0;
   late User loggedInUser;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -33,7 +32,6 @@ class _SignInPageState extends State<SignInPage> {
         for (var row in results) {
           setState(() {});
           loggedInUser = new User(row[0], row[1], row[2]);
-          loggedInID = loggedInUser.getID();
         }
       });
     });
@@ -145,7 +143,7 @@ class _SignInPageState extends State<SignInPage> {
           return;
         }
         await loginVerification(emailController.text, passwordController.text);
-        if (loggedInID != 0) {
+        if (globals.LOGGED_IN_USER.userID != 0) {
           globals.LOGGED_IN_USER = loggedInUser;
           Navigator.push(
             context,
@@ -183,6 +181,8 @@ class _SignInPageState extends State<SignInPage> {
                   CreateAccountPage()), //Replace Container() with call to Map-page.
         );
       } else {
+        var email = provider.user?.email.toString();
+        await loginVerificationGmail(email!);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -191,5 +191,33 @@ class _SignInPageState extends State<SignInPage> {
         );
       }
     });
+  }
+
+  Future<void> loginVerificationGmail(String email) async{
+    await db.getConnection().then((conn) async {
+      String sql =
+          "select id, email, password from maen0574.user where email = '$email'";
+      await conn.query(sql).then((results) {
+        for (var row in results) {
+          setState(() {});
+          loggedInUser = new User(row[0], row[1], row[2]);
+          globals.LOGGED_IN_USER = loggedInUser;
+        }
+      });
+    });
+    if(globals.LOGGED_IN_USER.userID == 0){
+      await db.getConnection().then((conn) async{
+        String sql = "INSERT INTO maen0574.user (id, email, password, username) VALUES (null, '$email', '', '');";
+        await conn.query(sql);
+        sql = "Select id, email, username from maen0574.user where email = '$email'";
+        await conn.query(sql).then((results) {
+          for (var row in results) {
+            setState(() {});
+            loggedInUser = new User(row[0], row[1], row[2]);
+            globals.LOGGED_IN_USER.userID = loggedInUser.userID;
+          }
+        });
+      });
+    }
   }
 }
