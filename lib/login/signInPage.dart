@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../mysql.dart';
 import '../HomePage.dart';
 import '../main.dart';
-import 'user.dart';
+import 'User.dart';
 import '../reusables/InputField.dart';
 import '../reusables/returnButton.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -21,7 +21,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   var db = mysql();
   int loggedInID = 0;
-  late user loggedInUser;
+  late User loggedInUser;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -32,7 +32,7 @@ class _SignInPageState extends State<SignInPage> {
       await conn.query(sql).then((results) {
         for (var row in results) {
           setState(() {});
-          loggedInUser = new user(row[0], row[1], row[2]);
+          loggedInUser = new User(row[0], row[1], row[2]);
           loggedInID = loggedInUser.getID();
         }
       });

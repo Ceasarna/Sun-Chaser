@@ -1,14 +1,16 @@
 import 'Venue.dart';
-import 'package:flutter_applicationdemo/login/user.dart';
-import '../login/user.dart';
+import 'package:flutter_applicationdemo/login/User.dart';
+import '../login/User.dart';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 import 'HomePage.dart';
+import 'Venue.dart';
+import 'Venue.dart';
 import 'main.dart';
 
-user LOGGED_IN_USER = user(0, "", "");
+User LOGGED_IN_USER = User(0, "", "");
 Color BACKGROUNDCOLOR = const Color.fromARGB(255, 190, 146, 160);
 Color ITEMCOLOR = const Color.fromARGB(255, 0, 0, 0);
 Color BUTTONCOLOR = const Color.fromARGB(204, 172, 123, 132);

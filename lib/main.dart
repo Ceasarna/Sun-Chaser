@@ -12,8 +12,8 @@ import 'Map.dart';
 import 'HomePage.dart';
 import 'Venue.dart';
 import 'mysql.dart';
-import 'package:flutter_applicationdemo/login/user.dart';
-import 'login/user.dart';
+import 'package:flutter_applicationdemo/login/User.dart';
+import 'login/User.dart';
 import 'globals.dart' as globals;
 
 void main() async {
@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
   }
 }
 Future<void> loadAllVenues() async{
+  globals.VENUES = [];
   var db = mysql();
   await db.getConnection().then((conn) async {
     String sql = "select venueName, venueID, latitude, longitude from maen0574.venue";
