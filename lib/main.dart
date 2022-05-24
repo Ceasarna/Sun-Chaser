@@ -13,8 +13,8 @@ import 'Map.dart';
 import 'HomePage.dart';
 import 'Venue.dart';
 import 'mysql.dart';
-import 'package:flutter_applicationdemo/login/user.dart';
-import 'login/user.dart';
+import 'package:flutter_applicationdemo/login/User.dart';
+import 'login/User.dart';
 import 'globals.dart' as globals;
 
 void main() async {

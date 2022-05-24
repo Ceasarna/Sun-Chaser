@@ -5,13 +5,17 @@ import 'package:flutter_applicationdemo/WebScraper.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
-//import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
+
+import 'package:flutter_applicationdemo/login/User.dart';
 import 'SettingsPage.dart';
 import 'Venue.dart';
+import 'globals.dart' as globals;
+
+
 import 'globals.dart' as globals;
 
 
@@ -24,6 +28,7 @@ const kGoogleApiKey = "AIzaSyAUmhd6Xxud8SwgDxJ4LlYlcntm01FGoSk";
 
 final homeSacffoldKey = GlobalKey<ScaffoldState>();
 
+
 class MapState extends State<Map> {
 
   Future getMerkerData() async {
@@ -34,28 +39,9 @@ class MapState extends State<Map> {
    // print('Response body: ${response.body.toString()}');
     var jsonData = jsonDecode(response.body);
 
-   /* print(jsonData['features'][0]);
-
-    print(jsonData['features'][1]['properties']['Plats_1']);
-
-    print(jsonData['features'][0]['properties']['Gatunr_1']);
-
-    print(jsonData['features'][0]['properties']['Kategorityp']);
-
-    /*String data = jsonData['features'][0]['properties']['Kategorityp'];
-    print(data.contains('Tillfälliga bostäder'));*/
-    
-
-    print(jsonData['features'][1]['geometry']['coordinates']);*/
-
-    //print(jsonData['features'][0]['properties']['MAIN_ATTRIBUTE_VALUE']);
-  
-   // List<_Marker> markers = [];
 
 
-      //print(m['properties']['Kategorityp']);
-    } 
-
+  }
 
   final Completer<GoogleMapController> _controller = Completer();
 
@@ -97,7 +83,7 @@ class MapState extends State<Map> {
                         Container(
                           child: Text(webScraper.openingHoursThisWeek.length.toString()),
                         ),
-                          
+
                       ],
                     )
                     ),
@@ -252,7 +238,7 @@ class MapState extends State<Map> {
               ],
               ),
             ),
-        ) 
+        )
         ),
     );
   }
@@ -260,7 +246,7 @@ class MapState extends State<Map> {
   Future<void> _goToCurrentPosition(LatLng latlng) async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        bearing: 192.8334901395799,
+        bearing: 0,
         target: LatLng(latlng.latitude, latlng.longitude),
         //tilt: 59.440717697143555,
         zoom: 14.4746)));
