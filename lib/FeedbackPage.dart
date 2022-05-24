@@ -1,6 +1,8 @@
-import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_applicationdemo/mysql.dart';
 import 'BottomNavPage.dart';
 import 'package:flutter/material.dart';
+import 'Form.dart';
 
 
 Color _backgroundColor = const Color.fromARGB(255, 190, 146, 160);
@@ -10,13 +12,32 @@ Color _colorContainerHappy = _backgroundColor;
 Color _colorContainerMediumHappy = _backgroundColor;
 Color _colorContainerUpset = _backgroundColor;
 
-// Logic status of priceRange
+
 Map<String, bool> _satisfactionBoolean = {
-  "VeryHappy": true,
+  "VeryHappy": false,
   "Happy": false,
   "MediumHappy": false,
   "Upset": false
 };
+
+Map<String, bool> _typeOfFeedback = {
+
+  "Compliment": false,
+  "Complaint": false,
+  "Bug": false,
+  "Mistake in sun accuracy": false,
+
+};
+
+bool check1 = false;
+bool check2 = false;
+bool check3 = false;
+bool check4 = false;
+
+TextEditingController satisfaction =new TextEditingController();
+TextEditingController typeOfFeedback =new TextEditingController();
+TextEditingController writtenFeedback =new TextEditingController();
+
 
 class FormForFeedback extends StatefulWidget {
   @override
@@ -28,15 +49,20 @@ class FormForFeedback extends StatefulWidget {
 class FormForFeedbackState extends State<FormForFeedback> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  var dataBase = mysql();
 
-  String? value = stdin.readLineSync();
-  late Map<String, bool> _satisfactionBoolean;
-  late String feedback;
 
-  bool check1 = false;
-  bool check2 = false;
-  bool check3 = false;
-  bool check4 = false;
+  Future<void> feedbackVerification(String satisfaction, String typeOfFeedback, String writtenFeedback) async {
+    await dataBase.getConnection().then((conn) async {
+      String sql = "INSERT INTO maen0574.User_feedback (Satisfaction, Type_of_feedback, Written_feedback) VALUES ('$satisfaction', '$typeOfFeedback', '$writtenFeedback');";
+      await conn.query(sql).then((results) {
+        for(var row in results) {
+          setState(() {});
+          form(row[0].toString(), row[1].toString(), row[2].toString(), row[3].toString());
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,18 +73,19 @@ class FormForFeedbackState extends State<FormForFeedback> {
 
     return Scaffold(
       backgroundColor: pinkBackgroundColor,
-      resizeToAvoidBottomInset: false, //för att undvika RenderFlex overflow när man får upp skrivbordet
+      resizeToAvoidBottomInset: true, //för att undvika RenderFlex overflow när man får upp skrivbordet
       appBar: AppBar(
         backgroundColor: buttonColor,
         title: Row(
-
           children: <Widget>[
+
             FlatButton(
-              textColor: Colors.white,
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => BottomNavPage()),
-              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BottomNavPage()),
+                );
+              },
 
               child: Text("Close",
                 style: TextStyle(
@@ -68,31 +95,9 @@ class FormForFeedbackState extends State<FormForFeedback> {
             ),
           ],
         ),
-
-        actions: <Widget>[
-          FlatButton(
-            textColor: Colors.white,
-            child: Text("Send feedback",
-              style: TextStyle(
-                  fontSize: 25,
-                  color: appBarColor),
-            ),
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                return;
-              } else {
-                /*print(Map<String, bool> _satisfactionBoolean);
-                print(String feedback);*/
-
-                BottomNavPage();
-                //Send to API
-              }
-            },
-          ),
-        ],
       ),
 
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Center(
           child: Column(children: <Widget>[
             Container(
@@ -102,15 +107,14 @@ class FormForFeedbackState extends State<FormForFeedback> {
                 style: TextStyle(
                   fontSize: 26,
                   color: textColor,
-
                 ),
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
 
             Text(
-              'What do you think about our app?',
+              'Tell us what you think',
               style: TextStyle(
                 fontSize: 20,
                 color: textColor,
@@ -126,9 +130,11 @@ class FormForFeedbackState extends State<FormForFeedback> {
                   child: InkWell(
                     onTap: () {
                       setState(() {
-                        pressedEmojiColor("VeryHappy");
+                        satisfaction.text = "VeryHappy";
+                        pressedEmojiColor(satisfaction.text);
                       });
-                      print("Very happy");
+                      print(satisfaction.text);
+
                     },
                     child: Container(
                       color: _colorContainerVeryHappy,
@@ -153,9 +159,10 @@ class FormForFeedbackState extends State<FormForFeedback> {
                   child: InkWell(
                     onTap: () {
                       setState(() {
-                        pressedEmojiColor("Happy");
+                        satisfaction.text = "Happy";
+                        pressedEmojiColor(satisfaction.text);
                       });
-                      print("Happy");
+                      print(satisfaction.text);
                     },
                     child: Container(
                       color: _colorContainerHappy,
@@ -181,9 +188,11 @@ class FormForFeedbackState extends State<FormForFeedback> {
                   child: InkWell(
                     onTap: () {
                       setState(() {
-                        pressedEmojiColor("MediumHappy");
+                        satisfaction.text = "MediumHappy";
+                        pressedEmojiColor(satisfaction.text);
                       });
-                      print("MediumHappy");
+                      print(satisfaction.text);
+
                     },
                     child: Container(
                       color: _colorContainerMediumHappy,
@@ -210,9 +219,10 @@ class FormForFeedbackState extends State<FormForFeedback> {
                   child: InkWell(
                     onTap: () {
                       setState(() {
-                        pressedEmojiColor("Upset");
+                        satisfaction.text = "Upset";
+                        pressedEmojiColor(satisfaction.text);
                       });
-                      print("Upset");
+                      print(satisfaction.text);
                     },
                     child: Container(
                       color: _colorContainerUpset,
@@ -238,35 +248,20 @@ class FormForFeedbackState extends State<FormForFeedback> {
 
             const SizedBox(height: 20),
 
-            Text(
-              'What is on your mind? 💕',
-              style: TextStyle(
-                fontSize: 20,
-                color: textColor,
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
 
             CheckboxListTile(
               title: const Text("Compliment"),
               value: check1,
               onChanged: (newValue) {
                 setState(() {
+                  typeOfFeedback.text = "Compliment";
+                  pressedTypeOfFeedback(typeOfFeedback.text);
+                  print(typeOfFeedback.text);
 
-                  check1 = newValue!;
-                  print("Compliment");
 
-                  if(check4 || check2 || check3){
-                    check4 = false;
-                    check2 = false;
-                    check3 = false;
-                  }
                 });
               },
               controlAffinity: ListTileControlAffinity.leading,  //lägger checkboxen på vänster sida om texten
-
             ),
 
             Column(children: <Widget>[
@@ -276,18 +271,14 @@ class FormForFeedbackState extends State<FormForFeedback> {
                 onChanged: (newValue) {
                   setState(() {
 
-                    check2 = newValue!;
-                    print("Complaint");
+                    typeOfFeedback.text = "Complaint";
+                    pressedTypeOfFeedback(typeOfFeedback.text);
+                    print(typeOfFeedback.text);
 
-                    if(check1 || check4 || check3){
-                      check1 = false;
-                      check4 = false;
-                      check3 = false;
-                    }
+
                   });
                 },
                 controlAffinity: ListTileControlAffinity.leading,  //lägger checkboxen på vänster sida om texten
-
               ),
 
               CheckboxListTile(
@@ -296,18 +287,14 @@ class FormForFeedbackState extends State<FormForFeedback> {
                 onChanged: (newValue) {
                   setState(() {
 
-                    check3 = newValue!;
-                    print("Bug");
+                    typeOfFeedback.text = "Bug";
+                    pressedTypeOfFeedback(typeOfFeedback.text);
+                    print(typeOfFeedback.text);
 
-                    if(check1 || check2 || check4){
-                      check1 = false;
-                      check2 = false;
-                      check4 = false;
-                    }
+
                   });
                 },
                 controlAffinity: ListTileControlAffinity.leading,  //lägger checkboxen på vänster sida om texten
-
               ),
 
               CheckboxListTile(
@@ -316,18 +303,14 @@ class FormForFeedbackState extends State<FormForFeedback> {
                 onChanged: (newValue) {
                   setState(() {
 
-                    check4 = newValue!;
-                    print("Mistake in sun accuracy");
+                    typeOfFeedback.text = "Mistake in sun accuracy";
+                    pressedTypeOfFeedback(typeOfFeedback.text);
+                    print(typeOfFeedback.text);
 
-                    if(check1 || check2 || check3){
-                      check1 = false;
-                      check2 = false;
-                      check3 = false;
-                    }
+
                   });
                 },
                 controlAffinity: ListTileControlAffinity.leading,  //lägger checkboxen på vänster sida om texten
-
               ),
 
               const SizedBox(height: 10),
@@ -335,6 +318,8 @@ class FormForFeedbackState extends State<FormForFeedback> {
               Padding(
                 padding: const EdgeInsets.all(40.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  controller: writtenFeedback,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(20.0),
                     labelText: "Write feedback here...",
@@ -345,89 +330,193 @@ class FormForFeedbackState extends State<FormForFeedback> {
                       ),
                     ), //fillColor: Colors.green
                   ),
-                  keyboardType: TextInputType.text,
-                  style: const TextStyle(
+                ),
+              ),
+
+              InkWell(
+
+                onTap: () async {
+                  print(writtenFeedback.text);
+                  if (writtenFeedback.text.contains("'")) {
+                    print('not allowed to use atrophies');
+                    return;
+                  }
+
+                  await feedbackVerification(satisfaction.text, typeOfFeedback.text, writtenFeedback.text);
+                  print(satisfaction.text);
+                  print(typeOfFeedback.text);
+                  print(writtenFeedback.text);
+
+                  //pop-up thank you for answering
+
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        AlertDialog(
+                          title: const Text('Thank you'),
+                          content: const Text('Thank you for your feedback, '
+                              'you will now be sent back to the map'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('Ok'),
+                              onPressed: () =>
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) =>
+                                        BottomNavPage()),
+                                    //Replace Container() with call to account-page.
+                                  ),
+                            ),
+                          ],
+                        ),
+                      );
+                  pressedEmojiColor("clear");
+                  pressedTypeOfFeedback("clear");
+                  writtenFeedback.text = '';
+                },
+
+
+                child: Container(
+                  color: Colors.purple,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      Text("Send feedback",
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ]
+            ],
             ),
-          ],
-          ),
+
+            const SizedBox(height: 30),
+
+        ],
         ),
+    ),
       ),
-    );
+      );
   }
 }
 
-void pressedEmojiColor (String satisfactionLevel) {
-  if (satisfactionLevel == "Upset") {
-    if (_satisfactionBoolean["Upset"] == true) {
-      _satisfactionBoolean["Upset"] = false;
-      _colorContainerUpset = _backgroundColor;
-    } else {
-      _satisfactionBoolean["Upset"] = true;
-      _colorContainerUpset = Colors.purple;
+void pressedEmojiColor (String s) {
+  if (s == "Upset") {
+    _colorContainerUpset = Colors.purple;
+    _satisfactionBoolean["Upset"] == true;
 
-      if(_satisfactionBoolean["MediumHappy"] == true || _satisfactionBoolean["Happy"] == true || _satisfactionBoolean["VeryHappy"] == true) {
-        _satisfactionBoolean["MediumHappy"] == false;
-        _colorContainerMediumHappy = _backgroundColor;
-        _satisfactionBoolean["Happy"] == false;
-        _colorContainerHappy = _backgroundColor;
-        _satisfactionBoolean["VeryHappy"] == false;
-        _colorContainerVeryHappy = _backgroundColor;
-      }
-    }
-  } else if (satisfactionLevel == "MediumHappy") {
-    if (_satisfactionBoolean["MediumHappy"] == true) {
-      _satisfactionBoolean["MediumHappy"] = false;
-      _colorContainerMediumHappy = _backgroundColor;
-    } else {
-      _satisfactionBoolean["MediumHappy"] = true;
-      _colorContainerMediumHappy = Colors.purple;
+    _satisfactionBoolean["MediumHappy"] == false;
+    _colorContainerMediumHappy = _backgroundColor;
+    _satisfactionBoolean["Happy"] == false;
+    _colorContainerHappy = _backgroundColor;
+    _satisfactionBoolean["VeryHappy"] == false;
+    _colorContainerVeryHappy = _backgroundColor;
+  }
 
-      if(_satisfactionBoolean["Upset"] == true || _satisfactionBoolean["Happy"] == true || _satisfactionBoolean["VeryHappy"] == true) {
-        _satisfactionBoolean["Upset"] == false;
-        _colorContainerUpset = _backgroundColor;
-        _satisfactionBoolean["Happy"] == false;
-        _colorContainerHappy = _backgroundColor;
-        _satisfactionBoolean["VeryHappy"] == false;
-        _colorContainerVeryHappy = _backgroundColor;
-      }
-    }
-  } else if (satisfactionLevel == "Happy") {
-    if (_satisfactionBoolean["Happy"] == true) {
-      _satisfactionBoolean["Happy"] = false;
-      _colorContainerHappy = _backgroundColor;
-    } else {
-      _satisfactionBoolean["Happy"] = true;
-      _colorContainerHappy = Colors.purple;
+  if (s == "MediumHappy") {
+    _colorContainerMediumHappy = Colors.purple;
+    _satisfactionBoolean["MediumHappy"] = true;
 
-      if(_satisfactionBoolean["MediumHappy"] == true || _satisfactionBoolean["Upset"] == true || _satisfactionBoolean["VeryHappy"] == true) {
-        _satisfactionBoolean["MediumHappy"] == false;
-        _colorContainerMediumHappy = _backgroundColor;
-        _satisfactionBoolean["Upset"] == false;
-        _colorContainerUpset = _backgroundColor;
-        _satisfactionBoolean["VeryHappy"] == false;
-        _colorContainerVeryHappy = _backgroundColor;
-      }
-    }
-  } else if(satisfactionLevel == "VeryHappy") {
-    if (_satisfactionBoolean["VeryHappy"] == true) {
-      _satisfactionBoolean["VeryHappy"] = false;
-      _colorContainerVeryHappy = _backgroundColor;
-    } else {
-      _satisfactionBoolean["VeryHappy"] = true;
-      _colorContainerVeryHappy = Colors.purple;
+    _satisfactionBoolean["Upset"] == false;
+    _colorContainerUpset = _backgroundColor;
+    _satisfactionBoolean["Happy"] == false;
+    _colorContainerHappy = _backgroundColor;
+    _satisfactionBoolean["VeryHappy"] == false;
+    _colorContainerVeryHappy = _backgroundColor;
+  }
 
-      if(_satisfactionBoolean["MediumHappy"] == true || _satisfactionBoolean["Happy"] == true || _satisfactionBoolean["Upset"] == true) {
-        _satisfactionBoolean["MediumHappy"] == false;
-        _colorContainerMediumHappy = _backgroundColor;
-        _satisfactionBoolean["Happy"] == false;
-        _colorContainerHappy = _backgroundColor;
-        _satisfactionBoolean["Upset"] == false;
-        _colorContainerUpset = _backgroundColor;
-      }
-    }
+  if (s == "Happy") {
+    _colorContainerHappy = Colors.purple;
+    _satisfactionBoolean["Happy"] = true;
+
+    _satisfactionBoolean["MediumHappy"] == false;
+    _colorContainerMediumHappy = _backgroundColor;
+    _satisfactionBoolean["Upset"] == false;
+    _colorContainerUpset = _backgroundColor;
+    _satisfactionBoolean["VeryHappy"] == false;
+    _colorContainerVeryHappy = _backgroundColor;
+  }
+
+  if(s == "VeryHappy") {
+    _colorContainerVeryHappy = Colors.purple;
+    _satisfactionBoolean["VeryHappy"] = true;
+
+    _satisfactionBoolean["MediumHappy"] == false;
+    _colorContainerMediumHappy = _backgroundColor;
+    _satisfactionBoolean["Happy"] == false;
+    _colorContainerHappy = _backgroundColor;
+    _satisfactionBoolean["Upset"] == false;
+    _colorContainerUpset = _backgroundColor;
+  }
+
+  if(s == "clear"){
+    _satisfactionBoolean["VeryHappy"] = false;
+    _colorContainerVeryHappy = _backgroundColor;
+    _satisfactionBoolean["MediumHappy"] == false;
+    _colorContainerMediumHappy = _backgroundColor;
+    _satisfactionBoolean["Happy"] == false;
+    _colorContainerHappy = _backgroundColor;
+    _satisfactionBoolean["Upset"] == false;
+    _colorContainerUpset = _backgroundColor;
+  }
+}
+
+void pressedTypeOfFeedback(String s) {
+  if (s == "Compliment") {
+    _typeOfFeedback["Compliment"] == true;
+    check1 = true;
+    _typeOfFeedback["Complaint"] == false;
+    check2 = false;
+    _typeOfFeedback["Bug"] == false;
+    check3 = false;
+    _typeOfFeedback["Mistake in sun accuracy"] == false;
+    check4 = false;
+  }
+
+  if (s == "Complaint") {
+    _typeOfFeedback["Complaint"] == true;
+    check2 = true;
+    _typeOfFeedback["Compliment"] == false;
+    check1 = false;
+    _typeOfFeedback["Bug"] == false;
+    check3 = false;
+    _typeOfFeedback["Mistake in sun accuracy"] == false;
+    check4 = false;
+  }
+
+  if (s == "Bug") {
+    _typeOfFeedback["Bug"] == true;
+    check3 = true;
+    _typeOfFeedback["Complaint"] == false;
+    check2 = false;
+    _typeOfFeedback["Compliment"] == false;
+    check1 = false;
+    _typeOfFeedback["Mistake in sun accuracy"] == false;
+    check4 = false;
+  }
+
+  if (s == "Mistake in sun accuracy") {
+    _typeOfFeedback["Mistake in sun accuracy"] == true;
+    check4 = true;
+    _typeOfFeedback["Complaint"] == false;
+    check2 = false;
+    _typeOfFeedback["Bug"] == false;
+    check3 = false;
+    _typeOfFeedback["Compliment"] == false;
+    check1 = false;
+  }
+
+  if (s == "clear") {
+    _typeOfFeedback["Mistake in sun accuracy"] == false;
+    check4 = false;
+    _typeOfFeedback["Complaint"] == false;
+    check2 = false;
+    _typeOfFeedback["Bug"] == false;
+    check3 = false;
+    _typeOfFeedback["Compliment"] == false;
+    check1 = false;
   }
 }

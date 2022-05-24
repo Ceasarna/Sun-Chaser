@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_applicationdemo/ShadowDetector.dart';
 import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
@@ -51,4 +52,8 @@ Future<void> loadAllVenues() async{
       }
     });
   });
+
+  var sd = ShadowDetector();
+  await sd.evaluateShadowsForAllVenues(globals.VENUES);
+
 }
