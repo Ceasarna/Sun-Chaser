@@ -56,6 +56,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "csslib",
+      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/csslib-0.17.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.4",
       "packageUri": "lib/",
@@ -231,9 +237,9 @@
     },
     {
       "name": "get",
-      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.3",
+      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.5",
       "packageUri": "lib/",
-      "languageVersion": "2.16"
+      "languageVersion": "2.15"
     },
     {
       "name": "google_api_headers",
@@ -243,7 +249,7 @@
     },
     {
       "name": "google_fonts",
-      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-2.3.2",
+      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-2.3.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -255,7 +261,7 @@
     },
     {
       "name": "google_maps_flutter_platform_interface",
-      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter_platform_interface-2.1.5",
+      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter_platform_interface-2.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -273,13 +279,13 @@
     },
     {
       "name": "google_sign_in_android",
-      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_android-5.2.7",
+      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_android-5.2.8",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "google_sign_in_ios",
-      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_ios-5.2.7",
+      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_ios-5.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -292,6 +298,12 @@
     {
       "name": "google_sign_in_web",
       "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.10.1+2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "html",
+      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/html-0.15.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -615,7 +627,7 @@
     },
     {
       "name": "webview_flutter_platform_interface",
-      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_platform_interface-1.8.1",
+      "rootUri": "file:///C:/Users/morte/OneDrive/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_platform_interface-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -656,7 +668,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-05-23T12:44:22.319887Z",
+  "generated": "2022-05-24T11:06:03.933866Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

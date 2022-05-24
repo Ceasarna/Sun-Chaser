@@ -32,6 +32,7 @@ class _SignInPageState extends State<SignInPage> {
         for (var row in results) {
           setState(() {});
           loggedInUser = new User(row[0], row[1], row[2]);
+          globals.LOGGED_IN_USER = loggedInUser;
         }
       });
     });
@@ -139,6 +140,7 @@ class _SignInPageState extends State<SignInPage> {
       onPressed: () async {
         if (emailController.text.contains("'") ||
             passwordController.text.contains("'")) {
+          print("1");
           loginError();
           return;
         }
@@ -152,6 +154,7 @@ class _SignInPageState extends State<SignInPage> {
                     HomePage()), //Replace Container() with call to account-page.
           );
         } else {
+          print(globals.LOGGED_IN_USER.userID);
           loginError();
         }
         //print(loggedInUser.email + " " + loggedInUser.userID.toString());

@@ -39,27 +39,7 @@ class MapState extends State<Map> {
    // print('Response body: ${response.body.toString()}');
     var jsonData = jsonDecode(response.body);
 
-   /* print(jsonData['features'][0]);
 
-    print(jsonData['features'][1]['properties']['Plats_1']);
-
-    print(jsonData['features'][0]['properties']['Gatunr_1']);
-
-    print(jsonData['features'][0]['properties']['Kategorityp']);
-
-    /*String data = jsonData['features'][0]['properties']['Kategorityp'];
-    print(data.contains('Tillfälliga bostäder'));*/
-
-
-    print(jsonData['features'][1]['geometry']['coordinates']);*/
-
-    //print(jsonData['features'][0]['properties']['MAIN_ATTRIBUTE_VALUE']);
-
-   // List<_Marker> markers = [];
-
-
-      //print(m['properties']['Kategorityp']);
-    }
 
   }
 
