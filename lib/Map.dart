@@ -1,22 +1,19 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/WebScraper.dart';
+import 'package:flutter_applicationdemo/HomePage.dart';
 import 'dart:async';
+import 'login/User.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
-import 'package:google_api_headers/google_api_headers.dart';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
-import 'package:geolocator/geolocator.dart';
-
-import 'package:flutter_applicationdemo/login/User.dart';
 import 'SettingsPage.dart';
 import 'Venue.dart';
 import 'globals.dart' as globals;
-
-
-import 'globals.dart' as globals;
+import 'FeedbackPage.dart';
+import 'login/CreateAccountPage.dart';
+import 'login/signInPage.dart';
 
 
 class Map extends StatefulWidget {
@@ -152,26 +149,22 @@ class MapState extends State<Map> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Sun chasers"),
         key: homeSacffoldKey,
-        //leading: IconButton(icon: Icon(Icons.search), onPressed:() {},),
-        actions: <Widget>[
-          IconButton(icon: const Icon(Icons.search), onPressed:() {
-          },),
-        ],
-        title: TextFormField(
-          controller: _searchController,
-          textCapitalization: TextCapitalization.words,
-          decoration: const InputDecoration(hintText: 'Find your place'),
-          onChanged: (value) {
-            print(value);
-          },
-        ),
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
+      drawer : Drawer(
+        child: Container(
+          child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
+        ),
+      ),
+
       body: Stack (
         children: [
           GoogleMap(
-            mapType: MapType.normal,
+
+          mapType: MapType.normal,
             initialCameraPosition: _kGooglePlex,
             markers: markersList.map((e) => e).toSet(),
             onMapCreated: (GoogleMapController controller) {
@@ -192,7 +185,7 @@ class MapState extends State<Map> {
                 MaterialPageRoute(
                 builder: (context) => const SettingsPage()));
           },
-            backgroundColor: Colors.purple,
+            backgroundColor: Colors.blueAccent,
             child: const Icon(Icons.filter_alt),
             ),
           ),
@@ -292,3 +285,145 @@ class MapState extends State<Map> {
   }*/
 }
 
+Widget buildDrawerSignedIn(BuildContext context){
+  return Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(
+          decoration: const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
+          child: Column(children: const <Widget>[
+            Text('Sun Chaser',
+              style :TextStyle(fontSize: 32),
+            ),
+
+            SizedBox(height: 30),
+            Icon(Icons.account_box_rounded),
+
+          ],
+
+          ),
+
+        ),
+
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text('Sign out'),
+          onTap:(){
+            globals.LOGGED_IN_USER = User(0, "", "");
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()), //Replace Container() with call to Map-page.
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.thumb_up_alt),
+          title: Text('Give feedback'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FormForFeedback(),
+              ),
+            );
+          },
+
+        ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text('Settings'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
+          },
+        ),
+
+      ],
+    ),
+  );
+}
+
+Widget buildDrawerSignedOut(BuildContext context){
+  return Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(
+          decoration: const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
+          child: Column(children: const <Widget>[
+            Text('Sun Chaser',
+              style :TextStyle(fontSize: 32),
+            ),
+
+            SizedBox(height: 30),
+          ],
+          ),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.account_box_rounded),
+          title: Text('Create account'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreateAccountPage(),
+              ),
+            );
+          },
+  ),
+        ListTile(
+          leading: Icon(Icons.login),
+          title: Text('Sign in'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignInPage(),
+              ),
+            );
+          },),
+        ListTile(
+          leading: Icon(Icons.thumb_up_alt),
+          title: Text('Give feedback'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FormForFeedback(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text('Settings'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
+          },
+        ),
+      ],
+    ),
+  );
+}
+
+
+class _Marker {
+
+  var Plats_1;
+  var Gatunr_1;
+  var coordinates;
+
+  _Marker(this.Plats_1, this.Gatunr_1, this.coordinates);
+
+}
