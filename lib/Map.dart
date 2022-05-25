@@ -7,14 +7,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/retry.dart';
+import 'package:intl/number_symbols.dart';
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
-
+import 'package:intl/intl.dart';
 import 'package:flutter_applicationdemo/login/User.dart';
 import 'SettingsPage.dart';
 import 'Venue.dart';
 import 'globals.dart' as globals;
-
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'globals.dart' as globals;
 
 class Map extends StatefulWidget {
@@ -38,7 +40,10 @@ class MapState extends State<Map> {
   }
 
   final Completer<GoogleMapController> _controller = Completer();
-
+  bool? _barFilterValue = true;
+  bool? _restaurantFilterValue = true;
+  bool? _cafeFilterValue = true;
+  dynamic _priceFilterValue = 3;
   LocationData? _currentPosition;
 
   static const CameraPosition _kGooglePlex = CameraPosition(
@@ -140,53 +145,7 @@ class MapState extends State<Map> {
     return Scaffold(
       appBar: AppBar(
         key: homeSacffoldKey,
-        actions: <Widget>[
-          PopupMenuButton(
-              icon: Icon(Icons.filter_list),
-              iconSize: 40,
-              itemBuilder: (context) => [
-                    const PopupMenuItem(
-                      child: Text(
-                        "Filters",
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                      padding: EdgeInsets.only(left: 80),
-                    ),
-                    PopupMenuItem(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        createFilterItem(
-                            Icon(Icons.sports_bar, color: Colors.orange), null),
-                        createFilterItem(
-                            Icon(Icons.restaurant, color: Colors.grey), null),
-                        createFilterItem(
-                            Icon(Icons.coffee, color: Colors.brown), null),
-                      ],
-                    )),
-                    PopupMenuItem(
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.attach_money_outlined,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      child: Slider(
-                        value: 0,
-                        onChanged: null,
-                        min: 0,
-                        max: 2,
-                        label: "",
-                      ),
-                    )
-                  ])
-        ],
+        actions: <Widget>[createFilterMenuButton()],
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
       body: Stack(
@@ -206,18 +165,132 @@ class MapState extends State<Map> {
     );
   }
 
-  PopupMenuItem<dynamic> createFilterItem(Icon icon, var onPressed) {
+  PopupMenuButton<dynamic> createFilterMenuButton() {
+    return PopupMenuButton(
+        icon: Icon(Icons.filter_list),
+        iconSize: 40,
+        itemBuilder: (context) => [
+              const PopupMenuItem(
+                child: Text(
+                  "Filters",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                padding: EdgeInsets.only(left: 60),
+              ),
+              createCheckBoxes(),
+              createPriceSlider(),
+              PopupMenuItem(
+                  child: ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+                  
+                  ElevatedButton(
+                    onPressed:
+                        null, // TODO: Fixa så att kartan filtreras när man klickar på 'Apply Filters'
+                    child: Text(
+                      "Apply Filters",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            globals.BUTTONCOLOR)),
+                  ),
+                ],
+              ))
+            ]);
+  }
+
+  // Creates the checkboxes for the filter menu
+  PopupMenuItem<dynamic> createCheckBoxes() {
     return PopupMenuItem(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          icon,
-          Checkbox(
-            value: true,
-            onChanged: onPressed,
-          ) // TODO: Implement onChanged
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Expanded(
+          child: Column(
+           
+            children: [
+              Divider(color: Colors.black,),
+              StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                return CheckboxListTile(
+                    value: _barFilterValue,
+                    onChanged: (bool? newValue) {
+                      setState(() {
+                        _barFilterValue = newValue;
+                      });
+                    },
+                    title: const Icon(
+                      Icons.sports_bar,
+                      color: Colors.orange,
+                    ));
+              }),
+              StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                return CheckboxListTile(
+                  value: _restaurantFilterValue,
+                  onChanged: (bool? newValue) {
+                    setState(() {
+                      _restaurantFilterValue = newValue;
+                    });
+                  },
+                  title: Icon(
+                    Icons.restaurant,
+                    color: Colors.blueGrey[200],
+                  ),
+                );
+              }),
+              //Cafe checkbox
+        
+              StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                return CheckboxListTile(
+                    value: _cafeFilterValue,
+                    onChanged: (bool? newValue) {
+                      setState(() => _cafeFilterValue = newValue);
+                    },
+                    title: Icon(
+                      Icons.coffee,
+                      color: Colors.brown[400],
+                    ));
+              }),
+              
+            ],
+          ),
+        ),
       ),
+    );
+  }
+
+  PopupMenuItem<dynamic> createPriceSlider() {
+    return PopupMenuItem(
+      child: StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+        return SfSlider(
+            value: _priceFilterValue,
+            onChanged: (dynamic newValue) {
+              setState((() => _priceFilterValue = newValue));
+            },
+            min: 1,
+            max: 3,
+            showTicks: true,
+            interval: 1,
+            activeColor: Colors.blue,
+            showLabels: true,
+            stepSize: 1.0,
+            labelFormatterCallback: (dynamic value, String formattedText) {
+              switch (value) {
+                case 1:
+                  return '\$';
+                case 2:
+                  return '\$\$';
+                case 3:
+                  return '\$\$\$';
+              }
+              return value.toString();
+            });
+      }),
     );
   }
 
