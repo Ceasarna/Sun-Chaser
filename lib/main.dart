@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_applicationdemo/ShadowDetector.dart';
 import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
@@ -12,8 +13,8 @@ import 'Map.dart';
 import 'HomePage.dart';
 import 'Venue.dart';
 import 'mysql.dart';
-import 'package:flutter_applicationdemo/login/user.dart';
-import 'login/user.dart';
+import 'package:flutter_applicationdemo/login/User.dart';
+import 'login/User.dart';
 import 'globals.dart' as globals;
 
 void main() async {
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
   }
 }
 Future<void> loadAllVenues() async{
+  globals.VENUES = [];
   var db = mysql();
   await db.getConnection().then((conn) async {
     String sql = "select venueName, venueID, latitude, longitude from maen0574.venue";
@@ -50,4 +52,8 @@ Future<void> loadAllVenues() async{
       }
     });
   });
+
+  var sd = ShadowDetector();
+  await sd.evaluateShadowsForAllVenues(globals.VENUES);
+
 }

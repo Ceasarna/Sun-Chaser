@@ -1,23 +1,21 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_applicationdemo/Venue.dart';
 import 'package:flutter_applicationdemo/mysql.dart';
+import 'package:flutter_applicationdemo/globals.dart' as globals;
 
-class user{
+
+class User{
   late int userID;
   late String username;
   late String email;
-  late List<int> likedVenuesList;
+  late List<Venue> likedVenuesList;
 
-  user(int userID, String username, String email){
-    this.userID = userID;
-    this.username = username;
-    this.email = email;
+  User(this.userID, this.username, this.email){
     likedVenuesList = List.empty(growable: true);
     getFavoriteVenues();
   }
 
-  user emptyUser(){
-    return user(0, "", "");
+  User emptyUser(){
+    return User(0, "", "");
   }
   int getID(){
     return userID;
@@ -29,9 +27,15 @@ class user{
       String sql = "select venue_id from maen0574.userFavorites where user_id = '$userID'";
       await conn.query(sql).then((results){
         for(var row in results){
-          likedVenuesList.add(row[0]);
+          Venue? venue = globals.getVenueByID(row[0]);
+          if(venue != null){
+            likedVenuesList.add(venue);
+          }
         }
       });
+      for(Venue venue in likedVenuesList){
+        print(venue.venueName);
+      }
     });
   }
 }

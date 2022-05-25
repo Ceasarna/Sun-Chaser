@@ -3,7 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'BottomNavPage.dart';
 import 'login/CreateAccountPage.dart';
 import 'globals.dart';
+import 'login/User.dart';
 import 'login/signInPage.dart';
+import '../login/User.dart';
+import 'mysql.dart';
+import 'package:flutter_applicationdemo/login/User.dart' as User;
 import 'login/user.dart';
 import 'globals.dart' as globals;
 
@@ -45,7 +49,6 @@ class _HomePageState extends State<HomePage> {
               color: globals.TEXTCOLOR,
               ),
             ),
-
             Container(
               padding: EdgeInsets.fromLTRB(80, 40, 80, 80),
               child: ElevatedButton(
@@ -156,7 +159,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 100,
       ),
       onPressed: () {
-        globals.LOGGED_IN_USER = user(0, "", "");
+        globals.LOGGED_IN_USER = User.User(0, "", "");
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()), //Replace Container() with call to Map-page.

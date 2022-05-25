@@ -9,15 +9,15 @@ class ShadowDetector {
 
   List<Venue> venuesInShade = [];
 
-  ShadowDetector(Venue venue) {
-    evaluateShadowsForOneVenue(venue);
+  ShadowDetector() {
+
   }
   //Called like "new ShadowDetector.fromShadowDetector(List of venues here);"
   ShadowDetector.fromShadowDetector(venues) {
     evaluateShadowsForAllVenues(venues);
   }
 
-  void evaluateShadowsForAllVenues (List<Venue> venues) async {
+  Future evaluateShadowsForAllVenues (List<Venue> venues) async {
     final dateInMilliseconds = DateTime.now().millisecondsSinceEpoch.toString() + 't';
     for(var venue in venues) {
         LatLng pos = venue.position;
@@ -49,6 +49,9 @@ class ShadowDetector {
     //print(responseAsString[responseAsString.length - 2]);
     if(responseAsString[responseAsString.length - 2] == 1) {
       venue.inShade = true;
+    }
+    else {
+      venue.inShade = false;
     }
   }
 }

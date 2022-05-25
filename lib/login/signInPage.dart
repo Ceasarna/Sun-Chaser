@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../mysql.dart';
 import '../HomePage.dart';
 import '../main.dart';
-import 'user.dart';
+import 'User.dart';
 import '../reusables/InputField.dart';
 import '../reusables/returnButton.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -20,8 +20,7 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   var db = mysql();
-  int loggedInID = 0;
-  late user loggedInUser;
+  late User loggedInUser;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -32,8 +31,8 @@ class _SignInPageState extends State<SignInPage> {
       await conn.query(sql).then((results) {
         for (var row in results) {
           setState(() {});
-          loggedInUser = new user(row[0], row[1], row[2]);
-          loggedInID = loggedInUser.getID();
+          loggedInUser = new User(row[0], row[1], row[2]);
+          globals.LOGGED_IN_USER = loggedInUser;
         }
       });
     });
@@ -141,11 +140,12 @@ class _SignInPageState extends State<SignInPage> {
       onPressed: () async {
         if (emailController.text.contains("'") ||
             passwordController.text.contains("'")) {
+          print("1");
           loginError();
           return;
         }
         await loginVerification(emailController.text, passwordController.text);
-        if (loggedInID != 0) {
+        if (globals.LOGGED_IN_USER.userID != 0) {
           globals.LOGGED_IN_USER = loggedInUser;
           Navigator.push(
             context,
@@ -154,6 +154,7 @@ class _SignInPageState extends State<SignInPage> {
                     HomePage()), //Replace Container() with call to account-page.
           );
         } else {
+          print(globals.LOGGED_IN_USER.userID);
           loginError();
         }
         //print(loggedInUser.email + " " + loggedInUser.userID.toString());
@@ -183,6 +184,8 @@ class _SignInPageState extends State<SignInPage> {
                   CreateAccountPage()), //Replace Container() with call to Map-page.
         );
       } else {
+        var email = provider.user?.email.toString();
+        await loginVerificationGmail(email!);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -191,5 +194,33 @@ class _SignInPageState extends State<SignInPage> {
         );
       }
     });
+  }
+
+  Future<void> loginVerificationGmail(String email) async{
+    await db.getConnection().then((conn) async {
+      String sql =
+          "select id, email, password from maen0574.user where email = '$email'";
+      await conn.query(sql).then((results) {
+        for (var row in results) {
+          setState(() {});
+          loggedInUser = new User(row[0], row[1], row[2]);
+          globals.LOGGED_IN_USER = loggedInUser;
+        }
+      });
+    });
+    if(globals.LOGGED_IN_USER.userID == 0){
+      await db.getConnection().then((conn) async{
+        String sql = "INSERT INTO maen0574.user (id, email, password, username) VALUES (null, '$email', '', '');";
+        await conn.query(sql);
+        sql = "Select id, email, username from maen0574.user where email = '$email'";
+        await conn.query(sql).then((results) {
+          for (var row in results) {
+            setState(() {});
+            loggedInUser = new User(row[0], row[1], row[2]);
+            globals.LOGGED_IN_USER.userID = loggedInUser.userID;
+          }
+        });
+      });
+    }
   }
 }

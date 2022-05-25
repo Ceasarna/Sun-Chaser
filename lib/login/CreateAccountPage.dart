@@ -8,7 +8,7 @@ import 'package:flutter_applicationdemo/mysql.dart';
 import 'package:flutter_applicationdemo/HomePage.dart';
 import '../globals.dart' as globals;
 import '../reusables/InputField.dart';
-import 'user.dart';
+import 'User.dart';
 import '../reusables/returnButton.dart';
 
 class CreateAccountPage extends StatefulWidget {
@@ -22,7 +22,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   var db = mysql();
-  late user loggedInUser;
+  late User loggedInUser;
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +150,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       await conn.query(sql).then((results) {
         for (var row in results) {
           setState(() {});
-          loggedInUser = new user(row[0], row[1], row[2]);
+          loggedInUser = new User(row[0], row[1], row[2]);
           globals.LOGGED_IN_USER.userID = loggedInUser.userID;
         }
       });

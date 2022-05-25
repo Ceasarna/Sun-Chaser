@@ -12,8 +12,6 @@ Color _colorContainerHappy = _backgroundColor;
 Color _colorContainerMediumHappy = _backgroundColor;
 Color _colorContainerUpset = _backgroundColor;
 
-var timestamp;
-
 
 Map<String, bool> _satisfactionBoolean = {
   "VeryHappy": false,
@@ -54,14 +52,13 @@ class FormForFeedbackState extends State<FormForFeedback> {
   var dataBase = mysql();
 
 
-  Future<void> feedbackVerification(String satisfaction, String typeOfFeedback, String writtenFeedback, String timestamp ) async {
+  Future<void> feedbackVerification(String satisfaction, String typeOfFeedback, String writtenFeedback) async {
     await dataBase.getConnection().then((conn) async {
-      String sql = "INSERT INTO maen0574.User_feedback (id, Satisfaction, Type_of_feedback, Written_feedback, timestamp) VALUES (null, '$satisfaction', '$typeOfFeedback', '$writtenFeedback', '$timestamp);";
+      String sql = "INSERT INTO maen0574.User_feedback (Satisfaction, Type_of_feedback, Written_feedback) VALUES ('$satisfaction', '$typeOfFeedback', '$writtenFeedback');";
       await conn.query(sql).then((results) {
         for(var row in results) {
-          print(row[0].toString());
           setState(() {});
-          form(row[0].toString(), row[1].toString(), row[2].toString(), row[3]);
+          form(row[0].toString(), row[1].toString(), row[2].toString(), row[3].toString());
         }
       });
     });
@@ -339,31 +336,48 @@ class FormForFeedbackState extends State<FormForFeedback> {
               InkWell(
 
                 onTap: () async {
-
-                  if(writtenFeedback.text.contains("'")) {
+                  print(writtenFeedback.text);
+                  if (writtenFeedback.text.contains("'")) {
                     print('not allowed to use atrophies');
                     return;
                   }
 
-                  timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-                  await feedbackVerification(satisfaction.text, typeOfFeedback.text, writtenFeedback.text, timestamp);
-                  if (_formKey.currentState!.validate()) {
+                  await feedbackVerification(satisfaction.text, typeOfFeedback.text, writtenFeedback.text);
+                  print(satisfaction.text);
+                  print(typeOfFeedback.text);
+                  print(writtenFeedback.text);
 
-                    print(satisfaction.text);
-                    print(typeOfFeedback.text);
-                    print(writtenFeedback.text);
-                    print(timestamp);
+                  //pop-up thank you for answering
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>
-                          BottomNavPage()), //Replace Container() with call to account-page.
-                    );
-                  }
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        AlertDialog(
+                          title: const Text('Thank you'),
+                          content: const Text('Thank you for your feedback, '
+                              'you will now be sent back to the map'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('Ok'),
+                              onPressed: () =>
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) =>
+                                        BottomNavPage()),
+                                    //Replace Container() with call to account-page.
+                                  ),
+                            ),
+                          ],
+                        ),
+                      );
+                  pressedEmojiColor("clear");
+                  pressedTypeOfFeedback("clear");
+                  writtenFeedback.text = '';
                 },
 
+
                 child: Container(
-                  color: _colorContainerHappy,
+                  color: Colors.purple,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const <Widget>[
@@ -381,15 +395,11 @@ class FormForFeedbackState extends State<FormForFeedback> {
 
             const SizedBox(height: 30),
 
-          ],
-          ),
-
+        ],
         ),
-
-
+    ),
       ),
-    );
-
+      );
   }
 }
 
@@ -441,6 +451,17 @@ void pressedEmojiColor (String s) {
     _satisfactionBoolean["Upset"] == false;
     _colorContainerUpset = _backgroundColor;
   }
+
+  if(s == "clear"){
+    _satisfactionBoolean["VeryHappy"] = false;
+    _colorContainerVeryHappy = _backgroundColor;
+    _satisfactionBoolean["MediumHappy"] == false;
+    _colorContainerMediumHappy = _backgroundColor;
+    _satisfactionBoolean["Happy"] == false;
+    _colorContainerHappy = _backgroundColor;
+    _satisfactionBoolean["Upset"] == false;
+    _colorContainerUpset = _backgroundColor;
+  }
 }
 
 void pressedTypeOfFeedback(String s) {
@@ -480,6 +501,17 @@ void pressedTypeOfFeedback(String s) {
   if (s == "Mistake in sun accuracy") {
     _typeOfFeedback["Mistake in sun accuracy"] == true;
     check4 = true;
+    _typeOfFeedback["Complaint"] == false;
+    check2 = false;
+    _typeOfFeedback["Bug"] == false;
+    check3 = false;
+    _typeOfFeedback["Compliment"] == false;
+    check1 = false;
+  }
+
+  if (s == "clear") {
+    _typeOfFeedback["Mistake in sun accuracy"] == false;
+    check4 = false;
     _typeOfFeedback["Complaint"] == false;
     check2 = false;
     _typeOfFeedback["Bug"] == false;

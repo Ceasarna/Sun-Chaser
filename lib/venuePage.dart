@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_applicationdemo/Venue.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -149,15 +150,19 @@ class WeatherData {
 }
 
 class VenuePage extends StatefulWidget {
-  const VenuePage({Key? key}) : super(key: key);
+  const VenuePage(this.venue, {Key? key}) : super(key: key);
+  final Venue venue;
 
   @override
-  State<VenuePage> createState() => _VenuePageState();
+  State<VenuePage> createState() => _VenuePageState(venue);
 }
 
 class _VenuePageState extends State<VenuePage> {
   late WeatherData currentWeather;
   final String imageLink = '';
+  late final Venue venue;
+
+  _VenuePageState(this.venue);
 
   validateAndGetImageLink() {
     if (imageLink == '') {
@@ -200,10 +205,10 @@ class _VenuePageState extends State<VenuePage> {
     return Scaffold(
       backgroundColor: const Color(0xfffceff9),
       appBar: AppBar(
-        title: const Text('My Venue'),
+        title: Text(venue.venueName),
         backgroundColor: const Color(0xffac7b84),
       ),
-      body: Center(
+      body: Center(child: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
           child: Column(children: <Widget>[
@@ -228,8 +233,8 @@ class _VenuePageState extends State<VenuePage> {
             Row(children: [
               Expanded(
                   child: Column(
-                children: const [
-                  Text('This is the name'),
+                children: [
+                  Text(venue.venueName),
                   Text('This is the address'),
                 ],
               )),
@@ -271,14 +276,14 @@ class _VenuePageState extends State<VenuePage> {
               )
             ]),
             const AboutTheSpotTable(),
-            GridView.count(
+            /*GridView.count(
               crossAxisCount: 2,
               children: [],
-            )
+            )*/
           ]),
         ),
       ),
-    );
+    ));
   }
 }
 
