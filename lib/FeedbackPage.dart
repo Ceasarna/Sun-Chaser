@@ -313,8 +313,6 @@ class FormForFeedbackState extends State<FormForFeedback> {
                 controlAffinity: ListTileControlAffinity.leading,  //lägger checkboxen på vänster sida om texten
               ),
 
-              const SizedBox(height: 10),
-
               Padding(
                 padding: const EdgeInsets.all(40.0),
                 child: TextFormField(
@@ -377,7 +375,9 @@ class FormForFeedbackState extends State<FormForFeedback> {
 
 
                 child: Container(
-                  color: Colors.purple,
+                  color: Color.fromARGB(255, 151, 92, 115),
+                  height: 60,
+                  width: 200,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const <Widget>[
@@ -393,7 +393,7 @@ class FormForFeedbackState extends State<FormForFeedback> {
             ],
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 60),
 
         ],
         ),
