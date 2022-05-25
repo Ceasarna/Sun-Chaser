@@ -165,6 +165,8 @@ class _VenuePageState extends State<VenuePage> {
 
   _VenuePageState(this.venue);
 
+
+
   validateAndGetImageLink() {
     if (imageLink == '') {
       return 'https://live.staticflickr.com/6205/6081773215_19444220b6_b.jpg';

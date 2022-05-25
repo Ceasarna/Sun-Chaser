@@ -140,4 +140,7 @@ class WeatherData {
         return const FaIcon(FontAwesomeIcons.times);
     }
   }
+
+
+
 }

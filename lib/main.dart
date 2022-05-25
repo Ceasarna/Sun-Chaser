@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 import 'Map.dart';
+import 'WeatherData.dart';
 import 'HomePage.dart';
 import 'Venue.dart';
 import 'mysql.dart';
@@ -24,8 +25,27 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await loadAllVenues();
+  await fetchWeather();
 
   runApp(MyApp());
+}
+
+Future fetchWeather() async {
+  WeatherData tempWeather = WeatherData(0, 0);
+  Uri weatherDataURI = Uri.parse(
+      'https://group-4-75.pvt.dsv.su.se/target/weather-0.0.2-SNAPSHOT.war/weather');
+
+  final response = await http.get(weatherDataURI);
+
+  if (response.statusCode == 200) {
+    var data = json.decode(response.body);
+    tempWeather = WeatherData.fromJson(data);
+    print(data);
+
+    globals.forecast = tempWeather;
+  } else {
+    throw const HttpException("Problem fetching the weather data");
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -46,32 +66,39 @@ class MyApp extends StatelessWidget {
 }
 
 Future loadAllVenues() async {
-
   Uri venueDataURI = Uri.parse(
       'https://group-4-75.pvt.dsv.su.se/target/weather-0.0.4-SNAPSHOT.war/venue');
 
   final response = await http.get(venueDataURI);
 
   if (response.statusCode == 200) {
-    var data = json.decode(response.body);
-    var _allVenuesTemp = [];
+    addVenues(response);
 
-    addValidVenues(data, _allVenuesTemp);
-
-    var count = 0;
-    for (Venue vdata in _allVenuesTemp) {
-      count++;
-      //print(count.toString() + ': ' + vdata.toString());
-      globals.VENUES.add(vdata);
-    }
+    // var sd = ShadowDetector();
+    // await sd.evaluateShadowsForAllVenues(seventyFiveVenues);
   } else {
     throw const HttpException("Problem fetching the weather data");
   }
 }
 
+void addVenues(http.Response response) {
+  var data = json.decode(response.body);
+  var _allVenuesTemp = [];
+
+  addValidVenues(data, _allVenuesTemp);
+
+  for (Venue venue in _allVenuesTemp) {
+    globals.VENUES.add(venue);
+  }
+}
+
 void addValidVenues(data, List<dynamic> _allVenuesTemp) {
   for (var i = 0; i < data.values.first.length; i++) {
-    if (!data.values.first[i]['name'].contains('©') &&
+    if (data.values.first[i]['name'] == null) {
+      continue;
+    } else if (data.values.first[i]['address'].contains('null')) {
+      continue;
+    } else if (!data.values.first[i]['name'].contains('©') &&
         !data.values.first[i]['name'].contains('¶') &&
         !data.values.first[i]['name'].contains('¥') &&
         !data.values.first[i]['name'].contains('Ã') &&
@@ -86,23 +113,3 @@ void addValidVenues(data, List<dynamic> _allVenuesTemp) {
     }
   }
 }
-
-/*
-Future<void> loadAllVenues() async {
-  globals.VENUES = [];
-  var db = mysql();
-  await db.getConnection().then((conn) async {
-    String sql =
-        "select venueName, venueID, latitude, longitude from maen0574.venue";
-    await conn.query(sql).then((results) {
-      for (var row in results) {
-        globals.VENUES.add(Venue(
-            row[0], row[1], VenueType.restaurant, LatLng(row[2], row[3])));
-      }
-    });
-  });
-
-var sd = ShadowDetector();
-await sd.evaluateShadowsForAllVenues(globals.VENUES);
-}
-*/
