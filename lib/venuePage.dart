@@ -6,10 +6,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'WeatherData.dart';
 
 // Color _backgroundColor = const Color(0xffac7b84);
 
-class WeatherData {
+/*class WeatherData {
   final int weatherValue;
   final int temperature;
 
@@ -144,10 +145,10 @@ class WeatherData {
       case 17:
         return const FaIcon(FontAwesomeIcons.snowflake);
       default:
-        return const Icon(Icons.not_accessible);
+        return const FaIcon(FontAwesomeIcons.times);
     }
   }
-}
+}*/
 
 class VenuePage extends StatefulWidget {
   const VenuePage(this.venue, {Key? key}) : super(key: key);
@@ -370,7 +371,7 @@ class SavePlaceButton extends StatelessWidget {
         ),
         label: const Text('Save place'),
         style: TextButton.styleFrom(
-          primary: Color(0xff4f6272),
+          primary: const Color(0xff4f6272),
         ),
       ),
     );
