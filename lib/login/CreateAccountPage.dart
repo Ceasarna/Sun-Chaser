@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_applicationdemo/mysql.dart';
 
 import 'package:flutter_applicationdemo/HomePage.dart';
@@ -53,10 +53,12 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         createTitleText(),
+        const SizedBox(height: 50),
         Text(
           "Create Log in:",
           style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
         ),
+        const SizedBox(height: 10),
         createUsernameField(),
         createEmailField(),
         createPasswordField(),
@@ -64,7 +66,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           padding: const EdgeInsets.only(top: 20),
           child: createCreateAccountButton(),
         ),
-
       ],
     );
   }
@@ -72,20 +73,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   Text createTitleText() {
     return Text(
       'Sun Chasers',
-      style: TextStyle(
-        fontSize: 50,
-        color: textColor,
-        fontFamily: 'Sacramento',
-        shadows: const <Shadow>[
-          Shadow(
-            offset: Offset(2, 2),
-            blurRadius: 10.0,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        ],
+        style: GoogleFonts.libreBaskerville(
+        fontSize: 35,
+        color: globals.TEXTCOLOR,
       ),
     );
   }
+
 
   InputField createUsernameField() {
     return InputField(
