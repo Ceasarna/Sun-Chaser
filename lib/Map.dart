@@ -11,7 +11,6 @@ import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
 import 'SettingsPage.dart';
 
-
 class Map extends StatefulWidget {
   @override
   State<Map> createState() => MapState();
@@ -23,18 +22,17 @@ final homeSacffoldKey = GlobalKey<ScaffoldState>();
 
 List<_Marker> markers = [];
 
-
 class MapState extends State<Map> {
-
   Future getMerkerData() async {
-    var url = Uri.parse('https://openstreetgs.stockholm.se/geoservice/api/b8e20fd7-5654-465e-8976-35b4de902b41/wfs?service=wfs&version=1.1.0&request=GetFeature&typeNames=od_gis:Markupplatelse&srsName=EPSG:4326&outputFormat=json');
+    var url = Uri.parse(
+        'https://openstreetgs.stockholm.se/geoservice/api/b8e20fd7-5654-465e-8976-35b4de902b41/wfs?service=wfs&version=1.1.0&request=GetFeature&typeNames=od_gis:Markupplatelse&srsName=EPSG:4326&outputFormat=json');
     var response = await http.get(url);
 
     print('Response status: ${response.statusCode}');
-   // print('Response body: ${response.body.toString()}');
+    // print('Response body: ${response.body.toString()}');
     var jsonData = jsonDecode(response.body);
 
-   /* print(jsonData['features'][0]);
+    /* print(jsonData['features'][0]);
 
     print(jsonData['features'][1]['properties']['Plats_1']);
 
@@ -49,20 +47,21 @@ class MapState extends State<Map> {
     print(jsonData['features'][1]['geometry']['coordinates']);*/
 
     //print(jsonData['features'][0]['properties']['MAIN_ATTRIBUTE_VALUE']);
-  
-   // List<_Marker> markers = [];
 
-    for(var m in jsonData['features']) {
+    // List<_Marker> markers = [];
+
+    for (var m in jsonData['features']) {
       String data = m['properties']['Kategorityp'];
       String typ = m['properties']['MAIN_ATTRIBUTE_VALUE'];
-      if(m['properties']['Kategorityp'] == "1.400I, Uteservering A-läge") {
+      if (m['properties']['Kategorityp'] == "1.400I, Uteservering A-läge") {
         print(m['properties']['Kategorityp']);
-        _Marker marker = _Marker(m['properties']['Plats_1'],m['properties']['Gatunr_1'],m['geometry']['coordinates']);
+        _Marker marker = _Marker(m['properties']['Plats_1'],
+            m['properties']['Gatunr_1'], m['geometry']['coordinates']);
         markers.add(marker);
       }
 
       print(markers.length);
-      
+
       int count = 0;
       for (var mar in markers) {
         print(mar.Plats_1);
@@ -77,17 +76,15 @@ class MapState extends State<Map> {
       }
 
       //print(m['properties']['Kategorityp']);
-    } 
+    }
   }
 
   final Completer<GoogleMapController> _controller = Completer();
 
   LocationData? _currentPosition;
 
-  final TextEditingController _searchController =  TextEditingController();
-
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(59.325027,18.068516),
+    target: LatLng(59.325027, 18.068516),
     zoom: 14.4746,
   );
 
@@ -101,171 +98,155 @@ class MapState extends State<Map> {
   }
 
   void createBottomSheet() {
-    Scaffold.of(context).showBottomSheet<void>(
-              ((context) {
-                return Container(
-                  height: 420,
-                  color: Colors.white,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: const <Widget>[
-                        /*const Text('BottomSheet'),
+    Scaffold.of(context).showBottomSheet<void>(((context) {
+      return Container(
+        height: 420,
+        color: Colors.white,
+        child: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: const <Widget>[
+            /*const Text('BottomSheet'),
                         ElevatedButton(
                           child: const Text('Close BottomSheet'),
                           onPressed: () {Navigator.pop(context);})*/
-                        Image(image: AssetImage('assets/images/bild.png'))
-                          
-                      ],
-                    )
-                    ),
-                );
-              })
-            );
+            Image(image: AssetImage('assets/images/bild.png'))
+          ],
+        )),
+      );
+    }));
   }
 
   intilize() {
     Marker marker_1;
     //for(var marker in markers) {
-      marker_1 = Marker(
-        markerId: const MarkerId('id_1'),
-        onTap: createBottomSheet,
-        position: const LatLng(59.320671571444514, 18.055854162299937),
-        infoWindow: const InfoWindow(
-          title: 'Münchenbryggeriet Beer Garden',        
-          snippet: 'Uteservering',
-        ),
-        icon: BitmapDescriptor.defaultMarkerWithHue(
-            BitmapDescriptor.hueGreen,
-        ),
-        );
+    marker_1 = Marker(
+      markerId: const MarkerId('id_1'),
+      onTap: createBottomSheet,
+      position: const LatLng(59.320671571444514, 18.055854162299937),
+      infoWindow: const InfoWindow(
+        title: 'Münchenbryggeriet Beer Garden',
+        snippet: 'Uteservering',
+      ),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueGreen,
+      ),
+    );
 
-      Marker marker_2 = Marker(
+    Marker marker_2 = Marker(
         markerId: const MarkerId('id_2'),
         onTap: createBottomSheet,
         position: const LatLng(59.33115735285231, 18.074432570090742),
         infoWindow: const InfoWindow(
           title: 'Le Hibou',
           snippet: 'Uteservering',
-        )
-        );
+        ));
 
-      Marker marker_3 = Marker(
+    Marker marker_3 = Marker(
         markerId: const MarkerId('id_3'),
         onTap: createBottomSheet,
         position: const LatLng(59.3315552932853, 18.092751076985277),
         infoWindow: const InfoWindow(
           title: 'Strandbryggan',
           snippet: 'Uteservering',
-        )
-        );
+        ));
 
-      Marker marker_4 = Marker(
+    Marker marker_4 = Marker(
         markerId: const MarkerId('id_4'),
         onTap: createBottomSheet,
         position: const LatLng(59.33632582609118, 18.072980646196587),
         infoWindow: const InfoWindow(
           title: 'Stureplan 1',
           snippet: 'Uteservering',
-        )
-        );
+        ));
 
-      Marker marker_5 = Marker(
+    Marker marker_5 = Marker(
         markerId: const MarkerId('id_5'),
         onTap: createBottomSheet,
         position: const LatLng(59.3240158318325, 18.070690101341437),
         infoWindow: const InfoWindow(
           title: 'Bågspännaren Bar & Cafe',
           snippet: 'Uteservering',
-        )
-        );
+        ));
 
-      Marker marker_6 = Marker(
+    Marker marker_6 = Marker(
         markerId: const MarkerId('id_6'),
         onTap: createBottomSheet,
         position: const LatLng(59.31905195030728, 18.075349015415547),
         infoWindow: const InfoWindow(
           title: 'Mosebacketerrassen',
           snippet: 'Uteservering',
-        )
-        );
+        ));
 
-      Marker marker_7 = Marker(
+    Marker marker_7 = Marker(
         markerId: const MarkerId('id_7'),
         onTap: createBottomSheet,
         position: const LatLng(59.31583756143469, 18.072591381467536),
         infoWindow: const InfoWindow(
           title: 'Snaps Bar & Bistro',
           snippet: 'Uteservering',
-        )
-        );
-      
-      Marker marker_8 = Marker(
+        ));
+
+    Marker marker_8 = Marker(
         markerId: const MarkerId('id_8'),
         onTap: createBottomSheet,
         position: const LatLng(59.315129508641505, 18.074243159987006),
         infoWindow: const InfoWindow(
           title: 'Kvarnen',
           snippet: 'Uteservering',
-        )
-        );
-      
-      Marker marker_9 = Marker(
+        ));
+
+    Marker marker_9 = Marker(
         markerId: const MarkerId('id_9'),
         onTap: createBottomSheet,
         position: const LatLng(59.31533181094423, 18.070972638518455),
         infoWindow: const InfoWindow(
           title: 'Neverland Pub & Restaurang',
           snippet: 'Uteservering',
-        )
-        );
+        ));
 
-      Marker marker_10 = Marker(
+    Marker marker_10 = Marker(
         markerId: const MarkerId('id_10'),
         onTap: createBottomSheet,
         position: const LatLng(59.31578389646754, 18.071146819010995),
         infoWindow: const InfoWindow(
           title: 'Baras Imperium',
           snippet: 'Uteservering',
-        )
-        );
+        ));
 
-      Marker marker_11 = Marker(
+    Marker marker_11 = Marker(
         markerId: const MarkerId('id_11'),
         onTap: createBottomSheet,
         position: const LatLng(59.31549103673382, 18.035425964557245),
         infoWindow: const InfoWindow(
           title: 'YUC Tanto',
           snippet: 'Uteservering',
-        )
-        );
+        ));
 
-      Marker marker_12 = Marker(
+    Marker marker_12 = Marker(
         markerId: const MarkerId('id_12'),
         onTap: createBottomSheet,
         position: const LatLng(59.314826329005506, 18.03317611771755),
         infoWindow: const InfoWindow(
           title: 'Loopen',
           snippet: 'Uteservering',
-        )
-        );
-    
-      markersList.add(marker_1);
-      markersList.add(marker_2);
-      markersList.add(marker_3);
-      markersList.add(marker_4);
-      markersList.add(marker_5);
-      markersList.add(marker_6);
-      markersList.add(marker_7);
-      markersList.add(marker_8);
-      markersList.add(marker_9);
-      markersList.add(marker_10);
-      markersList.add(marker_11);
-      markersList.add(marker_12);
-   // }
-  }
+        ));
 
+    markersList.add(marker_1);
+    markersList.add(marker_2);
+    markersList.add(marker_3);
+    markersList.add(marker_4);
+    markersList.add(marker_5);
+    markersList.add(marker_6);
+    markersList.add(marker_7);
+    markersList.add(marker_8);
+    markersList.add(marker_9);
+    markersList.add(marker_10);
+    markersList.add(marker_11);
+    markersList.add(marker_12);
+    // }
+  }
 
   Future<LocationData> _getLocationPermission() async {
     Location location = Location();
@@ -306,7 +287,7 @@ class MapState extends State<Map> {
   final Mode _mode = Mode.fullscreen;
 
   int currentIndex = 0;
-  final screens =[
+  final screens = [
     Map(),
   ];
   @override
@@ -314,30 +295,66 @@ class MapState extends State<Map> {
     return Scaffold(
       appBar: AppBar(
         key: homeSacffoldKey,
-        //leading: IconButton(icon: Icon(Icons.search), onPressed:() {},),
         actions: <Widget>[
-          IconButton(icon: const Icon(Icons.search), onPressed:() {
-          },),
+          PopupMenuButton(
+              icon: Icon(Icons.filter_list),
+              iconSize: 40,
+              itemBuilder: (context) => [
+                    const PopupMenuItem(
+                      child: Text(
+                        "Filters",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      padding: EdgeInsets.only(left: 80),
+                    ),
+                    PopupMenuItem(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        createFilterItem(
+                            Icon(Icons.sports_bar, color: Colors.orange), null),
+                        createFilterItem(
+                            Icon(Icons.restaurant, color: Colors.grey), null),
+                        createFilterItem(
+                            Icon(Icons.coffee, color: Colors.brown), null),
+                      ],
+                    )),
+                    PopupMenuItem(
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.attach_money_outlined,
+                            color: Colors.black,
+                          ),
+                          
+                          
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      child: Slider(
+                        value: 0,
+                        onChanged: null,
+                        min: 0,
+                        max: 2,
+                        label: "",
+                      ),
+                    )
+                  ])
         ],
-        title: TextFormField(
-          controller: _searchController,
-          textCapitalization: TextCapitalization.words,
-          decoration: const InputDecoration(hintText: 'Find your place'),
-          onChanged: (value) {
-            print(value);
-          },
-        ),
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
-      body: Stack (
+      body: Stack(
         children: [
           GoogleMap(
             mapType: MapType.normal,
             initialCameraPosition: _kGooglePlex,
             markers: markersList.map((e) => e).toSet(),
             onMapCreated: (GoogleMapController controller) {
-           _controller.complete(controller);
-           },
+              _controller.complete(controller);
+            },
           ),
           Align(
             alignment: Alignment.bottomLeft,
@@ -350,94 +367,99 @@ class MapState extends State<Map> {
                   SizedBox(width: 10.0),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.320671571444514 , 18.055854162299937, 'Münchenbryggeriet Beer Garden') ,
-                    ),
+                    child: _boxes(59.320671571444514, 18.055854162299937,
+                        'Münchenbryggeriet Beer Garden'),
+                  ),
                   SizedBox(width: 10.0),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.33115735285231, 18.074432570090742, 'Le Hibou') ,
-                    ),
+                    child: _boxes(
+                        59.33115735285231, 18.074432570090742, 'Le Hibou'),
+                  ),
                   SizedBox(width: 10.0),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.3315552932853, 18.092751076985277, 'Strandbryggan') ,
-                    ),
+                    child: _boxes(
+                        59.3315552932853, 18.092751076985277, 'Strandbryggan'),
+                  ),
                   SizedBox(width: 10.0),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.33632582609118, 18.072980646196587, 'Stureplan 1') ,
-                    ),
+                    child: _boxes(
+                        59.33632582609118, 18.072980646196587, 'Stureplan 1'),
+                  ),
                   SizedBox(width: 10.0),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: _boxes(59.3240158318325, 18.070690101341437, 'Bågspännaren Bar & Cafe') ,
-                    ),
+                    child: _boxes(59.3240158318325, 18.070690101341437,
+                        'Bågspännaren Bar & Cafe'),
+                  ),
                 ],
               ),
             ),
           )
-         // ElevatedButton(onPressed: () {} //_handelPressButton
-        //  ,child: const Text("Search Placses"))
+          // ElevatedButton(onPressed: () {} //_handelPressButton
+          //  ,child: const Text("Search Placses"))
         ],
       ),
+    );
+  }
 
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 100.0),
-          child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                builder: (context) => const SettingsPage()));
-          },
-            backgroundColor: Colors.purple,
-            child: const Icon(Icons.filter_alt),
-            ),
-          ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-            );
-          }
-
+  PopupMenuItem<dynamic> createFilterItem(Icon icon, var onPressed) {
+    return PopupMenuItem(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          icon,
+          Checkbox(
+            value: true,
+            onChanged: onPressed,
+          ) // TODO: Implement onChanged
+        ],
+      ),
+    );
+  }
 
   Future<void> _gotoLocation(double lat, double lng) async {
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat,lng), zoom: 15)));
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(lat, lng), zoom: 15)));
   }
 
   Widget _boxes(double lat, double lng, String resturantName) {
     return GestureDetector(
-      onTap: () { _gotoLocation(lat, lng);},
+      onTap: () {
+        _gotoLocation(lat, lng);
+      },
       child: Container(
-        child: FittedBox(
-          child: Material(
-            color: Colors.white,
-            elevation: 14.0,
-            borderRadius: BorderRadius.circular(24.0),
-            shadowColor: Color(0x802196F3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  width: 250,
-                  height: 200,
-                  child: ClipRRect(
-                    borderRadius: new BorderRadius.circular(24.0),
-                    child: const Image(
-                      image: AssetImage('assets/images/bild.png')
-                    ),
-                    ),
+          child: FittedBox(
+        child: Material(
+          color: Colors.white,
+          elevation: 14.0,
+          borderRadius: BorderRadius.circular(24.0),
+          shadowColor: Color(0x802196F3),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                width: 250,
+                height: 200,
+                child: ClipRRect(
+                  borderRadius: new BorderRadius.circular(24.0),
+                  child:
+                      const Image(image: AssetImage('assets/images/bild.png')),
                 ),
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(resturantName),
-                    ),
-                )
-              ],
               ),
-            ),
-        ) 
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(resturantName),
+                ),
+              )
+            ],
+          ),
         ),
+      )),
     );
   }
 
@@ -450,7 +472,7 @@ class MapState extends State<Map> {
         zoom: 14.4746)));
   }
 
- /* Future<void> _handelPressButton() async {
+  /* Future<void> _handelPressButton() async {
 
     Prediction? p = await PlacesAutocomplete.show(
                           context: context,
@@ -491,11 +513,9 @@ class MapState extends State<Map> {
 }
 
 class _Marker {
-
   var Plats_1;
   var Gatunr_1;
   var coordinates;
 
   _Marker(this.Plats_1, this.Gatunr_1, this.coordinates);
-
 }
