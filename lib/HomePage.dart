@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.push(
             context, //SignInPage()
-            MaterialPageRoute(builder: (context) => SignInPage()), //Replace Container() with call to Map-page.
+            MaterialPageRoute(builder: (context) =>SignInPage()), //Replace Container() with call to Map-page.
           );
         },
         child: Text('Sign in',

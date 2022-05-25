@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/reusables/InputField.dart';
 
 import 'package:flutter_applicationdemo/mysql.dart';
-import 'UpdatePassword.dart';
+import 'HomePage.dart';
 
 class ManageAccountPage extends StatefulWidget {
   @override
@@ -13,10 +13,11 @@ class ManageAccountPageState extends State<ManageAccountPage> {
   var db = mysql();
   TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   Widget _buildNameFiled() {
     return InputField(
-      text: "UserName", 
+      text: "new UserName", 
       isPassword: false, 
       icon: const Icon(Icons.person), 
       controller: userNameController
@@ -25,7 +26,7 @@ class ManageAccountPageState extends State<ManageAccountPage> {
 
   Widget _buildEmailFiled() {
    return InputField(
-      text: "Email", 
+      text: "current Email", 
       isPassword: false, 
       icon: const Icon(Icons.email), 
       controller: emailController
@@ -33,17 +34,11 @@ class ManageAccountPageState extends State<ManageAccountPage> {
   }
 
   Widget _buildPasswordFiled() {
-    return ElevatedButton(
-      onPressed: () {
-         Navigator.push(
-            context, 
-            MaterialPageRoute(builder: (context) => UpdatePassword()), //Replace Container() with call to Map-page.
-          );
-      }, 
-      child: const Text('Update password'),
-      style: ElevatedButton.styleFrom(
-        primary:  const Color.fromARGB(255, 190, 146, 160)
-        ),
+    return InputField(
+      text: "new Password", 
+      isPassword: true, 
+      icon: const Icon(Icons.lock), 
+      controller: passwordController
       );
   }
 
@@ -51,7 +46,7 @@ class ManageAccountPageState extends State<ManageAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ManageAccountPage'),
+        //title: const Text('ManageAccountPage'),
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
       body: Container(
@@ -60,19 +55,21 @@ class ManageAccountPageState extends State<ManageAccountPage> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text('Change user data' ,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                const Text('Update user data' ,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
                 const SizedBox(height: 50),
-                _buildNameFiled(),
                 _buildEmailFiled(),
+                _buildNameFiled(),
                 _buildPasswordFiled(),
                 ElevatedButton(
                   onPressed: () async {
                     UserInput userInput = UserInput(isValid: false, errorMessage: "");
-                    await verifyUserInput(userNameController.text, emailController.text, userInput);
+                    await verifyUserInput(userNameController.text, emailController.text,passwordController.text, userInput);
                     if(userInput.isValid) {
-                      //update user data...
-                      print(userNameController.text);
-                      print(emailController.text);
+                      await updateUserInSQL(emailController.text, userNameController.text, passwordController.text);
+                      Navigator.push(
+                        context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        );
                     } else {
                     createUserError(userInput.errorMessage);
                     }
@@ -89,17 +86,35 @@ class ManageAccountPageState extends State<ManageAccountPage> {
     );
   }
 
-verifyUserInput(String userName, String email,userInput) {
-  if (email!= '' && (email.contains("'") || !email.contains("@") || email.length < 5)) {
+Future<void> verifyUserInput(String userName, String email , String password,userInput) async {
+  var result = false;
+  await db.getConnection().then((conn) async {
+      String sql = "SELECT email from maen0574.user where email = '$email';";
+      var results = await conn.query(sql);
+
+      if(results.toString() == "()") {
+        result = true;
+      }
+    });
+
+    if (result == true) {
+      userInput.errorMessage = "email incorrect!";
+      return;
+    } else if (email.contains("'") || !email.contains("@") || email.length < 5) {
       userInput.errorMessage = "Incorrect email format";
       return;
-    } else if (userName != '' && (userName.contains("'") || userName.length < 6)) {
+    } else if (userName.contains("'") || userName.length < 6) {
       userInput.errorMessage =
           "Incorrect username. \nCharacters limited to a-z, A-Z, 0-9.";
       return;
-    } else {
+    } else if (password.contains("'") || password.length < 6) {
+      userInput.errorMessage =
+          "Incorrect password. \nPassword can't contain ' and needs to be atleast 6 characters long";
+      return;
+    }else {
       userInput.isValid = true;
     }
+
   }
 
 void createUserError(String stringContext) {
@@ -118,11 +133,11 @@ void createUserError(String stringContext) {
     );
   }
 
-Future<void> updateUserInSQL(String email, String username) async {
+  Future<void> updateUserInSQL(String email, String username, String password) async {
   await db.getConnection().then((conn) async {
-      
-  });
-
+      String sql = "UPDATE maen0574.user set password = '$password', username = '$username' where email = '$email';";
+      await conn.query(sql);
+    });
   }
   
 }
