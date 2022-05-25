@@ -10,7 +10,7 @@ class InputField extends StatelessWidget {
       required this.text,
       required this.isPassword,
       required this.icon,
-      required this.controller})
+      required this.controller, ontap})
       : super(key: key);
 
   @override
