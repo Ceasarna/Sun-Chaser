@@ -7,13 +7,16 @@ import 'package:flutter_applicationdemo/WebScraper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
+import 'login/User.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/retry.dart';
+import 'package:intl/number_symbols.dart';
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
-
+import 'package:intl/intl.dart';
 import 'package:flutter_applicationdemo/login/User.dart';
 import 'SettingsPage.dart';
 import 'WeatherData.dart';
@@ -21,7 +24,17 @@ import 'venuePage.dart';
 import 'Venue.dart';
 import 'globals.dart' as globals;
 
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'globals.dart' as globals;
+
+=======
+import 'SettingsPage.dart';
+import 'Venue.dart';
+import 'globals.dart' as globals;
+import 'FeedbackPage.dart';
+import 'login/CreateAccountPage.dart';
+import 'login/signInPage.dart';
+>>>>>>> master
 
 class Map extends StatefulWidget {
   @override
@@ -46,7 +59,10 @@ class MapState extends State<Map> {
   }*/
 
   final Completer<GoogleMapController> _controller = Completer();
-
+  bool? _barFilterValue = true;
+  bool? _restaurantFilterValue = true;
+  bool? _cafeFilterValue = true;
+  dynamic _priceFilterValue = 3;
   LocationData? _currentPosition;
 
   final TextEditingController _searchController = TextEditingController();
@@ -155,6 +171,8 @@ class MapState extends State<Map> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Sun chasers"),
         key: homeSacffoldKey,
         //leading: IconButton(icon: Icon(Icons.search), onPressed:() {},),
         actions: <Widget>[
@@ -171,9 +189,23 @@ class MapState extends State<Map> {
             print(value);
           },
         ),
+<<<<<<< HEAD
+        actions: <Widget>[createFilterMenuButton()],
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
       body: Stack(
+=======
+        backgroundColor: const Color.fromARGB(255, 190, 146, 160),
+      ),
+      body: Stack(
+      drawer : Drawer(
+        child: Container(
+          child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
+        ),
+      ),
+
+      body: Stack (
+>>>>>>> master
         children: [
           GoogleMap(
             mapType: MapType.normal,
@@ -194,6 +226,106 @@ class MapState extends State<Map> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(top: 100.0),
         child: FloatingActionButton(
+    );
+  }
+
+<<<<<<< HEAD
+  PopupMenuButton<dynamic> createFilterMenuButton() {
+    return PopupMenuButton(
+        icon: Icon(Icons.filter_list),
+        iconSize: 40,
+        itemBuilder: (context) => [
+              const PopupMenuItem(
+                child: Text(
+                  "Filters",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                padding: EdgeInsets.only(left: 60),
+              ),
+              createCheckBoxes(),
+              createPriceSlider(),
+              PopupMenuItem(
+                  child: ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+
+                  ElevatedButton(
+                    onPressed:
+                        null, // TODO: Fixa så att kartan filtreras när man klickar på 'Apply Filters'
+                    child: Text(
+                      "Apply Filters",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            globals.BUTTONCOLOR)),
+                  ),
+                ],
+              ))
+            ]);
+  }
+
+  // Creates the checkboxes for the filter menu
+  PopupMenuItem<dynamic> createCheckBoxes() {
+    return PopupMenuItem(
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Expanded(
+          child: Column(
+
+            children: [
+              Divider(color: Colors.black,),
+              StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                return CheckboxListTile(
+                    value: _barFilterValue,
+                    onChanged: (bool? newValue) {
+                      setState(() {
+                        _barFilterValue = newValue;
+                      });
+                    },
+                    title: const Icon(
+                      Icons.sports_bar,
+                      color: Colors.orange,
+                    ));
+              }),
+              StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                return CheckboxListTile(
+                  value: _restaurantFilterValue,
+                  onChanged: (bool? newValue) {
+                    setState(() {
+                      _restaurantFilterValue = newValue;
+                    });
+                  },
+                  title: Icon(
+                    Icons.restaurant,
+                    color: Colors.blueGrey[200],
+                  ),
+                );
+              }),
+              //Cafe checkbox
+
+              StatefulBuilder(
+                  builder: (BuildContext context, StateSetter setState) {
+                return CheckboxListTile(
+                    value: _cafeFilterValue,
+                    onChanged: (bool? newValue) {
+                      setState(() => _cafeFilterValue = newValue);
+                    },
+                    title: Icon(
+                      Icons.coffee,
+                      color: Colors.brown[400],
+                    ));
+              }),
+
+            ],
+=======
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(top: 100.0),
+          child: FloatingActionButton(
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const SettingsPage()));
@@ -203,6 +335,37 @@ class MapState extends State<Map> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+    );
+  }
+
+  PopupMenuItem<dynamic> createPriceSlider() {
+    return PopupMenuItem(
+      child: StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+        return SfSlider(
+            value: _priceFilterValue,
+            onChanged: (dynamic newValue) {
+              setState((() => _priceFilterValue = newValue));
+            },
+            min: 1,
+            max: 3,
+            showTicks: true,
+            interval: 1,
+            activeColor: Colors.blue,
+            showLabels: true,
+            stepSize: 1.0,
+            labelFormatterCallback: (dynamic value, String formattedText) {
+              switch (value) {
+                case 1:
+                  return '\$';
+                case 2:
+                  return '\$\$';
+                case 3:
+                  return '\$\$\$';
+              }
+              return value.toString();
+            });
+      }),
     );
   }
 
@@ -440,3 +603,149 @@ class MapState extends State<Map> {
     googleMapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat,lng), 14.0));
   }*/
 }
+<<<<<<< HEAD
+=======
+
+Widget buildDrawerSignedIn(BuildContext context){
+  return Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(
+          decoration: const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
+          child: Column(children: const <Widget>[
+            Text('Sun Chaser',
+              style :TextStyle(fontSize: 32),
+            ),
+
+            SizedBox(height: 30),
+            Icon(Icons.account_box_rounded),
+
+          ],
+
+          ),
+
+        ),
+
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text('Sign out'),
+          onTap:(){
+            globals.LOGGED_IN_USER = User(0, "", "");
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()), //Replace Container() with call to Map-page.
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.thumb_up_alt),
+          title: Text('Give feedback'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FormForFeedback(),
+              ),
+            );
+          },
+
+        ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text('Settings'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
+          },
+        ),
+
+      ],
+    ),
+  );
+}
+
+Widget buildDrawerSignedOut(BuildContext context){
+  return Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(
+          decoration: const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
+          child: Column(children: const <Widget>[
+            Text('Sun Chaser',
+              style :TextStyle(fontSize: 32),
+            ),
+
+            SizedBox(height: 30),
+          ],
+          ),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.account_box_rounded),
+          title: Text('Create account'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreateAccountPage(),
+              ),
+            );
+          },
+  ),
+        ListTile(
+          leading: Icon(Icons.login),
+          title: Text('Sign in'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignInPage(),
+              ),
+            );
+          },),
+        ListTile(
+          leading: Icon(Icons.thumb_up_alt),
+          title: Text('Give feedback'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FormForFeedback(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text('Settings'),
+          onTap:(){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
+          },
+        ),
+      ],
+    ),
+  );
+}
+
+
+class _Marker {
+
+  var Plats_1;
+  var Gatunr_1;
+  var coordinates;
+
+  _Marker(this.Plats_1, this.Gatunr_1, this.coordinates);
+
+}
+>>>>>>> master
