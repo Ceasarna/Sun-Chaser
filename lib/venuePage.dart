@@ -65,96 +65,96 @@ class _VenuePageState extends State<VenuePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfffceff9),
-      appBar: AppBar(
-        title: Text(venue.venueName),
-        backgroundColor: const Color(0xffac7b84),
-      ),
-      body: Center(child: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
-          child: Column(children: <Widget>[
-            Row(
-              children: const [
-                ShareButton(),
-                SavePlaceButton(),
-              ],
-            ),
-            Row(children: [
-              Expanded(
-                child: Image.network(validateAndGetImageLink()),
-              ),
-            ]),
-            // Row(
-            //   children: const [
-            //     Text(
-            //       'Placeholder for image',
-            //     ),
-            //   ],
-            // ),
-            Row(children: [
-              Expanded(
-                  child: Column(
-                children: [
-                  Text(venue.venueName,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      )
-                  ),
-                  Text(venue.venueAddress + ' ' + venue.venueStreetNo),
+        backgroundColor: const Color(0xfffceff9),
+        appBar: AppBar(
+          title: Text(venue.venueName),
+          backgroundColor: const Color(0xffac7b84),
+        ),
+        body: Center(child: SingleChildScrollView(
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(children: <Widget>[
+              Row(
+                children: const [
+                  ShareButton(),
+                  SavePlaceButton(),
                 ],
-              )),
-              Expanded(
-                child: Container(
-                  // decoration: BoxDecoration(
-                  //   border: Border.all(color: const Color(0xffaaaaaa)),
-                  // ),
-                  // color: const Color(0xffe9e9e9),
-                  child: buildWeatherColumn(),
+              ),
+              Row(children: [
+                Expanded(
+                  child: Image.network(validateAndGetImageLink()),
                 ),
-              )
-            ]),
-            const AboutTheSpotTable(),
-            /*GridView.count(
+              ]),
+              // Row(
+              //   children: const [
+              //     Text(
+              //       'Placeholder for image',
+              //     ),
+              //   ],
+              // ),
+              Row(children: [
+                Expanded(
+                    child: Column(
+                      children: [
+                        Text(venue.venueName,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )
+                        ),
+                        Text(venue.venueAddress + ' ' + venue.venueStreetNo),
+                      ],
+                    )),
+                Expanded(
+                  child: Container(
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: const Color(0xffaaaaaa)),
+                    // ),
+                    // color: const Color(0xffe9e9e9),
+                    child: buildWeatherColumn(),
+                  ),
+                )
+              ]),
+              const AboutTheSpotTable(),
+              /*GridView.count(
               crossAxisCount: 2,
               children: [],
             )*/
-          ]),
+            ]),
+          ),
         ),
-      ),
-    ));
+        ));
   }
 
   Column buildWeatherColumn() {
     return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: /*Text('Weather Status:',
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: /*Text('Weather Status:',
                           style: GoogleFonts.robotoCondensed(
                             textStyle: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           )),*/
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              currentWeather.getCurrentWeatherIcon(),
-                              Text(currentWeather.getCurrentWeatherStatus()),
-                            ],
-                          ),
-                          Text(currentWeather
-                                  .getCurrentTemperature()
-                                  .toString() +
-                              '\u2103'),
-                        ]),
-                    ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    currentWeather.getCurrentWeatherIcon(),
+                    Text(currentWeather.getCurrentWeatherStatus()),
                   ],
-                );
+                ),
+                Text(currentWeather
+                    .getCurrentTemperature()
+                    .toString() +
+                    '\u2103'),
+              ]),
+        ),
+      ],
+    );
   }
 }
 
@@ -178,8 +178,8 @@ class AboutTheSpotTable extends StatelessWidget {
             label: Text('About the spot',
                 style: GoogleFonts.roboto(
                     textStyle: const TextStyle(
-                  fontSize: 18,
-                )))),
+                      fontSize: 18,
+                    )))),
         const DataColumn(label: Text('', style: TextStyle())),
       ],
       rows: const [
