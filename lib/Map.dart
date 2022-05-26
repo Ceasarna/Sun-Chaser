@@ -27,14 +27,13 @@ import 'globals.dart' as globals;
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'globals.dart' as globals;
 
-=======
+import 'HomePage.dart';
 import 'SettingsPage.dart';
 import 'Venue.dart';
 import 'globals.dart' as globals;
 import 'FeedbackPage.dart';
 import 'login/CreateAccountPage.dart';
 import 'login/signInPage.dart';
->>>>>>> master
 
 class Map extends StatefulWidget {
   @override
@@ -175,26 +174,24 @@ class MapState extends State<Map> {
         title: const Text("Sun chasers"),
         key: homeSacffoldKey,
         //leading: IconButton(icon: Icon(Icons.search), onPressed:() {},),
-        actions: <Widget>[
+        /*actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {},
           ),
-        ],
-        title: TextFormField(
+        ],*/
+        /*title: TextFormField(
           controller: _searchController,
           textCapitalization: TextCapitalization.words,
           decoration: const InputDecoration(hintText: 'Find your place'),
           onChanged: (value) {
             print(value);
           },
-        ),
-<<<<<<< HEAD
+        ),*/
         actions: <Widget>[createFilterMenuButton()],
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
-      body: Stack(
-=======
+      /*body: Stack(
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
       body: Stack(
@@ -202,10 +199,9 @@ class MapState extends State<Map> {
         child: Container(
           child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
         ),
-      ),
+      ),*/
 
-      body: Stack (
->>>>>>> master
+      body: Stack(
         children: [
           GoogleMap(
             mapType: MapType.normal,
@@ -226,10 +222,18 @@ class MapState extends State<Map> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(top: 100.0),
         child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()));
+          },
+          backgroundColor: Colors.purple,
+          child: const Icon(Icons.filter_alt),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
 
-<<<<<<< HEAD
   PopupMenuButton<dynamic> createFilterMenuButton() {
     return PopupMenuButton(
         icon: Icon(Icons.filter_list),
@@ -250,10 +254,9 @@ class MapState extends State<Map> {
                   child: ButtonBar(
                 alignment: MainAxisAlignment.center,
                 children: [
-
                   ElevatedButton(
-                    onPressed:
-                        null, // TODO: Fixa så att kartan filtreras när man klickar på 'Apply Filters'
+                    onPressed: null,
+                    // TODO: Fixa så att kartan filtreras när man klickar på 'Apply Filters'
                     child: Text(
                       "Apply Filters",
                       style: TextStyle(color: Colors.black),
@@ -270,72 +273,76 @@ class MapState extends State<Map> {
   // Creates the checkboxes for the filter menu
   PopupMenuItem<dynamic> createCheckBoxes() {
     return PopupMenuItem(
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Expanded(
-          child: Column(
-
-            children: [
-              Divider(color: Colors.black,),
-              StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setState) {
-                return CheckboxListTile(
-                    value: _barFilterValue,
-                    onChanged: (bool? newValue) {
-                      setState(() {
-                        _barFilterValue = newValue;
-                      });
-                    },
-                    title: const Icon(
-                      Icons.sports_bar,
-                      color: Colors.orange,
-                    ));
-              }),
-              StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setState) {
-                return CheckboxListTile(
-                  value: _restaurantFilterValue,
-                  onChanged: (bool? newValue) {
-                    setState(() {
-                      _restaurantFilterValue = newValue;
-                    });
-                  },
-                  title: Icon(
-                    Icons.restaurant,
-                    color: Colors.blueGrey[200],
+        child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Expanded(
+              child: Column(
+                children: [
+                  Divider(
+                    color: Colors.black,
                   ),
-                );
-              }),
-              //Cafe checkbox
+                  StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                    return CheckboxListTile(
+                        value: _barFilterValue,
+                        onChanged: (bool? newValue) {
+                          setState(() {
+                            _barFilterValue = newValue;
+                          });
+                        },
+                        title: const Icon(
+                          Icons.sports_bar,
+                          color: Colors.orange,
+                        ));
+                  }),
+                  StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                    return CheckboxListTile(
+                      value: _restaurantFilterValue,
+                      onChanged: (bool? newValue) {
+                        setState(() {
+                          _restaurantFilterValue = newValue;
+                        });
+                      },
+                      title: Icon(
+                        Icons.restaurant,
+                        color: Colors.blueGrey[200],
+                      ),
+                    );
+                  }),
+                  //Cafe checkbox
 
-              StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setState) {
-                return CheckboxListTile(
-                    value: _cafeFilterValue,
-                    onChanged: (bool? newValue) {
-                      setState(() => _cafeFilterValue = newValue);
-                    },
-                    title: Icon(
-                      Icons.coffee,
-                      color: Colors.brown[400],
-                    ));
-              }),
+                  StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                    return CheckboxListTile(
+                        value: _cafeFilterValue,
+                        onChanged: (bool? newValue) {
+                          setState(() => _cafeFilterValue = newValue);
+                        },
+                        title: Icon(
+                          Icons.coffee,
+                          color: Colors.brown[400],
+                        ));
+                  }),
+                ],
 
-            ],
-=======
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 100.0),
-          child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()));
-          },
-          backgroundColor: Colors.purple,
-          child: const Icon(Icons.filter_alt),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-    );
+                /*floatingActionButton: Padding(
+                    padding: const EdgeInsets.only(top: 100.0),
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SettingsPage()));
+                      },
+                      backgroundColor: Colors.purple,
+                      child: const Icon(Icons.filter_alt),
+                    ),
+                  ),
+                  floatingActionButtonLocation: FloatingActionButtonLocation
+                      .endTop,*/
+              ),
+            )));
   }
 
   PopupMenuItem<dynamic> createPriceSlider() {
@@ -502,10 +509,8 @@ class MapState extends State<Map> {
               ElevatedButton(
                 child: const Text('ListView'),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ListViewPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ListViewPage()));
                 },
               ),
             ],
@@ -603,45 +608,43 @@ class MapState extends State<Map> {
     googleMapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat,lng), 14.0));
   }*/
 }
-<<<<<<< HEAD
-=======
 
-Widget buildDrawerSignedIn(BuildContext context){
+Widget buildDrawerSignedIn(BuildContext context) {
   return Drawer(
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          decoration: const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
-          child: Column(children: const <Widget>[
-            Text('Sun Chaser',
-              style :TextStyle(fontSize: 32),
-            ),
-
-            SizedBox(height: 30),
-            Icon(Icons.account_box_rounded),
-
-          ],
-
+          decoration:
+              const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
+          child: Column(
+            children: const <Widget>[
+              Text(
+                'Sun Chaser',
+                style: TextStyle(fontSize: 32),
+              ),
+              SizedBox(height: 30),
+              Icon(Icons.account_box_rounded),
+            ],
           ),
-
         ),
-
         ListTile(
           leading: Icon(Icons.logout),
           title: Text('Sign out'),
-          onTap:(){
+          onTap: () {
             globals.LOGGED_IN_USER = User(0, "", "");
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()), //Replace Container() with call to Map-page.
+              MaterialPageRoute(
+                  builder: (context) =>
+                      HomePage()), //Replace Container() with call to Map-page.
             );
           },
         ),
         ListTile(
           leading: Icon(Icons.thumb_up_alt),
           title: Text('Give feedback'),
-          onTap:(){
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -649,12 +652,11 @@ Widget buildDrawerSignedIn(BuildContext context){
               ),
             );
           },
-
         ),
         ListTile(
           leading: Icon(Icons.settings),
           title: Text('Settings'),
-          onTap:(){
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -663,33 +665,33 @@ Widget buildDrawerSignedIn(BuildContext context){
             );
           },
         ),
-
       ],
     ),
   );
 }
 
-Widget buildDrawerSignedOut(BuildContext context){
+Widget buildDrawerSignedOut(BuildContext context) {
   return Drawer(
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          decoration: const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
-          child: Column(children: const <Widget>[
-            Text('Sun Chaser',
-              style :TextStyle(fontSize: 32),
-            ),
-
-            SizedBox(height: 30),
-          ],
+          decoration:
+              const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
+          child: Column(
+            children: const <Widget>[
+              Text(
+                'Sun Chaser',
+                style: TextStyle(fontSize: 32),
+              ),
+              SizedBox(height: 30),
+            ],
           ),
         ),
-
         ListTile(
           leading: Icon(Icons.account_box_rounded),
           title: Text('Create account'),
-          onTap:(){
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -697,22 +699,23 @@ Widget buildDrawerSignedOut(BuildContext context){
               ),
             );
           },
-  ),
+        ),
         ListTile(
           leading: Icon(Icons.login),
           title: Text('Sign in'),
-          onTap:(){
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => SignInPage(),
               ),
             );
-          },),
+          },
+        ),
         ListTile(
           leading: Icon(Icons.thumb_up_alt),
           title: Text('Give feedback'),
-          onTap:(){
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -724,7 +727,7 @@ Widget buildDrawerSignedOut(BuildContext context){
         ListTile(
           leading: Icon(Icons.settings),
           title: Text('Settings'),
-          onTap:(){
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -738,14 +741,10 @@ Widget buildDrawerSignedOut(BuildContext context){
   );
 }
 
-
 class _Marker {
-
   var Plats_1;
   var Gatunr_1;
   var coordinates;
 
   _Marker(this.Plats_1, this.Gatunr_1, this.coordinates);
-
 }
->>>>>>> master
