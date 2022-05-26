@@ -99,12 +99,12 @@ class WeatherData {
       case 1:
         return const Icon(
           Icons.sunny,
-          color: Color.fromARGB(255, 251, 183, 9),
+          color: Color.fromARGB(255, 255, 161, 19),
         );
       case 2:
         return const Icon(
           Icons.sunny,
-          color: Color.fromARGB(255, 251, 183, 9),
+          color: Color.fromARGB(255, 255, 161, 19),
         );
       case 3:
         return const FaIcon(FontAwesomeIcons.cloudSun);

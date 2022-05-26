@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 
 import 'HomePage.dart';
 import 'Venue.dart';
-import 'Venue.dart';
 import 'main.dart';
 
 User LOGGED_IN_USER = User(0, "", "");

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/ListViewPage.dart';
 import 'package:flutter_applicationdemo/WeatherData.dart';
 import 'package:flutter_applicationdemo/WebScraper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -300,7 +301,8 @@ class MapState extends State<Map> {
                       ),
                       Row(
                         children: [
-                          Text('– ' + globals.forecast.getCurrentWeatherStatus()),
+                          Text('– ' +
+                              globals.forecast.getCurrentWeatherStatus()),
                         ],
                       ),
                       Row(
@@ -334,6 +336,15 @@ class MapState extends State<Map> {
                     Navigator.pop(context);
                     _bottomSheetIsOpen = false;
                   }),
+              ElevatedButton(
+                child: const Text('ListView'),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ListViewPage()));
+                },
+              ),
             ],
           ),
         ),
@@ -375,7 +386,7 @@ class MapState extends State<Map> {
           style: GoogleFonts.roboto(
               textStyle: const TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.w200,
+            fontWeight: FontWeight.w300,
             fontSize: 18,
           )),
         )
