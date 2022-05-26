@@ -51,7 +51,6 @@ class MapState extends State<Map> {
     var url = Uri.parse(
         'https://openstreetgs.stockholm.se/geoservice/api/b8e20fd7-5654-465e-8976-35b4de902b41/wfs?service=wfs&version=1.1.0&request=GetFeature&typeNames=od_gis:Markupplatelse&srsName=EPSG:4326&outputFormat=json');
     var response = await http.get(url);
-
     print('Response status: ${response.statusCode}');
     // print('Response body: ${response.body.toString()}');
     var jsonData = jsonDecode(response.body);
@@ -107,18 +106,18 @@ class MapState extends State<Map> {
         color: Colors.white,
         child: Center(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            /*const Text('BottomSheet'),
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                /*const Text('BottomSheet'),
                         ElevatedButton(
                           child: const Text('Close BottomSheet'),
                           onPressed: () {Navigator.pop(context);})*/
-            Container(
-              child: Text(webScraper.openingHoursThisWeek.length.toString()),
-            ),
-          ],
-        )),
+                Container(
+                  child: Text(webScraper.openingHoursThisWeek.length.toString()),
+                ),
+              ],
+            )),
       );
     }));
   }
@@ -239,19 +238,19 @@ class MapState extends State<Map> {
         icon: Icon(Icons.filter_list),
         iconSize: 40,
         itemBuilder: (context) => [
-              const PopupMenuItem(
-                child: Text(
-                  "Filters",
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                padding: EdgeInsets.only(left: 60),
+          const PopupMenuItem(
+            child: Text(
+              "Filters",
+              style: TextStyle(
+                fontSize: 20,
               ),
-              createCheckBoxes(),
-              createPriceSlider(),
-              PopupMenuItem(
-                  child: ButtonBar(
+            ),
+            padding: EdgeInsets.only(left: 60),
+          ),
+          createCheckBoxes(),
+          createPriceSlider(),
+          PopupMenuItem(
+              child: ButtonBar(
                 alignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
@@ -267,7 +266,7 @@ class MapState extends State<Map> {
                   ),
                 ],
               ))
-            ]);
+        ]);
   }
 
   // Creates the checkboxes for the filter menu
@@ -283,47 +282,46 @@ class MapState extends State<Map> {
                   ),
                   StatefulBuilder(
                       builder: (BuildContext context, StateSetter setState) {
-                    return CheckboxListTile(
-                        value: _barFilterValue,
-                        onChanged: (bool? newValue) {
-                          setState(() {
-                            _barFilterValue = newValue;
-                          });
-                        },
-                        title: const Icon(
-                          Icons.sports_bar,
-                          color: Colors.orange,
-                        ));
-                  }),
+                        return CheckboxListTile(
+                            value: _barFilterValue,
+                            onChanged: (bool? newValue) {
+                              setState(() {
+                                _barFilterValue = newValue;
+                              });
+                            },
+                            title: const Icon(
+                              Icons.sports_bar,
+                              color: Colors.orange,
+                            ));
+                      }),
                   StatefulBuilder(
                       builder: (BuildContext context, StateSetter setState) {
-                    return CheckboxListTile(
-                      value: _restaurantFilterValue,
-                      onChanged: (bool? newValue) {
-                        setState(() {
-                          _restaurantFilterValue = newValue;
-                        });
-                      },
-                      title: Icon(
-                        Icons.restaurant,
-                        color: Colors.blueGrey[200],
-                      ),
-                    );
-                  }),
+                        return CheckboxListTile(
+                          value: _restaurantFilterValue,
+                          onChanged: (bool? newValue) {
+                            setState(() {
+                              _restaurantFilterValue = newValue;
+                            });
+                          },
+                          title: Icon(
+                            Icons.restaurant,
+                            color: Colors.blueGrey[200],
+                          ),
+                        );
+                      }),
                   //Cafe checkbox
-
                   StatefulBuilder(
                       builder: (BuildContext context, StateSetter setState) {
-                    return CheckboxListTile(
-                        value: _cafeFilterValue,
-                        onChanged: (bool? newValue) {
-                          setState(() => _cafeFilterValue = newValue);
-                        },
-                        title: Icon(
-                          Icons.coffee,
-                          color: Colors.brown[400],
-                        ));
-                  }),
+                        return CheckboxListTile(
+                            value: _cafeFilterValue,
+                            onChanged: (bool? newValue) {
+                              setState(() => _cafeFilterValue = newValue);
+                            },
+                            title: Icon(
+                              Icons.coffee,
+                              color: Colors.brown[400],
+                            ));
+                      }),
                 ],
 
                 /*floatingActionButton: Padding(
@@ -349,30 +347,30 @@ class MapState extends State<Map> {
     return PopupMenuItem(
       child: StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-        return SfSlider(
-            value: _priceFilterValue,
-            onChanged: (dynamic newValue) {
-              setState((() => _priceFilterValue = newValue));
-            },
-            min: 1,
-            max: 3,
-            showTicks: true,
-            interval: 1,
-            activeColor: Colors.blue,
-            showLabels: true,
-            stepSize: 1.0,
-            labelFormatterCallback: (dynamic value, String formattedText) {
-              switch (value) {
-                case 1:
-                  return '\$';
-                case 2:
-                  return '\$\$';
-                case 3:
-                  return '\$\$\$';
-              }
-              return value.toString();
-            });
-      }),
+            return SfSlider(
+                value: _priceFilterValue,
+                onChanged: (dynamic newValue) {
+                  setState((() => _priceFilterValue = newValue));
+                },
+                min: 1,
+                max: 3,
+                showTicks: true,
+                interval: 1,
+                activeColor: Colors.blue,
+                showLabels: true,
+                stepSize: 1.0,
+                labelFormatterCallback: (dynamic value, String formattedText) {
+                  switch (value) {
+                    case 1:
+                      return '\$';
+                    case 2:
+                      return '\$\$';
+                    case 3:
+                      return '\$\$\$';
+                  }
+                  return value.toString();
+                });
+          }),
     );
   }
 
@@ -389,33 +387,33 @@ class MapState extends State<Map> {
       },
       child: Container(
           child: FittedBox(
-        child: Material(
-          color: Colors.white,
-          elevation: 14.0,
-          borderRadius: BorderRadius.circular(24.0),
-          shadowColor: Color(0x802196F3),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                width: 250,
-                height: 200,
-                child: ClipRRect(
-                  borderRadius: new BorderRadius.circular(24.0),
-                  child:
+            child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    width: 250,
+                    height: 200,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child:
                       const Image(image: AssetImage('assets/images/bild.png')),
-                ),
+                    ),
+                  ),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(resturantName),
+                    ),
+                  )
+                ],
               ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(resturantName),
-                ),
-              )
-            ],
-          ),
-        ),
-      )),
+            ),
+          )),
     );
   }
 
@@ -544,19 +542,19 @@ class MapState extends State<Map> {
           venue.venueName,
           style: GoogleFonts.roboto(
               textStyle: const TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          )),
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              )),
         ),
         Text(
           venue.venueAddress + ' ' + venue.venueStreetNo,
           style: GoogleFonts.roboto(
               textStyle: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w300,
-            fontSize: 18,
-          )),
+                color: Colors.black,
+                fontWeight: FontWeight.w300,
+                fontSize: 18,
+              )),
         )
       ],
     );
@@ -570,7 +568,6 @@ class MapState extends State<Map> {
   }
 
 /* Future<void> _handelPressButton() async {
-
     Prediction? p = await PlacesAutocomplete.show(
                           context: context,
                           apiKey: kGoogleApiKey,
@@ -586,25 +583,18 @@ class MapState extends State<Map> {
     if (p != null) {
       displayPrediction(p,homeSacffoldKey.currentState);
     }
-
   }
-
   Future<void> displayPrediction(Prediction p, ScaffoldState? currentState) async {
     GoogleMapsPlaces places = GoogleMapsPlaces(
       apiKey: kGoogleApiKey,
       apiHeaders: await const GoogleApiHeaders().getHeaders()
     );
-
     PlacesDetailsResponse detail = await places.getDetailsByPlaceId(p.placeId!);
-
     final lat = detail.result.geometry!.location.lat;
     final lng = detail.result.geometry!.location.lng;
-
     markersList.clear();
     markersList.add(Marker(markerId: const MarkerId("0"), position: LatLng(lat, lng), infoWindow: InfoWindow(title: detail.result.name)));
-
     setState(() {});
-
     googleMapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat,lng), 14.0));
   }*/
 }
@@ -616,7 +606,7 @@ Widget buildDrawerSignedIn(BuildContext context) {
       children: [
         DrawerHeader(
           decoration:
-              const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
+          const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
           child: Column(
             children: const <Widget>[
               Text(
@@ -677,7 +667,7 @@ Widget buildDrawerSignedOut(BuildContext context) {
       children: [
         DrawerHeader(
           decoration:
-              const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
+          const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
           child: Column(
             children: const <Widget>[
               Text(
