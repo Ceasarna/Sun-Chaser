@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_applicationdemo/Venue.dart';
+import 'package:flutter_applicationdemo/venuePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'Venue.dart';
+import 'globals.dart' as globals;
 
 // Color _backgroundColor = const Color(0xffac7b84);
 
@@ -153,6 +156,7 @@ class VenuePage extends StatefulWidget {
   const VenuePage(this.venue, {Key? key}) : super(key: key);
   final Venue venue;
 
+
   @override
   State<VenuePage> createState() => _VenuePageState(venue);
 }
@@ -213,9 +217,9 @@ class _VenuePageState extends State<VenuePage> {
           alignment: Alignment.center,
           child: Column(children: <Widget>[
             Row(
-              children: const [
+              children: [
                 ShareButton(),
-                SavePlaceButton(),
+                SavePlaceButton(venue),
               ],
             ),
             Row(children: [
@@ -287,7 +291,7 @@ class _VenuePageState extends State<VenuePage> {
   }
 }
 
-//Just an example table
+
 class AboutTheSpotTable extends StatelessWidget {
   const AboutTheSpotTable({
     Key? key,
@@ -337,43 +341,49 @@ class AboutTheSpotTable extends StatelessWidget {
   }
 }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         backgroundColor: const Color(0xfffceff9),
-//         appBar: AppBar(
-//           title: const Text('My Venue'),
-//           backgroundColor: _backgroundColor,
-//         ),
-//         body: Row(
-//           children: const <Widget>[
-//             ShareButton(),
-//             SavePlaceButton(),
-//           ],
-//         ));
-//   }
-// }
-
 class SavePlaceButton extends StatelessWidget {
-  const SavePlaceButton({
+  Venue venue;
+
+  SavePlaceButton(this.venue, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: TextButton.icon(
-        onPressed: () {},
-        icon: const Icon(
-          Icons.favorite,
-          color: Colors.red,
-        ),
-        label: const Text('Save place'),
-        style: TextButton.styleFrom(
-          primary: Color(0xff4f6272),
-        ),
+    return globals.LOGGED_IN_USER.likedVenuesList.contains(venue) ? buildLikeButton(context, venue, true) : buildLikeButton(context, venue, false);
+  }
+
+  Expanded buildLikeButton(BuildContext context, Venue venue, bool alreadyLiked) {
+    return alreadyLiked? Expanded(
+    child: TextButton.icon(
+      onPressed: () {
+        globals.LOGGED_IN_USER.likedVenuesList.remove(venue);
+        (context as Element).reassemble();
+      },
+      icon: const Icon(
+        Icons.favorite,
+        color: Colors.red,
       ),
-    );
+      label: const Text('Unlike place'),
+      style: TextButton.styleFrom(
+        primary: Color(0xff4f6272),
+      ),
+    ),
+    ) : Expanded(
+        child: TextButton.icon(
+          onPressed: () {
+            globals.LOGGED_IN_USER.likedVenuesList.add(venue);
+            (context as Element).reassemble();
+          },
+          icon: const Icon(
+            Icons.favorite_border_outlined,
+            color: Colors.red,
+          ),
+          label: const Text('Like place'),
+          style: TextButton.styleFrom(
+            primary: Color(0xff4f6272),
+          ),
+        ));
   }
 }
 
