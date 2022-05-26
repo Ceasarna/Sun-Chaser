@@ -6,148 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'WeatherData.dart';
+import 'globals.dart' as globals;
 
-// Color _backgroundColor = const Color(0xffac7b84);
-
-class WeatherData {
-  final int weatherValue;
-  final int temperature;
-
-  WeatherData(this.weatherValue, this.temperature);
-
-  factory WeatherData.fromJson(Map<String, dynamic> json) {
-    var value = json.values;
-    var tempWeatherData;
-    var tempTemperature;
-
-    if (value.first['wsymb2'] is int) {
-      tempWeatherData = value.first['wsymb2'];
-    }
-    if (value.first['temp'] is double) {
-      tempTemperature = value.first['temp'];
-    }
-
-    if (tempWeatherData != null && tempTemperature != null) {
-      return WeatherData(tempWeatherData, tempTemperature.round());
-    } else {
-      return WeatherData(0, 0);
-    }
-  }
-
-  int getCurrentTemperature() {
-    return temperature;
-  }
-
-  String getCurrentWeatherStatus() {
-    String weatherStatus;
-    switch (weatherValue) {
-      case 0:
-        weatherStatus = 'Undefined';
-        break;
-      case 1:
-        weatherStatus = 'Clear sky';
-        break;
-      case 2:
-        weatherStatus = 'Nearly clear sky';
-        break;
-      case 3:
-        weatherStatus = 'Variable cloudiness';
-        break;
-      case 4:
-        weatherStatus = 'Halfclear sky';
-        break;
-      case 5:
-        weatherStatus = 'Cloudy sky';
-        break;
-      case 6:
-        weatherStatus = 'Overcast';
-        break;
-      case 7:
-        weatherStatus = 'Fog';
-        break;
-      case 8:
-        weatherStatus = 'Light rain showers';
-        break;
-      case 9:
-        weatherStatus = 'Moderate rain showers';
-        break;
-      case 10:
-        weatherStatus = 'Heavy rain showers';
-        break;
-      case 11:
-        weatherStatus = 'Thunderstorm';
-        break;
-      case 12:
-        weatherStatus = 'Light sleet showers';
-        break;
-      case 13:
-        weatherStatus = 'Moderate sleet showers';
-        break;
-      case 14:
-        weatherStatus = 'Heavy sleet showers';
-        break;
-      case 15:
-        weatherStatus = 'Light snow showers';
-        break;
-      case 16:
-        weatherStatus = 'Moderate snow showers';
-        break;
-      case 17:
-        weatherStatus = 'Heavy snow showers';
-        break;
-      default:
-        weatherStatus = 'Undefined';
-    }
-    return weatherStatus;
-  }
-
-  Widget getCurrentWeatherIcon() {
-    switch (weatherValue) {
-      case 1:
-        return const Icon(
-          Icons.sunny,
-          color: Color.fromARGB(255, 251, 183, 9),
-        );
-      case 2:
-        return const Icon(
-          Icons.sunny,
-          color: Color.fromARGB(255, 251, 183, 9),
-        );
-      case 3:
-        return const FaIcon(FontAwesomeIcons.cloudSun);
-      case 4:
-        return const FaIcon(FontAwesomeIcons.cloudSun);
-      case 5:
-        return const FaIcon(FontAwesomeIcons.cloud);
-      case 6:
-        return const FaIcon(FontAwesomeIcons.cloud);
-      case 7:
-        return const FaIcon(FontAwesomeIcons.smog);
-      case 8:
-        return const FaIcon(FontAwesomeIcons.umbrella);
-      case 9:
-        return const FaIcon(FontAwesomeIcons.cloudRain);
-      case 10:
-        return const FaIcon(FontAwesomeIcons.cloudShowersHeavy);
-      case 11:
-        return const FaIcon(FontAwesomeIcons.cloudflare);
-      case 12:
-        return const FaIcon(FontAwesomeIcons.cloudRain);
-      case 13:
-        return const FaIcon(FontAwesomeIcons.cloudShowersHeavy);
-      case 14:
-        return const FaIcon(FontAwesomeIcons.cloudShowersHeavy);
-      case 15:
-        return const FaIcon(FontAwesomeIcons.snowflake);
-      case 16:
-        return const FaIcon(FontAwesomeIcons.snowflake);
-      case 17:
-        return const FaIcon(FontAwesomeIcons.snowflake);
-      default:
-        return const Icon(Icons.not_accessible);
-    }
-  }
-}
 
 class VenuePage extends StatefulWidget {
   const VenuePage(this.venue, {Key? key}) : super(key: key);
@@ -163,6 +24,8 @@ class _VenuePageState extends State<VenuePage> {
   late final Venue venue;
 
   _VenuePageState(this.venue);
+
+
 
   validateAndGetImageLink() {
     if (imageLink == '') {
@@ -182,17 +45,16 @@ class _VenuePageState extends State<VenuePage> {
     currentWeather = tempWeather;
 
     Uri weatherDataURI = Uri.parse(
-        'https://group-4-75.pvt.dsv.su.se/target/weather-0.0.2-SNAPSHOT.war/weather');
+        'https://group-4-75.pvt.dsv.su.se/target/weather-0.0.4-SNAPSHOT.war/weather');
 
-    final responce = await http.get(weatherDataURI);
+    final response = await http.get(weatherDataURI);
 
-    if (responce.statusCode == 200) {
-      var data = json.decode(responce.body);
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
       tempWeather = WeatherData.fromJson(data);
 
-      print(data);
-
       setState(() {
+        globals.forecast = tempWeather;
         currentWeather = tempWeather; //Could be a widget instead??
       });
     } else {
@@ -234,8 +96,13 @@ class _VenuePageState extends State<VenuePage> {
               Expanded(
                   child: Column(
                 children: [
-                  Text(venue.venueName),
-                  Text('This is the address'),
+                  Text(venue.venueName,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )
+                  ),
+                  Text(venue.venueAddress + ' ' + venue.venueStreetNo),
                 ],
               )),
               Expanded(
@@ -244,34 +111,7 @@ class _VenuePageState extends State<VenuePage> {
                   //   border: Border.all(color: const Color(0xffaaaaaa)),
                   // ),
                   // color: const Color(0xffe9e9e9),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text('Weather Status:',
-                            style: GoogleFonts.robotoCondensed(
-                              textStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )),
-                      ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: [
-                                currentWeather.getCurrentWeatherIcon(),
-                                Text(currentWeather.getCurrentWeatherStatus()),
-                              ],
-                            ),
-                            Text(currentWeather
-                                    .getCurrentTemperature()
-                                    .toString() +
-                                '\u2103'),
-                          ]),
-                    ],
-                  ),
+                  child: buildWeatherColumn(),
                 ),
               )
             ]),
@@ -284,6 +124,37 @@ class _VenuePageState extends State<VenuePage> {
         ),
       ),
     ));
+  }
+
+  Column buildWeatherColumn() {
+    return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: /*Text('Weather Status:',
+                          style: GoogleFonts.robotoCondensed(
+                            textStyle: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),*/
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              currentWeather.getCurrentWeatherIcon(),
+                              Text(currentWeather.getCurrentWeatherStatus()),
+                            ],
+                          ),
+                          Text(currentWeather
+                                  .getCurrentTemperature()
+                                  .toString() +
+                              '\u2103'),
+                        ]),
+                    ),
+                  ],
+                );
   }
 }
 
@@ -337,22 +208,7 @@ class AboutTheSpotTable extends StatelessWidget {
   }
 }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         backgroundColor: const Color(0xfffceff9),
-//         appBar: AppBar(
-//           title: const Text('My Venue'),
-//           backgroundColor: _backgroundColor,
-//         ),
-//         body: Row(
-//           children: const <Widget>[
-//             ShareButton(),
-//             SavePlaceButton(),
-//           ],
-//         ));
-//   }
-// }
+
 
 class SavePlaceButton extends StatelessWidget {
   const SavePlaceButton({
@@ -370,7 +226,7 @@ class SavePlaceButton extends StatelessWidget {
         ),
         label: const Text('Save place'),
         style: TextButton.styleFrom(
-          primary: Color(0xff4f6272),
+          primary: const Color(0xff4f6272),
         ),
       ),
     );
