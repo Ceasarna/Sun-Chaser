@@ -18,9 +18,7 @@ class VenueInfo {
   late String _openHoursToday;
 
 
-  VenueInfo() {
-
-  }
+  VenueInfo(/*this._photos, this._tastes, this._priceClass, this._rating, this._totalRatings, this._openNow, this._openHoursToday*/);
 
   Future getVenueInfo(String venueName) async {
 
