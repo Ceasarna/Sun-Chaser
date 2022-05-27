@@ -5,6 +5,7 @@ import 'login/CreateAccountPage.dart';
 import 'login/signInPage.dart';
 import 'package:flutter_applicationdemo/login/User.dart' as User;
 import 'globals.dart' as globals;
+import 'ManageAccountPage.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -98,8 +99,8 @@ class _HomePageState extends State<HomePage> {
         ),
         onPressed: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SignInPage()), //Replace Container() with call to Map-page.
+            context, //SignInPage()
+            MaterialPageRoute(builder: (context) =>SignInPage()), //Replace Container() with call to Map-page.
           );
         },
         child: Text('Sign in',

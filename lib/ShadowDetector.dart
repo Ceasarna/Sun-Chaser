@@ -37,7 +37,7 @@ class ShadowDetector {
 
   List<Venue> get listWithVenuesInShade => venuesInShade; //Get all venues with their shadow status updated.
 
-  void evaluateShadowsForOneVenue (Venue venue) async {
+  Future evaluateShadowsForOneVenue (Venue venue) async {
     LatLng pos= venue.position;
     final lat = pos.latitude.toString();
     final lng = pos.longitude.toString();

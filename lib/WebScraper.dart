@@ -7,9 +7,9 @@ class WebScraper {
   late List<String> openingHoursThisWeek;
   late String openingHoursToday;
   late String reviewScore;
-  //late String priceClass;
+  late String priceClass;
 
-  WebScraper() { //Must provide an URL from bing search engine.
+  WebScraper() {
 
   }
 
@@ -35,7 +35,7 @@ class WebScraper {
         .toList()[0]
         .toString();
 
-   /* final tripAdvisorURL = htmlBing.querySelectorAll('div.infoModule.b_divsec.topBleed.noSeparator > div > a')
+    final tripAdvisorURL = htmlBing.querySelectorAll('div.infoModule.b_divsec.topBleed.noSeparator > div > a')
         .map((e) => e.attributes['href'])
         .toList()[0]
         .toString();
@@ -47,7 +47,7 @@ class WebScraper {
         .getElementsByClassName('drUyy')
         .map((e) => e.text)
         .toList()[0]
-        .toString();*/
+        .toString();
   }
 
   List<String> get getOpeningHoursThisWeek => openingHoursThisWeek; //First item is monday, last item is sunday.
@@ -55,6 +55,6 @@ class WebScraper {
 
   String get getOpeningHoursToday => openingHoursToday; //Output example: "Open · Closes 01:00" (Gets automatically updated).
   String get getReviewScore => reviewScore; // Output example: "Star Rating: 4 out of 5.".
-  //String get getPriceClass => priceClass; // Output example: "$$ - $$$".
+  String get getPriceClass => priceClass; // Output example: "$$ - $$$".
 
 }

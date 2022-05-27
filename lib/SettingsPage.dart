@@ -50,7 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
             'Settings',
             style: TextStyle(
               fontSize: 30,
-              color: Colors.grey,
+              color: Colors.white,
               shadows: <Shadow>[
                 Shadow(
                   offset: Offset(2, 2),
@@ -104,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   title: const Text('Restaurant'),
                 ),
                 SettingsTile(
-                  title: const Text(""),
+                  title: const Text("Price"),
                   value: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
@@ -119,17 +119,17 @@ class _SettingsPageState extends State<SettingsPage> {
                                   duration: Duration(milliseconds: 1000),
                                   behavior: SnackBarBehavior.floating,
                                   content: Text('Selected £'),
-                                ));
+                                ),);
                               }else{
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                   duration: Duration(milliseconds: 1000),
                                   content: Text('Unselected £'),
                                   behavior: SnackBarBehavior.floating,
-                                ));
+                                ),);
                               }
 
                             });
-                            print("Tapped single dollarSign");
+                            
                           },
                           child: Container(
                             color: _colorContainerLow,
