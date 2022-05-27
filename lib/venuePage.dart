@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'VenueInfo.dart';
 import 'WeatherData.dart';
 import 'globals.dart' as globals;
 
@@ -22,7 +23,7 @@ class _VenuePageState extends State<VenuePage> {
   late WeatherData currentWeather;
   final String imageLink = '';
   late final Venue venue;
-
+  late VenueInfo venueInfo;
   _VenuePageState(this.venue);
 
 
@@ -38,7 +39,15 @@ class _VenuePageState extends State<VenuePage> {
   @override
   void initState() {
     refreshWeather();
+    gatherVenueInfo();
   }
+
+  Future gatherVenueInfo( ) async {
+    VenueInfo vu = VenueInfo();
+    venueInfo = vu;
+    venueInfo = await vu.getVenueInfo(venue.venueName);
+  }
+
 
   Future refreshWeather() async {
     WeatherData tempWeather = WeatherData(0, 0);
@@ -70,59 +79,70 @@ class _VenuePageState extends State<VenuePage> {
           title: Text(venue.venueName),
           backgroundColor: const Color(0xffac7b84),
         ),
-        body: Center(child: SingleChildScrollView(
-          child: Container(
-            alignment: Alignment.center,
-            child: Column(children: <Widget>[
-              Row(
-                children: const [
-                  ShareButton(),
-                  SavePlaceButton(),
-                ],
-              ),
-              Row(children: [
-                Expanded(
-                  child: Image.network(validateAndGetImageLink()),
-                ),
-              ]),
-              // Row(
-              //   children: const [
-              //     Text(
-              //       'Placeholder for image',
-              //     ),
-              //   ],
-              // ),
-              Row(children: [
-                Expanded(
-                    child: Column(
-                      children: [
-                        Text(venue.venueName,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            )
+        body: Center(
+          child: FutureBuilder(
+              future: gatherVenueInfo(),
+              builder: (context, snapshot) {
+                if(snapshot.connectionState == ConnectionState.done) {
+                  return SingleChildScrollView(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Column(children: <Widget>[
+                        Row(
+                          children: const [
+                            ShareButton(),
+                            SavePlaceButton(),
+                          ],
                         ),
-                        Text(venue.venueAddress + ' ' + venue.venueStreetNo),
-                      ],
-                    )),
-                Expanded(
-                  child: Container(
-                    // decoration: BoxDecoration(
-                    //   border: Border.all(color: const Color(0xffaaaaaa)),
-                    // ),
-                    // color: const Color(0xffe9e9e9),
-                    child: buildWeatherColumn(),
-                  ),
-                )
-              ]),
-              const AboutTheSpotTable(),
-              /*GridView.count(
+                        Row(children: [
+                          Expanded(
+                            child: Image.network(venueInfo.getPhotoURL()),
+                          ),
+                        ]),
+                        // Row(
+                        //   children: const [
+                        //     Text(
+                        //       'Placeholder for image',
+                        //     ),
+                        //   ],
+                        // ),
+                        Row(children: [
+                          Expanded(
+                              child: Column(
+                                children: [
+                                  Text(venue.venueName,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      )
+                                  ),
+                                  Text(venue.venueAddress + ' ' + venue.venueStreetNo),
+                                ],
+                              )),
+                          Expanded(
+                            child: Container(
+                              // decoration: BoxDecoration(
+                              //   border: Border.all(color: const Color(0xffaaaaaa)),
+                              // ),
+                              // color: const Color(0xffe9e9e9),
+                              child: buildWeatherColumn(),
+                            ),
+                          )
+                        ]),
+                        AboutTheSpotTable(venueInfo: venueInfo),
+                        /*GridView.count(
               crossAxisCount: 2,
               children: [],
             )*/
-            ]),
-          ),
-        ),
+                      ]),
+                    ),
+                  );
+                }
+                else {
+                  return CircularProgressIndicator();
+                }
+              }
+          )
         ));
   }
 
@@ -159,17 +179,24 @@ class _VenuePageState extends State<VenuePage> {
 }
 
 //Just an example table
-class AboutTheSpotTable extends StatelessWidget {
-  const AboutTheSpotTable({
+class AboutTheSpotTable extends StatefulWidget {
+  final VenueInfo venueInfo;
+   AboutTheSpotTable({
     Key? key,
+    required this.venueInfo,
   }) : super(key: key);
 
+  @override
+  State<AboutTheSpotTable> createState() => _AboutTheSpotTableState();
+}
+
+class _AboutTheSpotTableState extends State<AboutTheSpotTable> {
   @override
   Widget build(BuildContext context) {
     return DataTable(
       headingRowHeight: 30,
       columnSpacing: 100,
-      dataRowHeight: 30,
+      //dataRowHeight: 30,
       dataTextStyle: GoogleFonts.robotoCondensed(
         color: const Color(0xff4F6272),
       ),
@@ -182,18 +209,18 @@ class AboutTheSpotTable extends StatelessWidget {
                     )))),
         const DataColumn(label: Text('', style: TextStyle())),
       ],
-      rows: const [
+      rows:  [
         DataRow(cells: [
           DataCell(Text('Type of venue')),
           DataCell(Text('Saloon')),
         ]),
         DataRow(cells: [
           DataCell(Text('Pricing')),
-          DataCell(Text('\$\$\$')),
+          DataCell(Text(widget.venueInfo.getPriceClass())),
         ]),
         DataRow(cells: [
           DataCell(Text('Rating')),
-          DataCell(Text('4.2/5')),
+          DataCell(Text(widget.venueInfo.getRating().toString() + ' (' + widget.venueInfo.getTotalRatings().toString() + ' ratings)')),
         ]),
         DataRow(cells: [
           DataCell(Text('Current activity')),
@@ -201,7 +228,7 @@ class AboutTheSpotTable extends StatelessWidget {
         ]),
         DataRow(cells: [
           DataCell(Text('Opening hours')),
-          DataCell(Text('11:00-23:00')),
+          DataCell(Text(widget.venueInfo.getOpeningHours())),
         ]),
       ],
     );
