@@ -57,7 +57,7 @@
     },
     {
       "name": "csslib",
-      "rootUri": "file:///C:/src/flutter_windows_2.10.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/csslib-0.17.1",
+      "rootUri": "file:///C:/src/flutter_windows_2.10.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/csslib-0.17.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -633,7 +633,7 @@
     },
     {
       "name": "webview_flutter_android",
-      "rootUri": "file:///C:/src/flutter_windows_2.10.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_android-2.8.8",
+      "rootUri": "file:///C:/src/flutter_windows_2.10.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_android-2.8.9",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -680,7 +680,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-05-28T02:45:06.679946Z",
+  "generated": "2022-05-28T02:57:50.818716Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }
