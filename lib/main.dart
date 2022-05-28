@@ -9,8 +9,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
 import 'package:provider/provider.dart';
 
+import 'BottomNavPage.dart';
 import 'Map.dart';
-import 'HomePage.dart';
 import 'Venue.dart';
 import 'mysql.dart';
 import 'package:flutter_applicationdemo/login/User.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         title: 'Flutter Google Maps Demo',
-        home: HomePage(),
+        home: BottomNavPage(),
         debugShowCheckedModeBanner: false,
       ),
     );

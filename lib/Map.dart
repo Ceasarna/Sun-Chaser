@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import 'package:flutter_applicationdemo/WebScraper.dart';
 import 'package:flutter_applicationdemo/HomePage.dart';
 import 'dart:async';
@@ -313,7 +314,7 @@ Widget buildDrawerSignedIn(BuildContext context){
             globals.LOGGED_IN_USER = User(0, "", "");
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()), //Replace Container() with call to Map-page.
+              MaterialPageRoute(builder: (context) => BottomNavPage()), //Replace Container() with call to Map-page.
             );
           },
         ),

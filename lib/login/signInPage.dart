@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import '../mysql.dart';
 import '../HomePage.dart';
 import '../main.dart';
@@ -49,7 +50,7 @@ class _SignInPageState extends State<SignInPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => BottomNavPage()),
             );
           },
         ),
@@ -151,7 +152,7 @@ class _SignInPageState extends State<SignInPage> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    HomePage()), //Replace Container() with call to account-page.
+                    BottomNavPage()), //Replace Container() with call to account-page.
           );
         } else {
           print(globals.LOGGED_IN_USER.userID);
@@ -190,7 +191,7 @@ class _SignInPageState extends State<SignInPage> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  HomePage()), //Replace Container() with call to Map-page.
+                  BottomNavPage()), //Replace Container() with call to Map-page.
         );
       }
     });
