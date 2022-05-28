@@ -4,19 +4,18 @@ import 'Map.dart';
 import 'FavoritePage.dart';
 import 'SettingsPage.dart';
 import 'globals.dart' as globals;
-
+import 'ListViewPage.dart';
 
 class BottomNavPage extends StatefulWidget {
-
   @override
   State<BottomNavPage> createState() => BottomNavPageState();
 }
 
 class BottomNavPageState extends State<BottomNavPage> {
-
   int currentIndex = 0;
-  final screens =[
+  final screens = [
     Map(),
+    ListViewPage(),
     FavoritePage(),
     SettingsPage(),
   ];
@@ -25,25 +24,29 @@ class BottomNavPageState extends State<BottomNavPage> {
     return Scaffold(
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: globals.BACKGROUNDCOLOR,
-        selectedItemColor: globals.ITEMCOLOR,
-        currentIndex: currentIndex,
-        onTap: (index) => setState( () => currentIndex = index),
-        items: const[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: "Liked",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
-          ),
-        ]),
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: globals.BACKGROUNDCOLOR,
+          selectedItemColor: globals.ITEMCOLOR,
+          currentIndex: currentIndex,
+          onTap: (index) => setState(() => currentIndex = index),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.map_outlined),
+              label: "Map",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list_sharp),
+              label: "List View",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: "Liked",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: "Settings",
+            ),
+          ]),
     );
   }
 }
-
