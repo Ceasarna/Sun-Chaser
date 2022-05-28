@@ -191,15 +191,12 @@ class MapState extends State<Map> {
         actions: <Widget>[createFilterMenuButton()],
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
-      /*body: Stack(
-        backgroundColor: const Color.fromARGB(255, 190, 146, 160),
-      ),
-      body: Stack(
+
       drawer : Drawer(
         child: Container(
           child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
         ),
-      ),*/
+      ),
 
       body: Stack(
         children: [
