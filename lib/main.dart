@@ -24,8 +24,8 @@ import 'globals.dart' as globals;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await loadAllVenues();
-  await fetchWeather();
+  //await loadAllVenues();
+  //await fetchWeather();
 
   runApp(MyApp());
 }

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
+import 'package:flutter_applicationdemo/login/EncryptData.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_applicationdemo/mysql.dart';
 
@@ -134,6 +135,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   Future<void> createUserInSQL(
       String email, String username, String password) async {
+    password = EncryptData.encryptAES(password);
     await db.getConnection().then((conn) async {
       String sql =
           "INSERT INTO maen0574.user (id, email, password, username) VALUES (null, '$email', '$password', '$username');";

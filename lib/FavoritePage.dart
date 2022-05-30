@@ -18,6 +18,7 @@ import 'Map.dart';
 import 'package:flutter_applicationdemo/login/User.dart';
 import 'HomePage.dart';
 import 'Venue.dart';
+import 'login/signInPage.dart';
 import 'mysql.dart';
 import 'globals.dart' as globals;
 
@@ -49,7 +50,7 @@ class _FavoritePageState extends State<FavoritePage> {
             title: Text("Liked"),
             backgroundColor: globals.BACKGROUNDCOLOR,
           ),
-          body: ListView.builder(
+          body: globals.LOGGED_IN_USER.userID != 0 ? ListView.builder(
             itemCount: likedVenuesList.length,
             itemBuilder: (BuildContext context, int index) {
               return Dismissible(
@@ -92,6 +93,45 @@ class _FavoritePageState extends State<FavoritePage> {
                 ),
               );
             },
+          )
+              : Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'Can\'t find your liked venues\n since you\'re not logged in',
+                  style: TextStyle(fontSize: 25),
+                ),
+                const Padding(padding: EdgeInsets.symmetric(horizontal: 10, vertical: 45),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(200, 50),
+                    primary: globals.BUTTONCOLOR,
+                    elevation: 100,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context, //SignInPage()
+                      MaterialPageRoute(builder: (context) =>SignInPage()), //Replace Container() with call to Map-page.
+                    );
+                  },
+                  child: Text('Sign in',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          shadows: <Shadow> [
+                            Shadow(
+                              offset: Offset(2, 2),
+                              blurRadius: 10.0,
+                              color: globals.SHADOWCOLOR,
+                            ),
+                          ])
+                  ),
+                ),
+              ],
+            )
           )
         ),
     );

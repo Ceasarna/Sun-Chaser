@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/ShadowDetector.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Venue {
@@ -9,6 +10,8 @@ class Venue {
   String venueStreetNo;
   late LatLng position;
   bool inShade = false;
+  bool isShownOnMap = false;
+  DateTime? lastUpdated;
 
   Venue(this.venueID, this.venueName, this.venueAddress, this.venueStreetNo,
       this.position);
@@ -52,6 +55,13 @@ class Venue {
   }
 
   BitmapDescriptor drawIconColor() {
+    if (lastUpdated == null || lastUpdated!.difference(DateTime.now()).inMinutes > 30) {
+      ShadowDetector SD = ShadowDetector();
+      SD.evaluateShadowsForOneVenue(this);
+      lastUpdated = DateTime.now();
+    }
+    print("Skugga " + inShade.toString());
+
     if (inShade) {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure);
     } else {

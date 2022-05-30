@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/login/EncryptData.dart';
 import 'package:flutter_applicationdemo/reusables/InputField.dart';
 
 import 'package:flutter_applicationdemo/mysql.dart';
@@ -134,6 +135,7 @@ void createUserError(String stringContext) {
   }
 
   Future<void> updateUserInSQL(String email, String username, String password) async {
+    password = EncryptData.encryptAES(password);
   await db.getConnection().then((conn) async {
       String sql = "UPDATE maen0574.user set password = '$password', username = '$username' where email = '$email';";
       await conn.query(sql);

@@ -18,24 +18,17 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_applicationdemo/login/User.dart';
 import 'SettingsPage.dart';
-import 'WeatherData.dart';
 import 'venuePage.dart';
 import 'Venue.dart';
 import 'globals.dart' as globals;
 
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-import 'globals.dart' as globals;
 
 import 'HomePage.dart';
-import 'SettingsPage.dart';
-import 'Venue.dart';
-import 'globals.dart' as globals;
 import 'FeedbackPage.dart';
 import 'login/CreateAccountPage.dart';
 import 'login/signInPage.dart';
-import 'FeedbackPage.dart';
-import 'login/CreateAccountPage.dart';
-import 'login/signInPage.dart';
+
 
 
 class Map extends StatefulWidget {
@@ -51,17 +44,6 @@ late CameraPosition _currentCameraPosition;
 
 class MapState extends State<Map> {
   bool _bottomSheetIsOpen = false;
-
-/*  Future getMerkerData() async {
-    var url = Uri.parse(
-        'https://openstreetgs.stockholm.se/geoservice/api/b8e20fd7-5654-465e-8976-35b4de902b41/wfs?service=wfs&version=1.1.0&request=GetFeature&typeNames=od_gis:Markupplatelse&srsName=EPSG:4326&outputFormat=json');
-    var response = await http.get(url);
-    print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body.toString()}');
-
-
-    var jsonData = jsonDecode(response.body);
-  }*/
 
   final Completer<GoogleMapController> _controller = Completer();
   bool? _barFilterValue = true;
@@ -79,6 +61,8 @@ class MapState extends State<Map> {
 
   List<Marker> markersList = [];
   List<Marker> closeByMarkersList = [];
+  List<Venue> hiddenVenues = [];
+  List<Venue> closeByVenues = [];
 
   @override
   void initState() {
@@ -88,21 +72,17 @@ class MapState extends State<Map> {
   }
 
   initialize() {
-    List<Venue> allVenues = globals.VENUES;
+    hiddenVenues.addAll(globals.VENUES);
+    /*List<Venue> allVenues = globals.VENUES;
     for (var venue in allVenues) {
       Marker marker = Marker(
         markerId: MarkerId(venue.venueID.toString()),
         position: venue.position,
-        /*infoWindow: InfoWindow(
-            title: venue.venueName,
-            snippet: venue.venueAddress,
-          ),*/
-        // onTap: () => createBottomSheet(venue.venueName),
         onTap: () => createBottomDrawer(venue),
         icon: venue.drawIconColor(),
       );
       markersList.add(marker);
-    }
+    }*/
   }
 
   void createBottomSheet(String venueName) async {
@@ -110,16 +90,6 @@ class MapState extends State<Map> {
     await webScraper.getWebsiteData(venueName);
     Scaffold.of(context).showBottomSheet<void>(
         ((context) {
-          return Container(
-            height: 420,
-            color: Colors.white,
-            child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children:  <Widget>[
-                    /*const Text('BottomSheet'),
-    Scaffold.of(context).showBottomSheet<void>(((context) {
       return Container(
         height: 420,
         color: Colors.white,
@@ -128,14 +98,9 @@ class MapState extends State<Map> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                /*const Text('BottomSheet'),
-                        ElevatedButton(
-                          child: const Text('Close BottomSheet'),
-                          onPressed: () {Navigator.pop(context);})*/
                     Container(
                       child: Text(webScraper.openingHoursThisWeek.length.toString()),
-                    ),
-
+                    )
                   ],
                 )
             ),
@@ -143,26 +108,6 @@ class MapState extends State<Map> {
         })
     );
   }
-
-  initialize() {
-    List<Venue> allVenues = globals.VENUES;
-    for(var venue in allVenues) {
-      Marker marker = Marker(
-        markerId: MarkerId(venue.venueID.toString()),
-        position: venue.position,
-        onTap: () => createBottomSheet(venue.venueName),
-        icon: venue.drawIconColor(),
-      );
-      markersList.add(marker);
-    }
-                Container(
-                  child: Text(webScraper.openingHoursThisWeek.length.toString()),
-                ),
-              ],
-            )),
-      );
-    }));
-  }*/
 
   Future<LocationData> _getLocationPermission() async {
     Location location = Location();
@@ -213,39 +158,8 @@ class MapState extends State<Map> {
         centerTitle: true,
         title: const Text("Sun chasers"),
         key: homeSacffoldKey,
-        //leading: IconButton(icon: Icon(Icons.search), onPressed:() {},),
-        /*actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],*/
-        /*title: TextFormField(
-          controller: _searchController,
-          textCapitalization: TextCapitalization.words,
-          decoration: const InputDecoration(hintText: 'Find your place'),
-          onChanged: (value) {
-            print(value);
-          },
-        ),*/
         actions: <Widget>[createFilterMenuButton()],
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
-      ),
-      /*body: Stack(
-        backgroundColor: const Color.fromARGB(255, 190, 146, 160),
-      ),
-      body: Stack(
-      drawer : Drawer(
-        child: Container(
-          child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
-        ),
-      ),*/
-
-      body: Stack(
-      drawer : Drawer(
-        child: Container(
-          child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
-        ),
       ),
 
       body: Stack (
@@ -262,16 +176,13 @@ class MapState extends State<Map> {
             mapType: MapType.normal,
             myLocationEnabled: true,
             initialCameraPosition: _stockholmCity,
-            markers: markersList.map((e) => e).toSet(),
-            initialCameraPosition: _kGooglePlex,
             markers: closeByMarkersList.map((e) => e).toSet(),
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
+              addMarkersInRange();
             },
             onTap: (LatLng) {
               closeBottomSheetIfOpen();
-            },
-              _controller.complete(controller);
             },
           ),
          // ElevatedButton(onPressed: () {} //_handelPressButton
@@ -383,20 +294,6 @@ class MapState extends State<Map> {
                             ));
                       }),
                 ],
-
-                /*floatingActionButton: Padding(
-                    padding: const EdgeInsets.only(top: 100.0),
-                    child: FloatingActionButton(
-                      onPressed: () {Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SettingsPage()));
-          },
-          backgroundColor: Colors.blueAccent,
-          child: const Icon(Icons.filter_alt),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,*/
     ),
   )));
   }
@@ -487,84 +384,94 @@ class MapState extends State<Map> {
   }
 
   void removeMarkersOutOfRange() {
-    for(Marker marker in closeByMarkersList){
+    for(int i = 0; i<closeByMarkersList.length; i++){
+      Marker marker = closeByMarkersList[i];
       if(marker.position.longitude - _currentCameraPosition.target.longitude > 0.02 || marker.position.latitude - _currentCameraPosition.target.latitude > 0.02){
         closeByMarkersList.remove(marker);
+        globals.getVenueByID(int.parse(marker.markerId.toString()))?.isShownOnMap = false;
+        i--;
       }
     }
   }
 
   void addMarkersInRange() {
-    for(Marker marker in markersList){
-      if((marker.position.longitude - _currentCameraPosition.target.longitude < 0.02 || marker.position.latitude - _currentCameraPosition.target.latitude < 0.02) && !closeByMarkersList.contains(marker)){
+    for(int i = 0; i<hiddenVenues.length; i++){
+      if(!hiddenVenues[i].isShownOnMap && (hiddenVenues[i].position.longitude - _currentCameraPosition.target.longitude < 0.02 && hiddenVenues[i].position.latitude - _currentCameraPosition.target.latitude < 0.02)){
+        Marker marker = Marker(
+            markerId: MarkerId(hiddenVenues[i].venueID.toString()),
+            position: hiddenVenues[i].position,
+            onTap: () => createBottomDrawer(hiddenVenues[i]),
+            icon: hiddenVenues[i].drawIconColor()
+        );
+        hiddenVenues[i].isShownOnMap = true;
         closeByMarkersList.add(marker);
       }
     }
   }
 
-/* Future<void> _handelPressButton() async {
-  createBottomDrawer(Venue venue) async {
-    // Position? position = await Geolocator.getLastKnownPosition();
-    // double bar = Geolocator.bearingBetween(position != null? position.latitude : 0, position != null? position.longitude : 0, venue.position.latitude, venue.position.longitude);
-    _bottomSheetIsOpen = true;
-    Scaffold.of(context).showBottomSheet<void>(((context) {
-      return InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => VenuePage(venue)),
-          );
-        },
-        child: Container(
-          height: 250,
-          color: const Color(0xFFF5F5F5),
-          child: Center(
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  margin: const EdgeInsets.all(8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      columnCoveringNameAndAddress(venue),
-                      columnCoveringRating(),
-                    ],
-                  ),
-                ),
-                columnHandlingCloseButton(context),
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          const Text('Weather: \t\t'),
-                          globals.forecast.getCurrentWeatherIcon(),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text('– ' +
-                              globals.forecast.getCurrentWeatherStatus()),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Text('Distance:'),
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
-    }));
-  }
+   createBottomDrawer(Venue venue) async {
+     // Position? position = await Geolocator.getLastKnownPosition();
+     // double bar = Geolocator.bearingBetween(position != null? position.latitude : 0, position != null? position.longitude : 0, venue.position.latitude, venue.position.longitude);
+     _bottomSheetIsOpen = true;
+     Scaffold.of(context).showBottomSheet<void>(((context) {
+       return InkWell(
+         onTap: () {
+           Navigator.push(
+             context,
+             MaterialPageRoute(builder: (context) => VenuePage(venue)),
+           );
+         },
+         child: Container(
+           height: 250,
+           color: const Color(0xFFF5F5F5),
+           child: Center(
+             child: Column(
+               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+               children: [
+                 Container(
+                   margin: const EdgeInsets.all(8),
+                   child: Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     // mainAxisSize: MainAxisSize.min,
+                     children: <Widget>[
+                       columnCoveringNameAndAddress(venue),
+                       columnCoveringRating(),
+                     ],
+                   ),
+                 ),
+                 columnHandlingCloseButton(context),
+                 Container(
+                   padding: const EdgeInsets.all(16.0),
+                   child: Column(
+                     children: [
+                       Row(
+                         children: [
+                           const Text('Weather: \t\t'),
+                           globals.forecast.getCurrentWeatherIcon(),
+                         ],
+                       ),
+                       Row(
+                         children: [
+                           Text('– ' +
+                               globals.forecast.getCurrentWeatherStatus()),
+                         ],
+                       ),
+                       Row(
+                         children: [
+                           const Text('Distance:'),
+                         ],
+                       )
+                     ],
+                   ),
+                 )
+               ],
+             ),
+           ),
+         ),
+       );
+     }));
+   }
+
 
   Column columnHandlingCloseButton(BuildContext context) {
     return Column(
@@ -643,8 +550,8 @@ class MapState extends State<Map> {
       Navigator.pop(context);
     }
   }
-
-/* Future<void> _handelPressButton() async {
+/*
+ Future<void> _handelPressButton() async {
     Prediction? p = await PlacesAutocomplete.show(
                           context: context,
                           apiKey: kGoogleApiKey,
@@ -795,137 +702,6 @@ Widget buildDrawerSignedOut(BuildContext context) {
           leading: Icon(Icons.settings),
           title: Text('Settings'),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingsPage(),
-              ),
-            );
-          },
-        ),
-      ],
-    ),
-  );
-}
-Widget buildDrawerSignedIn(BuildContext context){
-  return Drawer(
-    child: ListView(
-      padding: EdgeInsets.zero,
-      children: [
-        DrawerHeader(
-          decoration: const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
-          child: Column(children: const <Widget>[
-            Text('Sun Chaser',
-              style :TextStyle(fontSize: 32),
-            ),
-
-            SizedBox(height: 30),
-            Icon(Icons.account_box_rounded),
-
-          ],
-
-          ),
-
-        ),
-
-        ListTile(
-          leading: Icon(Icons.logout),
-          title: Text('Sign out'),
-          onTap:(){
-            globals.LOGGED_IN_USER = User(0, "", "");
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()), //Replace Container() with call to Map-page.
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.thumb_up_alt),
-          title: Text('Give feedback'),
-          onTap:(){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FormForFeedback(),
-              ),
-            );
-          },
-
-        ),
-        ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Settings'),
-          onTap:(){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingsPage(),
-              ),
-            );
-          },
-        ),
-
-      ],
-    ),
-  );
-}
-
-Widget buildDrawerSignedOut(BuildContext context){
-  return Drawer(
-    child: ListView(
-      padding: EdgeInsets.zero,
-      children: [
-        DrawerHeader(
-          decoration: const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
-          child: Column(children: const <Widget>[
-            Text('Sun Chaser',
-              style :TextStyle(fontSize: 32),
-            ),
-
-            SizedBox(height: 30),
-          ],
-          ),
-        ),
-
-        ListTile(
-          leading: Icon(Icons.account_box_rounded),
-          title: Text('Create account'),
-          onTap:(){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreateAccountPage(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.login),
-          title: Text('Sign in'),
-          onTap:(){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SignInPage(),
-              ),
-            );
-          },),
-        ListTile(
-          leading: Icon(Icons.thumb_up_alt),
-          title: Text('Give feedback'),
-          onTap:(){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FormForFeedback(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Settings'),
-          onTap:(){
             Navigator.push(
               context,
               MaterialPageRoute(

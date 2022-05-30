@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/venuePage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'globals.dart' as globals;
 import 'package:flutter_applicationdemo/Venue.dart';
-import 'VenuePage.dart';
 
 class ListViewPage extends StatefulWidget {
   const ListViewPage({Key? key}) : super(key: key);

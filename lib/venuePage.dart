@@ -10,38 +10,9 @@ import 'package:http/http.dart' as http;
 import 'WeatherData.dart';
 import 'globals.dart' as globals;
 import 'Venue.dart';
-import 'globals.dart' as globals;
 
 // Color _backgroundColor = const Color(0xffac7b84);
 
-class WeatherData {
-  final int weatherValue;
-  final int temperature;
-
-  WeatherData(this.weatherValue, this.temperature);
-
-  factory WeatherData.fromJson(Map<String, dynamic> json) {
-    var value = json.values;
-    var tempWeatherData;
-    var tempTemperature;
-
-    if (value.first['wsymb2'] is int) {
-      tempWeatherData = value.first['wsymb2'];
-    }
-    if (value.first['temp'] is double) {
-      tempTemperature = value.first['temp'];
-    }
-
-    if (tempWeatherData != null && tempTemperature != null) {
-      return WeatherData(tempWeatherData, tempTemperature.round());
-    } else {
-      return WeatherData(0, 0);
-    }
-  }
-
-  int getCurrentTemperature() {
-    return temperature;
-  }
 
 
 class VenuePage extends StatefulWidget {
@@ -107,9 +78,9 @@ class _VenuePageState extends State<VenuePage> {
             alignment: Alignment.center,
             child: Column(children: <Widget>[
               Row(
-                children: const [
+                children: [
                   ShareButton(),
-                  SavePlaceButton(),
+                  SavePlaceButton(venue),
                 ],
               ),
               Row(children: [
