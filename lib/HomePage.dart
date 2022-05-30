@@ -5,7 +5,6 @@ import 'login/CreateAccountPage.dart';
 import 'login/signInPage.dart';
 import 'package:flutter_applicationdemo/login/User.dart' as User;
 import 'globals.dart' as globals;
-import 'ManageAccountPage.dart';
 
 
 class HomePage extends StatefulWidget {

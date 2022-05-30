@@ -392,7 +392,6 @@ class MapState extends State<Map> {
       if(marker.position.longitude - _currentCameraPosition.target.longitude > 0.02 || marker.position.latitude - _currentCameraPosition.target.latitude > 0.02){
         closeByMarkersList.remove(marker);
         globals.getVenueByID(int.parse(marker.markerId.value))?.isShownOnMap = false;
-        //print(globals.getVenueByID(int.parse(marker.markerId.value))!.venueName + " " + globals.getVenueByID(int.parse(marker.markerId.value))!.venueID.toString());
         i--;
       }
     }
@@ -400,7 +399,6 @@ class MapState extends State<Map> {
 
   void addMarkersInRange() {
     for(int i = 0; i< globals.VENUES.length; i++){
-      print(hiddenVenues[i].venueName + " " + hiddenVenues[i].venueID.toString());
       if(!globals.VENUES[i].isShownOnMap && (globals.VENUES[i].position.longitude - _currentCameraPosition.target.longitude < 0.02 && globals.VENUES[i].position.latitude - _currentCameraPosition.target.latitude < 0.02)){
         Marker marker = Marker(
             markerId: MarkerId(globals.VENUES[i].venueID.toString()),

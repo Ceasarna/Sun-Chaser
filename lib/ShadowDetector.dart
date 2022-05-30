@@ -2,7 +2,6 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'dart:async';
-import 'globals.dart' as globals;
 import 'Venue.dart';
 
 class ShadowDetector {
