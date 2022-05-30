@@ -39,13 +39,12 @@ class _VenuePageState extends State<VenuePage> {
   @override
   void initState() {
     refreshWeather();
-    gatherVenueInfo();
   }
 
   Future gatherVenueInfo( ) async {
     VenueInfo vu = VenueInfo();
     venueInfo = vu;
-    venueInfo = await vu.getVenueInfo(venue.venueName);
+    venueInfo = await vu.getVenueInfo(venue);
   }
 
 
