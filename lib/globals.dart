@@ -29,3 +29,12 @@ Venue? getVenueByID(int searchedVenueID){
     }
   }return null;
 }
+
+bool venueAlreadyAdded(String venueName){
+  for(var V in VENUES){
+    if(V.venueName.compareTo(venueName) == 0){
+      return true;
+    }
+  }
+  return false;
+}

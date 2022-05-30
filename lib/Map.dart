@@ -67,22 +67,12 @@ class MapState extends State<Map> {
   @override
   void initState() {
     initialize();
-    //_getUserLocation();
+    _getUserLocation();
     super.initState();
   }
 
   initialize() {
     hiddenVenues.addAll(globals.VENUES);
-    /*List<Venue> allVenues = globals.VENUES;
-    for (var venue in allVenues) {
-      Marker marker = Marker(
-        markerId: MarkerId(venue.venueID.toString()),
-        position: venue.position,
-        onTap: () => createBottomDrawer(venue),
-        icon: venue.drawIconColor(),
-      );
-      markersList.add(marker);
-    }*/
   }
 
   void createBottomSheet(String venueName) async {
@@ -153,6 +143,7 @@ class MapState extends State<Map> {
   ];
   @override
   Widget build(BuildContext context) {
+    _currentCameraPosition = _stockholmCity;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -165,6 +156,10 @@ class MapState extends State<Map> {
       body: Stack (
         children: [
           GoogleMap(
+            cameraTargetBounds: CameraTargetBounds(LatLngBounds(
+                northeast: const LatLng(59.3474696569038, 18.1001602476002147),
+                southwest: const LatLng(59.297332547922636, 17.999522500277884))),
+            minMaxZoomPreference: MinMaxZoomPreference(12.5, 18.5),
             onCameraMove: (CameraPosition camera){
               _currentCameraPosition = camera;
             },
@@ -176,11 +171,13 @@ class MapState extends State<Map> {
             mapType: MapType.normal,
             myLocationEnabled: true,
             initialCameraPosition: _stockholmCity,
-            markers: closeByMarkersList.map((e) => e).toSet(),
+            compassEnabled: true,
             onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
+              setAllMarkersAsInvisible();
               addMarkersInRange();
+              _controller.complete(controller);
             },
+            markers: closeByMarkersList.map((e) => e).toSet(),
             onTap: (LatLng) {
               closeBottomSheetIfOpen();
             },
@@ -332,10 +329,10 @@ class MapState extends State<Map> {
   Future<void> _gotoLocation(double lat, double lng) async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(lat, lng), zoom: 15)));
+        CameraPosition(target: LatLng(lat, lng), zoom: 14.5)));
   }
 
-  Widget _boxes(double lat, double lng, String resturantName) {
+  Widget _boxes(double lat, double lng, String restaurantName) {
     return GestureDetector(
       onTap: () {
         _gotoLocation(lat, lng);
@@ -363,7 +360,7 @@ class MapState extends State<Map> {
                   Container(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(resturantName),
+                      child: Text(restaurantName),
                     ),
                   )
                 ],
@@ -380,30 +377,33 @@ class MapState extends State<Map> {
         bearing: 0,
         target: LatLng(latlng.latitude, latlng.longitude),
         //tilt: 59.440717697143555,
-        zoom: 14.4746)));
+        zoom: 15.4746)));
   }
 
   void removeMarkersOutOfRange() {
     for(int i = 0; i<closeByMarkersList.length; i++){
       Marker marker = closeByMarkersList[i];
+      globals.venueAlreadyAdded(globals.getVenueByID(int.parse(marker.markerId.value))!.venueName);
       if(marker.position.longitude - _currentCameraPosition.target.longitude > 0.02 || marker.position.latitude - _currentCameraPosition.target.latitude > 0.02){
         closeByMarkersList.remove(marker);
-        globals.getVenueByID(int.parse(marker.markerId.toString()))?.isShownOnMap = false;
+        globals.getVenueByID(int.parse(marker.markerId.value))?.isShownOnMap = false;
+        //print(globals.getVenueByID(int.parse(marker.markerId.value))!.venueName + " " + globals.getVenueByID(int.parse(marker.markerId.value))!.venueID.toString());
         i--;
       }
     }
   }
 
   void addMarkersInRange() {
-    for(int i = 0; i<hiddenVenues.length; i++){
-      if(!hiddenVenues[i].isShownOnMap && (hiddenVenues[i].position.longitude - _currentCameraPosition.target.longitude < 0.02 && hiddenVenues[i].position.latitude - _currentCameraPosition.target.latitude < 0.02)){
+    for(int i = 0; i< globals.VENUES.length; i++){
+      print(hiddenVenues[i].venueName + " " + hiddenVenues[i].venueID.toString());
+      if(!globals.VENUES[i].isShownOnMap && (globals.VENUES[i].position.longitude - _currentCameraPosition.target.longitude < 0.02 && globals.VENUES[i].position.latitude - _currentCameraPosition.target.latitude < 0.02)){
         Marker marker = Marker(
-            markerId: MarkerId(hiddenVenues[i].venueID.toString()),
-            position: hiddenVenues[i].position,
-            onTap: () => createBottomDrawer(hiddenVenues[i]),
-            icon: hiddenVenues[i].drawIconColor()
+            markerId: MarkerId(globals.VENUES[i].venueID.toString()),
+            position: globals.VENUES[i].position,
+            onTap: () => createBottomDrawer(globals.VENUES[i]),
+            icon: globals.VENUES[i].drawIconColor()
         );
-        hiddenVenues[i].isShownOnMap = true;
+        globals.VENUES[i].isShownOnMap = true;
         closeByMarkersList.add(marker);
       }
     }
@@ -545,9 +545,14 @@ class MapState extends State<Map> {
   }
 
   closeBottomSheetIfOpen() {
-    print(_bottomSheetIsOpen);
     if (_bottomSheetIsOpen) {
       Navigator.pop(context);
+    }
+  }
+
+  void setAllMarkersAsInvisible() {
+    for(Venue venue in hiddenVenues){
+      venue.isShownOnMap = false;
     }
   }
 /*

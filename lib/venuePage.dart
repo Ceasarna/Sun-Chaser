@@ -48,7 +48,7 @@ class _VenuePageState extends State<VenuePage> {
     currentWeather = tempWeather;
 
     Uri weatherDataURI = Uri.parse(
-        'https://group-4-75.pvt.dsv.su.se/target/weather-0.0.4-SNAPSHOT.war/weather');
+        'https://group-4-75.pvt.dsv.su.se/target/info.war/weather');
 
     final response = await http.get(weatherDataURI);
 

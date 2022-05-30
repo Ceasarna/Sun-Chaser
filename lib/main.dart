@@ -24,8 +24,9 @@ import 'globals.dart' as globals;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //await loadAllVenues();
-  //await fetchWeather();
+  await loadAllVenues();
+  await fetchWeather();
+  await loadAllVenuesSQL();
 
   runApp(MyApp());
 }
@@ -33,14 +34,13 @@ void main() async {
 Future fetchWeather() async {
   WeatherData tempWeather = WeatherData(0, 0);
   Uri weatherDataURI = Uri.parse(
-      'https://group-4-75.pvt.dsv.su.se/target/weather-0.0.2-SNAPSHOT.war/weather');
+      'https://group-4-75.pvt.dsv.su.se/target/info.war/weather');
 
   final response = await http.get(weatherDataURI);
 
   if (response.statusCode == 200) {
     var data = json.decode(response.body);
     tempWeather = WeatherData.fromJson(data);
-    print(data);
 
     globals.forecast = tempWeather;
   } else {
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
 
 Future loadAllVenues() async {
   Uri venueDataURI = Uri.parse(
-      'https://group-4-75.pvt.dsv.su.se/target/weather-0.0.4-SNAPSHOT.war/venue');
+      'https://group-4-75.pvt.dsv.su.se/target/info.war/venue');
 
   final response = await http.get(venueDataURI);
 
@@ -88,7 +88,9 @@ void addVenues(http.Response response) {
   addValidVenues(data, _allVenuesTemp);
 
   for (Venue venue in _allVenuesTemp) {
-    globals.VENUES.add(venue);
+    if(!globals.venueAlreadyAdded(venue.venueName)){
+      globals.VENUES.add(venue);
+    }
   }
 }
 
@@ -112,4 +114,22 @@ void addValidVenues(data, List<dynamic> _allVenuesTemp) {
       continue;
     }
   }
+}
+
+Future<void> loadAllVenuesSQL() async{
+  var db = mysql();
+  await db.getConnection().then((conn) async {
+    String sql = "select venueName, venueID, latitude, longitude from maen0574.venue";
+    await conn.query(sql).then((results){
+      for(var row in results){
+        globals.VENUES.add(Venue(row[1], row[0], "Dalagatan", "2", LatLng(row[2], row[3])));
+      }
+    });
+    sql = "select venueID, north, east, west, south from maen0574.seatingArea";
+    await conn.query(sql).then((results){
+      for(var row in results){
+        globals.getVenueByID(row[0])?.assignSeatingArea(OutdoorSeatingArea(northPoint: row[1], eastPoint: row[2], westPoint: row[3], southPoint: row[4]));
+      }
+    });
+  });
 }
