@@ -21,6 +21,7 @@ class _ListViewPageState extends State<ListViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Venues near you',),
         backgroundColor: globals.BACKGROUNDCOLOR,
       ),
