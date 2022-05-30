@@ -34,7 +34,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => BottomNavPage()),
             );
           },
         ),
@@ -117,7 +117,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               passwordController.text);
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => BottomNavPage()),
           );
         } else {
           createUserError(userInput.errorMessage);

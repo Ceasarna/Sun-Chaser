@@ -15,6 +15,7 @@ class ManageAccountPageState extends State<ManageAccountPage> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  UserInput userInput = UserInput(isValid: false, errorMessage: "");
 
   Widget _buildNameFiled() {
     return InputField(
@@ -63,7 +64,6 @@ class ManageAccountPageState extends State<ManageAccountPage> {
                 _buildPasswordFiled(),
                 ElevatedButton(
                   onPressed: () async {
-                    UserInput userInput = UserInput(isValid: false, errorMessage: "");
                     await verifyUserInput(userNameController.text, emailController.text,passwordController.text, userInput);
                     if(userInput.isValid) {
                       await updateUserInSQL(emailController.text, userNameController.text, passwordController.text);
@@ -117,6 +117,27 @@ Future<void> verifyUserInput(String userName, String email , String password,use
     }
 
   }
+
+
+String userInputResult(String userName, String email , String password) {
+  String message  = userInput.errorMessage;
+
+  if (email.contains("'") || !email.contains("@") || email.length < 5) {
+      message = "Incorrect email format";
+      return message;
+    } else if (userName.contains("'") || userName.length < 6) {
+      message =
+          "Incorrect username. \nCharacters limited to a-z, A-Z, 0-9.";
+      return message;
+    } else if (password.contains("'") || password.length < 6) {
+      message =
+          "Incorrect password. \nPassword can't contain ' and needs to be atleast 6 characters long";
+      return message;
+    } else {
+      return "";
+    }
+
+}
 
 void createUserError(String stringContext) {
     showDialog<String>(

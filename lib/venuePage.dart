@@ -1,18 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter_applicationdemo/Venue.dart';
 import 'package:flutter_applicationdemo/venuePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'VenueInfo.dart';
 import 'WeatherData.dart';
 import 'globals.dart' as globals;
 import 'Venue.dart';
 
 // Color _backgroundColor = const Color(0xffac7b84);
-
 
 
 class VenuePage extends StatefulWidget {
@@ -27,6 +28,7 @@ class _VenuePageState extends State<VenuePage> {
   late WeatherData currentWeather;
   final String imageLink = '';
   late final Venue venue;
+  late VenueInfo venueInfo;
 
   _VenuePageState(this.venue);
 
@@ -41,6 +43,12 @@ class _VenuePageState extends State<VenuePage> {
   @override
   void initState() {
     refreshWeather();
+  }
+
+  Future gatherVenueInfo() async {
+    VenueInfo vu = VenueInfo();
+    venueInfo = vu;
+    venueInfo = await vu.getVenueInfo(venue);
   }
 
   Future refreshWeather() async {
@@ -73,60 +81,66 @@ class _VenuePageState extends State<VenuePage> {
           title: Text(venue.venueName),
           backgroundColor: const Color(0xffac7b84),
         ),
-        body: Center(child: SingleChildScrollView(
-          child: Container(
-            alignment: Alignment.center,
-            child: Column(children: <Widget>[
-              Row(
-                children: [
-                  ShareButton(),
-                  SavePlaceButton(venue),
-                ],
-              ),
-              Row(children: [
-                Expanded(
-                  child: Image.network(validateAndGetImageLink()),
-                ),
-              ]),
-              // Row(
-              //   children: const [
-              //     Text(
-              //       'Placeholder for image',
-              //     ),
-              //   ],
-              // ),
-              Row(children: [
-                Expanded(
-                    child: Column(
-                      children: [
-                        Text(venue.venueName,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            )
+        body: Center(
+            child: FutureBuilder(
+                future: gatherVenueInfo(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return SingleChildScrollView(
+                      child: Expanded(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          alignment: Alignment.center,
+                          child: buildPageContentColumn(),
                         ),
-                        Text(venue.venueAddress + ' ' + venue.venueStreetNo),
-                      ],
-                    )),
-                Expanded(
-                  child: Container(
-                    // decoration: BoxDecoration(
-                    //   border: Border.all(color: const Color(0xffaaaaaa)),
-                    // ),
-                    // color: const Color(0xffe9e9e9),
-                    child: buildWeatherColumn(),
-                  ),
-                )
-              ]),
-              const AboutTheSpotTable(),
-              /*GridView.count(
-              crossAxisCount: 2,
-              children: [],
-            )*/
-            ]),
-          ),
+                      ),
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                })));
+  }
+
+  Column buildPageContentColumn() {
+    return Column(children: <Widget>[
+      Row(
+        children: const [
+          ShareButton(),
+          SavePlaceButton(),
+        ],
+      ),
+      Row(children: [
+        Expanded(
+          child: Image.network(venueInfo.getPhotoURL()),
         ),
-        ));
+      ]),
+      Row(children: [buildNameAndAddress(), buildWeatherInfo()]),
+      AboutTheSpotTable(venueInfo: venueInfo),
+      //Expanded(child: AboutTheSpotTable(venueInfo: venueInfo)),
+    ]);
+  }
+
+  Expanded buildWeatherInfo() {
+    return Expanded(
+      child: Container(
+        child: buildWeatherColumn(),
+      ),
+    );
+  }
+
+  Expanded buildNameAndAddress() {
+    return Expanded(
+        child: Column(
+      children: [
+        Text(venue.venueName,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
+        Text(venue.venueAddress + ' ' + venue.venueStreetNo),
+      ],
+    ));
   }
 
   Column buildWeatherColumn() {
@@ -134,27 +148,16 @@ class _VenuePageState extends State<VenuePage> {
       children: [
         Padding(
           padding: const EdgeInsets.all(4.0),
-          child: /*Text('Weather Status:',
-                          style: GoogleFonts.robotoCondensed(
-                            textStyle: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )),*/
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Column(
               children: [
-                Column(
-                  children: [
-                    currentWeather.getCurrentWeatherIcon(),
-                    Text(currentWeather.getCurrentWeatherStatus()),
-                  ],
-                ),
-                Text(currentWeather
-                    .getCurrentTemperature()
-                    .toString() +
-                    '\u2103'),
-              ]),
+                currentWeather.getCurrentWeatherIcon(),
+                Text(currentWeather.getCurrentWeatherStatus()),
+              ],
+            ),
+            Text(currentWeather.getCurrentTemperature().toString() + '\u2103'),
+          ]),
         ),
       ],
     );
@@ -162,56 +165,67 @@ class _VenuePageState extends State<VenuePage> {
 }
 
 //Just an example table
-class AboutTheSpotTable extends StatelessWidget {
-  const AboutTheSpotTable({
+class AboutTheSpotTable extends StatefulWidget {
+  final VenueInfo venueInfo;
+
+  AboutTheSpotTable({
     Key? key,
+    required this.venueInfo,
   }) : super(key: key);
 
   @override
+  State<AboutTheSpotTable> createState() => _AboutTheSpotTableState();
+}
+
+class _AboutTheSpotTableState extends State<AboutTheSpotTable> {
+  @override
   Widget build(BuildContext context) {
-    return DataTable(
-      headingRowHeight: 30,
-      columnSpacing: 100,
-      dataRowHeight: 30,
-      dataTextStyle: GoogleFonts.robotoCondensed(
-        color: const Color(0xff4F6272),
+    return Center(
+      child: DataTable(
+        // headingRowHeight: 30,
+        // columnSpacing: 100,
+        //dataRowHeight: 30,
+        dataTextStyle: GoogleFonts.robotoCondensed(
+          color: const Color(0xff4F6272),
+        ),
+        columns: [
+          DataColumn(
+              label: Text('About the spot',
+                  style: GoogleFonts.roboto(
+                      textStyle: const TextStyle(
+                    fontSize: 18,
+                  )))),
+          const DataColumn(label: Text('', style: TextStyle())),
+        ],
+        rows: [
+          const DataRow(cells: [
+            DataCell(Text('Type of venue')),
+            DataCell(Text('Restaurant')),
+          ]),
+          DataRow(cells: [
+            const DataCell(Text('Pricing')),
+            DataCell(Text(widget.venueInfo.getPriceClass())),
+          ]),
+          DataRow(cells: [
+            const DataCell(Text('Rating')),
+            DataCell(Text(widget.venueInfo.getRating().toString() +
+                ' (' +
+                widget.venueInfo.getTotalRatings().toString() +
+                ' ratings)')),
+          ]),
+          const DataRow(cells: [
+            DataCell(Text('Current activity')),
+            DataCell(Text('Moderate')),
+          ]),
+          DataRow(cells: [
+            const DataCell(Text('Opening hours')),
+            DataCell(Text(widget.venueInfo.getOpeningHours())),
+          ]),
+        ],
       ),
-      columns: [
-        DataColumn(
-            label: Text('About the spot',
-                style: GoogleFonts.roboto(
-                    textStyle: const TextStyle(
-                      fontSize: 18,
-                    )))),
-        const DataColumn(label: Text('', style: TextStyle())),
-      ],
-      rows: const [
-        DataRow(cells: [
-          DataCell(Text('Type of venue')),
-          DataCell(Text('Saloon')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('Pricing')),
-          DataCell(Text('\$\$\$')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('Rating')),
-          DataCell(Text('4.2/5')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('Current activity')),
-          DataCell(Text('Moderate')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('Opening hours')),
-          DataCell(Text('11:00-23:00')),
-        ]),
-      ],
     );
   }
 }
-
-
 
 class SavePlaceButton extends StatelessWidget {
   Venue venue;
@@ -267,11 +281,22 @@ class ShareButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: TextButton.icon(
-        onPressed: () {},
-        icon: const Icon(Icons.share),
-        label: const Text('Share'),
+      child: Column(
+        children: <Widget>[
+          TextButton.icon(
+            onPressed: () {shareVenue();},
+            icon: const Icon(Icons.share),
+            label: const Text('Share'),
+          ),
+        ],
       ),
     );
   }
+
+  void shareVenue() {
+
+    Share.share('Share this venue', subject: 'Subject venue');
+
+  }
+
 }
