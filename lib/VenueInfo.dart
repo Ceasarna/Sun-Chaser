@@ -78,8 +78,11 @@ class VenueInfo {
   }
 
   String getOpeningHours() {
+    String splitString;
     if(_openHoursToday.isNotEmpty) {
-      return  _openHoursToday;
+      splitString = _openHoursToday.replaceAll(';', '\n');
+      splitString = splitString.replaceAll(',', ',\n');
+      return  splitString;
     }
     return 'N/A';
   }

@@ -26,14 +26,26 @@ void main() async {
   await Firebase.initializeApp();
   await loadAllVenues();
   await fetchWeather();
+  // await createVenue();
+  // await setWeather();
 
   runApp(MyApp());
+}
+
+setWeather() {
+  WeatherData weather = WeatherData(4, 15);
+  globals.forecast = weather;
+}
+
+createVenue() {
+  Venue venue = Venue(00, 'Restaurang Aira', 'Biskopsvägen', '9', const LatLng(59.32117929060902, 18.123636884658502));
+  globals.VENUES.add(venue);
 }
 
 Future fetchWeather() async {
   WeatherData tempWeather = WeatherData(0, 0);
   Uri weatherDataURI = Uri.parse(
-      'https://group-4-75.pvt.dsv.su.se/target/weather-0.0.2-SNAPSHOT.war/weather');
+      'https://group-4-75.pvt.dsv.su.se/target/info.war/weather');
 
   final response = await http.get(weatherDataURI);
 
@@ -67,7 +79,7 @@ class MyApp extends StatelessWidget {
 
 Future loadAllVenues() async {
   Uri venueDataURI = Uri.parse(
-      'https://group-4-75.pvt.dsv.su.se/target/weather-0.0.4-SNAPSHOT.war/venue');
+      'https://group-4-75.pvt.dsv.su.se/target/info.war/venue');
 
   final response = await http.get(venueDataURI);
 
@@ -77,7 +89,7 @@ Future loadAllVenues() async {
     // var sd = ShadowDetector();
     // await sd.evaluateShadowsForAllVenues(seventyFiveVenues);
   } else {
-    throw const HttpException("Problem fetching the weather data");
+    throw const HttpException("Problem fetching the venue data");
   }
 }
 
