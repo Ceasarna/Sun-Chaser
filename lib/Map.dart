@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import 'package:flutter_applicationdemo/ListViewPage.dart';
 import 'package:flutter_applicationdemo/WeatherData.dart';
 import 'package:flutter_applicationdemo/WebScraper.dart';
@@ -190,15 +191,12 @@ class MapState extends State<Map> {
         actions: <Widget>[createFilterMenuButton()],
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
-      /*body: Stack(
-        backgroundColor: const Color.fromARGB(255, 190, 146, 160),
-      ),
-      body: Stack(
+
       drawer : Drawer(
         child: Container(
           child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
         ),
-      ),*/
+      ),
 
       body: Stack(
         children: [
@@ -654,9 +652,7 @@ Widget buildDrawerSignedIn(BuildContext context) {
             globals.LOGGED_IN_USER = User(0, "", "");
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      HomePage()), //Replace Container() with call to Map-page.
+              MaterialPageRoute(builder: (context) => BottomNavPage()), //Replace Container() with call to Map-page.
             );
           },
         ),
