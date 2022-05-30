@@ -1,0 +1,16 @@
+import 'package:encrypt/encrypt.dart';
+
+class EncryptData{
+//for AES Algorithms
+
+  static Encrypted? encrypted;
+
+
+  static encryptAES(plainText){
+    final key = Key.fromUtf8('my32lengthsupersecretnooneknows1');
+    final iv = IV.fromLength(16);
+    final encrypter = Encrypter(AES(key));
+    encrypted = encrypter.encrypt(plainText, iv: iv);
+    return encrypted!.base64;
+  }
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/ShadowDetector.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Venue {
@@ -9,6 +10,9 @@ class Venue {
   String venueStreetNo;
   late LatLng position;
   bool inShade = false;
+  bool isShownOnMap = false;
+  DateTime? lastUpdated;
+  OutdoorSeatingArea? outdoorSeatingArea;
 
   Venue(this.venueID, this.venueName, this.venueAddress, this.venueStreetNo,
       this.position);
@@ -52,6 +56,15 @@ class Venue {
   }
 
   BitmapDescriptor drawIconColor() {
+    if(outdoorSeatingArea != null){
+      return outdoorSeatingArea!.getMarker();
+    }
+    if (lastUpdated == null || lastUpdated!.difference(DateTime.now()).inMinutes > 30) {
+      ShadowDetector SD = ShadowDetector();
+      SD.evaluateShadowsForOneVenue(this);
+      lastUpdated = DateTime.now();
+    }
+
     if (inShade) {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure);
     } else {
@@ -73,6 +86,10 @@ class Venue {
 
   LatLng getPositionAsLatLng(BuildContext context) {
     return position;
+  }
+
+  void assignSeatingArea(OutdoorSeatingArea outdoorSeatingArea){
+    this.outdoorSeatingArea = outdoorSeatingArea;
   }
 
   Widget getIcon(BuildContext context) {
@@ -102,6 +119,41 @@ class Venue {
         ', ' +
         'coordinates: ' +
         position.toString();
+  }
+}
+
+class OutdoorSeatingArea {
+  double northPoint;
+  double eastPoint;
+  double westPoint;
+  double southPoint;
+  bool shadowIsCalculated = false;
+  late int shadowPercent;
+
+
+  OutdoorSeatingArea({
+    required this.northPoint, required this.eastPoint, required this.westPoint, required this.southPoint
+  });
+
+  int calculateShadow(){
+    if(!shadowIsCalculated){
+      ShadowDetector SD = ShadowDetector();
+      SD.evaluateShadowsForOneOutdoorSeatingArea(this);
+      shadowIsCalculated = true;
+    }
+    return shadowPercent;
+  }
+
+  BitmapDescriptor getMarker() {
+    calculateShadow();
+    if(shadowPercent < 26){
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen);
+    }else if(shadowPercent < 51){
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure);
+    }else if(shadowPercent < 76){
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange);
+    }
+    return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
   }
 }
 
