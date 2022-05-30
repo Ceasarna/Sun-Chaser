@@ -26,20 +26,8 @@ void main() async {
   await Firebase.initializeApp();
   await loadAllVenues();
   await fetchWeather();
-  // await createVenue();
-  // await setWeather();
 
   runApp(MyApp());
-}
-
-setWeather() {
-  WeatherData weather = WeatherData(4, 15);
-  globals.forecast = weather;
-}
-
-createVenue() {
-  Venue venue = Venue(00, 'Restaurang Aira', 'Biskopsvägen', '9', const LatLng(59.32117929060902, 18.123636884658502));
-  globals.VENUES.add(venue);
 }
 
 Future fetchWeather() async {
