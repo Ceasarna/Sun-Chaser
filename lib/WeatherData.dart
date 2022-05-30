@@ -88,6 +88,18 @@ class WeatherData {
       case 17:
         weatherStatus = 'Heavy snow showers';
         break;
+      case 18:
+        weatherStatus = 'Light rain';
+        break;
+      case 19:
+        weatherStatus = 'Moderate rain';
+        break;
+      case 20:
+        weatherStatus = 'Heavy rain';
+        break;
+      case 21:
+        weatherStatus = 'Thunder';
+        break;
       default:
         weatherStatus = 'Undefined';
     }
@@ -136,6 +148,14 @@ class WeatherData {
         return const FaIcon(FontAwesomeIcons.snowflake);
       case 17:
         return const FaIcon(FontAwesomeIcons.snowflake);
+      case 18:
+        return const FaIcon(FontAwesomeIcons.cloudRain);
+      case 19:
+        return const FaIcon(FontAwesomeIcons.cloudRain);
+      case 20:
+        return const FaIcon(FontAwesomeIcons.cloudShowersHeavy);
+      case 21:
+        return const FaIcon(FontAwesomeIcons.bolt);
       default:
         return const FaIcon(FontAwesomeIcons.times);
     }
