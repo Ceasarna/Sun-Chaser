@@ -87,14 +87,12 @@ class _VenuePageState extends State<VenuePage> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return SingleChildScrollView(
-                      child: Expanded(
                         child: Container(
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
                           alignment: Alignment.center,
                           child: buildPageContentColumn(),
                         ),
-                      ),
                     );
                   } else {
                     return const CircularProgressIndicator();
@@ -102,23 +100,24 @@ class _VenuePageState extends State<VenuePage> {
                 })));
   }
 
-  Column buildPageContentColumn() {
-    return Column(children: <Widget>[
-      Row(
-        children: const [
-          ShareButton(),
-          SavePlaceButton(),
-        ],
-      ),
-      Row(children: [
-        Expanded(
-          child: Image.network(venueInfo.getPhotoURL()),
-        ),
-      ]),
-      Row(children: [buildNameAndAddress(), buildWeatherInfo()]),
-      AboutTheSpotTable(venueInfo: venueInfo),
-      //Expanded(child: AboutTheSpotTable(venueInfo: venueInfo)),
-    ]);
+  SingleChildScrollView buildPageContentColumn() {
+    return SingleChildScrollView(
+        child: Column(children: <Widget>[
+          Row(
+            children: [
+              const ShareButton(),
+              LikeVenueButton(venue),
+            ],
+          ),
+          Row(children: [
+            Expanded(
+              child: Image.network(venueInfo.getPhotoURL()),
+            ),
+          ]),
+          Row(children: [buildNameAndAddress(), buildWeatherInfo()]),
+          AboutTheSpotTable(venueInfo: venueInfo),
+          //Expanded(child: AboutTheSpotTable(venueInfo: venueInfo)),
+        ]));
   }
 
   Expanded buildWeatherInfo() {
@@ -180,57 +179,58 @@ class AboutTheSpotTable extends StatefulWidget {
 class _AboutTheSpotTableState extends State<AboutTheSpotTable> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: DataTable(
-        // headingRowHeight: 30,
-        // columnSpacing: 100,
-        //dataRowHeight: 30,
-        dataTextStyle: GoogleFonts.robotoCondensed(
-          color: const Color(0xff4F6272),
-        ),
-        columns: [
-          DataColumn(
-              label: Text('About the spot',
-                  style: GoogleFonts.roboto(
-                      textStyle: const TextStyle(
-                    fontSize: 18,
-                  )))),
-          const DataColumn(label: Text('', style: TextStyle())),
-        ],
-        rows: [
-          const DataRow(cells: [
-            DataCell(Text('Type of venue')),
-            DataCell(Text('Restaurant')),
-          ]),
-          DataRow(cells: [
-            const DataCell(Text('Pricing')),
-            DataCell(Text(widget.venueInfo.getPriceClass())),
-          ]),
-          DataRow(cells: [
-            const DataCell(Text('Rating')),
-            DataCell(Text(widget.venueInfo.getRating().toString() +
-                ' (' +
-                widget.venueInfo.getTotalRatings().toString() +
-                ' ratings)')),
-          ]),
-          const DataRow(cells: [
-            DataCell(Text('Current activity')),
-            DataCell(Text('Moderate')),
-          ]),
-          DataRow(cells: [
-            const DataCell(Text('Opening hours')),
-            DataCell(Text(widget.venueInfo.getOpeningHours())),
-          ]),
-        ],
-      ),
-    );
+    return SingleChildScrollView(
+        child: Center(
+          child: DataTable(
+            // headingRowHeight: 30,
+            // columnSpacing: 100,
+            //dataRowHeight: 30,
+            dataTextStyle: GoogleFonts.robotoCondensed(
+              color: const Color(0xff4F6272),
+            ),
+            columns: [
+              DataColumn(
+                  label: Text('About the spot',
+                      style: GoogleFonts.roboto(
+                          textStyle: const TextStyle(
+                            fontSize: 18,
+                          )))),
+              const DataColumn(label: Text('', style: TextStyle())),
+            ],
+            rows: [
+              const DataRow(cells: [
+                DataCell(Text('Type of venue')),
+                DataCell(Text('Restaurant')),
+              ]),
+              DataRow(cells: [
+                const DataCell(Text('Pricing')),
+                DataCell(Text(widget.venueInfo.getPriceClass())),
+              ]),
+              DataRow(cells: [
+                const DataCell(Text('Rating')),
+                DataCell(Text(widget.venueInfo.getRating().toString() +
+                    ' (' +
+                    widget.venueInfo.getTotalRatings().toString() +
+                    ' ratings)')),
+              ]),
+              const DataRow(cells: [
+                DataCell(Text('Current activity')),
+                DataCell(Text('Moderate')),
+              ]),
+              DataRow(cells: [
+                const DataCell(Text('Opening hours')),
+                DataCell(Text(widget.venueInfo.getOpeningHours())),
+              ]),
+            ],
+          ),
+        ));
   }
 }
 
-class SavePlaceButton extends StatelessWidget {
+class LikeVenueButton extends StatelessWidget {
   Venue venue;
 
-  SavePlaceButton(this.venue, {
+  LikeVenueButton(this.venue, {
     Key? key,
   }) : super(key: key);
 

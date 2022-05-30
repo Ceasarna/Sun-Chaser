@@ -139,10 +139,6 @@ class MapState extends State<Map> {
   final Mode _mode = Mode.fullscreen;
 
   int currentIndex = 0;
-  final screens = [
-    Map(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     _currentCameraPosition = _stockholmCity;
@@ -154,16 +150,13 @@ class MapState extends State<Map> {
         actions: <Widget>[createFilterMenuButton()],
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
-
-      body: Stack (
-
       drawer : Drawer(
         child: Container(
           child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
         ),
       ),
 
-      body: Stack(
+      body: Stack (
         children: [
           GoogleMap(
             cameraTargetBounds: CameraTargetBounds(LatLngBounds(
@@ -210,6 +203,10 @@ class MapState extends State<Map> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
+
+  final screens = [
+    Map(),
+  ];
 
   PopupMenuButton<dynamic> createFilterMenuButton() {
     return PopupMenuButton(
