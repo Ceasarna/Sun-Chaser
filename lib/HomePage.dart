@@ -26,31 +26,23 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.fromLTRB(80, 80, 80, 0),
               child: Text(
                 'Sun Chasers',
-                style: GoogleFonts.libreBaskerville(
-                  fontSize: 35,
+                style: GoogleFonts.roboto(
+                  fontSize: 52,
                   color: globals.TEXTCOLOR,
                 ),
+                textAlign: TextAlign.center,
       ),
             ),
 
 
             const SizedBox(height: 10),
-
-            Text(
-              'The #1 Sunny Spot Finder',
-              style: GoogleFonts.libreBaskerville(
-              fontSize: 20,
-              fontWeight: FontWeight. bold,
-              color: globals.TEXTCOLOR,
-              ),
-            ),
             Container(
-              padding: EdgeInsets.fromLTRB(80, 40, 80, 80),
+              margin: EdgeInsets.fromLTRB(80, 80, 80, 80),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(200, 200),
                   primary: globals.BUTTONCOLOR,
-                  elevation: 100,
+                  elevation: globals.elevation,
                   shape: const CircleBorder(),
                 ),
                 onPressed: () {
@@ -60,19 +52,12 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: Text(
-              (globals.LOGGED_IN_USER.userID == 0 ? 'FIND SPOT BY LOCATION \n \n without signing in' : 'FIND SPOT BY LOCATION'),
+              (globals.LOGGED_IN_USER.userID == 0 ? '\nFIND SPOT BY LOCATION \n \n as guest' : 'FIND SPOT BY LOCATION'),
 
               textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
-                      shadows: <Shadow> [
-                        Shadow(
-                          offset: Offset(2, 2),
-                          blurRadius: 10.0,
-                          color: globals.SHADOWCOLOR,
-                        ),
-                      ]
                   ),
                 ),
               ),
@@ -94,7 +79,7 @@ class _HomePageState extends State<HomePage> {
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(200, 50),
           primary: globals.BUTTONCOLOR,
-          elevation: 100,
+          elevation: globals.elevation,
         ),
         onPressed: () {
           Navigator.push(
@@ -106,13 +91,7 @@ class _HomePageState extends State<HomePage> {
             style: TextStyle(
                 fontSize: 18,
                 color: Colors.white,
-                shadows: <Shadow> [
-                  Shadow(
-                    offset: Offset(2, 2),
-                    blurRadius: 10.0,
-                    color: globals.SHADOWCOLOR,
-                  ),
-                ])
+               )
         ),
       ),
         Padding(padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5)),
@@ -120,7 +99,7 @@ class _HomePageState extends State<HomePage> {
           style: ElevatedButton.styleFrom(
             fixedSize: const Size(200, 50),
             primary: globals.BUTTONCOLOR,
-            elevation: 100,
+            elevation: globals.elevation,
           ),
           onPressed: () {
             Navigator.push(
@@ -132,13 +111,7 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
-                  shadows: <Shadow> [
-                    Shadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 10.0,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                  ])
+              )
           ),
         )
         ]
@@ -151,7 +124,7 @@ class _HomePageState extends State<HomePage> {
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(200, 50),
         primary: globals.BUTTONCOLOR,
-        elevation: 100,
+        elevation: globals.elevation,
       ),
       onPressed: () {
         globals.LOGGED_IN_USER = User.User(0, "", "");
