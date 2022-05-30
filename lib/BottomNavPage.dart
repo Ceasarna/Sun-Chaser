@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter_platform_interface/src/types/camera.dart';
 import 'Map.dart';
 import 'FavoritePage.dart';
 import 'SettingsPage.dart';
@@ -15,9 +14,8 @@ class BottomNavPageState extends State<BottomNavPage> {
   int currentIndex = 0;
   final screens = [
     Map(),
-    ListViewPage(),
-    FavoritePage(),
-    SettingsPage(),
+    const ListViewPage(),
+    const FavoritePage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -41,10 +39,6 @@ class BottomNavPageState extends State<BottomNavPage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               label: "Liked",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: "Settings",
             ),
           ]),
     );

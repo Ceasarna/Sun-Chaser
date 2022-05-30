@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import 'package:flutter_applicationdemo/ListViewPage.dart';
@@ -7,11 +6,11 @@ import 'package:flutter_applicationdemo/WeatherData.dart';
 import 'package:flutter_applicationdemo/WebScraper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_applicationdemo/HomePage.dart';
 import 'dart:async';
 import 'login/User.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
-import 'package:google_api_headers/google_api_headers.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/retry.dart';
 import 'package:intl/number_symbols.dart';
@@ -20,18 +19,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_applicationdemo/login/User.dart';
 import 'SettingsPage.dart';
-import 'WeatherData.dart';
 import 'venuePage.dart';
 import 'Venue.dart';
 import 'globals.dart' as globals;
 
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-import 'globals.dart' as globals;
 
 import 'HomePage.dart';
-import 'SettingsPage.dart';
-import 'Venue.dart';
-import 'globals.dart' as globals;
 import 'FeedbackPage.dart';
 import 'login/CreateAccountPage.dart';
 import 'login/signInPage.dart';
@@ -45,17 +39,10 @@ const kGoogleApiKey = "AIzaSyAUmhd6Xxud8SwgDxJ4LlYlcntm01FGoSk";
 
 final homeSacffoldKey = GlobalKey<ScaffoldState>();
 
+late CameraPosition _currentCameraPosition;
+
 class MapState extends State<Map> {
   bool _bottomSheetIsOpen = false;
-
-/*  Future getMerkerData() async {
-    var url = Uri.parse(
-        'https://openstreetgs.stockholm.se/geoservice/api/b8e20fd7-5654-465e-8976-35b4de902b41/wfs?service=wfs&version=1.1.0&request=GetFeature&typeNames=od_gis:Markupplatelse&srsName=EPSG:4326&outputFormat=json');
-    var response = await http.get(url);
-    print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body.toString()}');
-    var jsonData = jsonDecode(response.body);
-  }*/
 
   final Completer<GoogleMapController> _controller = Completer();
   bool? _barFilterValue = true;
@@ -72,36 +59,26 @@ class MapState extends State<Map> {
   );
 
   List<Marker> markersList = [];
+  List<Marker> closeByMarkersList = [];
+  List<Venue> hiddenVenues = [];
+  List<Venue> closeByVenues = [];
 
   @override
   void initState() {
     initialize();
-    //_getUserLocation();
+    _getUserLocation();
     super.initState();
   }
 
   initialize() {
-    List<Venue> allVenues = globals.VENUES;
-    for (var venue in allVenues) {
-      Marker marker = Marker(
-        markerId: MarkerId(venue.venueID.toString()),
-        position: venue.position,
-        /*infoWindow: InfoWindow(
-            title: venue.venueName,
-            snippet: venue.venueAddress,
-          ),*/
-        // onTap: () => createBottomSheet(venue.venueName),
-        onTap: () => createBottomDrawer(venue),
-        icon: venue.drawIconColor(),
-      );
-      markersList.add(marker);
-    }
+    hiddenVenues.addAll(globals.VENUES);
   }
 
   void createBottomSheet(String venueName) async {
     var webScraper = WebScraper();
     await webScraper.getWebsiteData(venueName);
-    Scaffold.of(context).showBottomSheet<void>(((context) {
+    Scaffold.of(context).showBottomSheet<void>(
+        ((context) {
       return Container(
         height: 420,
         color: Colors.white,
@@ -162,58 +139,54 @@ class MapState extends State<Map> {
   final Mode _mode = Mode.fullscreen;
 
   int currentIndex = 0;
-  final screens = [
-    Map(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    _currentCameraPosition = _stockholmCity;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Sun chasers"),
         key: homeSacffoldKey,
-        //leading: IconButton(icon: Icon(Icons.search), onPressed:() {},),
-        /*actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],*/
-        /*title: TextFormField(
-          controller: _searchController,
-          textCapitalization: TextCapitalization.words,
-          decoration: const InputDecoration(hintText: 'Find your place'),
-          onChanged: (value) {
-            print(value);
-          },
-        ),*/
         actions: <Widget>[createFilterMenuButton()],
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
-
       drawer : Drawer(
         child: Container(
           child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
         ),
       ),
 
-      body: Stack(
+      body: Stack (
         children: [
           GoogleMap(
+            cameraTargetBounds: CameraTargetBounds(LatLngBounds(
+                northeast: const LatLng(59.3474696569038, 18.1001602476002147),
+                southwest: const LatLng(59.297332547922636, 17.999522500277884))),
+            minMaxZoomPreference: MinMaxZoomPreference(12.5, 18.5),
+            onCameraMove: (CameraPosition camera){
+              _currentCameraPosition = camera;
+            },
+            onCameraIdle: (){
+              (context as Element).reassemble();
+              removeMarkersOutOfRange();
+              addMarkersInRange();
+            },
             mapType: MapType.normal,
             myLocationEnabled: true,
             initialCameraPosition: _stockholmCity,
-            markers: markersList.map((e) => e).toSet(),
+            compassEnabled: true,
             onMapCreated: (GoogleMapController controller) {
+              setAllMarkersAsInvisible();
+              addMarkersInRange();
               _controller.complete(controller);
             },
+            markers: closeByMarkersList.map((e) => e).toSet(),
             onTap: (LatLng) {
               closeBottomSheetIfOpen();
             },
           ),
-          // ElevatedButton(onPressed: () {} //_handelPressButton
-          //  ,child: const Text("Search Placses"))
+         // ElevatedButton(onPressed: () {} //_handelPressButton
+        //  ,child: const Text("Search Placses"))
         ],
       ),
       floatingActionButton: Padding(
@@ -230,6 +203,10 @@ class MapState extends State<Map> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
+
+  final screens = [
+    Map(),
+  ];
 
   PopupMenuButton<dynamic> createFilterMenuButton() {
     return PopupMenuButton(
@@ -321,24 +298,8 @@ class MapState extends State<Map> {
                         ));
                   }),
                 ],
-
-                /*floatingActionButton: Padding(
-                    padding: const EdgeInsets.only(top: 100.0),
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SettingsPage()));
-                      },
-                      backgroundColor: Colors.purple,
-                      child: const Icon(Icons.filter_alt),
-                    ),
-                  ),
-                  floatingActionButtonLocation: FloatingActionButtonLocation
-                      .endTop,*/
-              ),
-            )));
+    ),
+  )));
   }
 
   PopupMenuItem<dynamic> createPriceSlider() {
@@ -375,7 +336,7 @@ class MapState extends State<Map> {
   Future<void> _gotoLocation(double lat, double lng) async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(lat, lng), zoom: 15)));
+        CameraPosition(target: LatLng(lat, lng), zoom: 14.5)));
   }
 
   Widget _boxes(double lat, double lng, String restaurantName) {
@@ -421,7 +382,34 @@ class MapState extends State<Map> {
         bearing: 0,
         target: LatLng(latlng.latitude, latlng.longitude),
         //tilt: 59.440717697143555,
-        zoom: 14.4746)));
+        zoom: 15.4746)));
+  }
+
+  void removeMarkersOutOfRange() {
+    for(int i = 0; i<closeByMarkersList.length; i++){
+      Marker marker = closeByMarkersList[i];
+      globals.venueAlreadyAdded(globals.getVenueByID(int.parse(marker.markerId.value))!.venueName);
+      if(marker.position.longitude - _currentCameraPosition.target.longitude > 0.02 || marker.position.latitude - _currentCameraPosition.target.latitude > 0.02){
+        closeByMarkersList.remove(marker);
+        globals.getVenueByID(int.parse(marker.markerId.value))?.isShownOnMap = false;
+        i--;
+      }
+    }
+  }
+
+  void addMarkersInRange() {
+    for(int i = 0; i< globals.VENUES.length; i++){
+      if(!globals.VENUES[i].isShownOnMap && (globals.VENUES[i].position.longitude - _currentCameraPosition.target.longitude < 0.02 && globals.VENUES[i].position.latitude - _currentCameraPosition.target.latitude < 0.02)){
+        Marker marker = Marker(
+            markerId: MarkerId(globals.VENUES[i].venueID.toString()),
+            position: globals.VENUES[i].position,
+            onTap: () => createBottomDrawer(globals.VENUES[i]),
+            icon: globals.VENUES[i].drawIconColor()
+        );
+        globals.VENUES[i].isShownOnMap = true;
+        closeByMarkersList.add(marker);
+      }
+    }
   }
 
   createBottomDrawer(Venue venue) async {
@@ -548,14 +536,19 @@ class MapState extends State<Map> {
   }
 
   closeBottomSheetIfOpen() {
-    print(_bottomSheetIsOpen);
     if (_bottomSheetIsOpen) {
       Navigator.pop(context);
       _bottomSheetIsOpen = false;
     }
   }
 
-/* Future<void> _handelPressButton() async {
+  void setAllMarkersAsInvisible() {
+    for(Venue venue in hiddenVenues){
+      venue.isShownOnMap = false;
+    }
+  }
+/*
+ Future<void> _handelPressButton() async {
     Prediction? p = await PlacesAutocomplete.show(
                           context: context,
                           apiKey: kGoogleApiKey,

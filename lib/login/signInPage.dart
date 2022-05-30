@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/login/EncryptData.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import '../mysql.dart';
 import '../HomePage.dart';
@@ -26,6 +27,8 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController passwordController = TextEditingController();
 
   Future<void> loginVerification(String email, String password) async {
+    password = EncryptData.encryptAES(password);
+
     await db.getConnection().then((conn) async {
       String sql =
           "select id, email, password from maen0574.user where email = '$email' and password = '$password'";
