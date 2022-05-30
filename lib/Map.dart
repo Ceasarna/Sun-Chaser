@@ -426,7 +426,8 @@ class MapState extends State<Map> {
 
   createBottomDrawer(Venue venue) async {
     _bottomSheetIsOpen = true;
-    Scaffold.of(context).showBottomSheet<void>(((context) {
+    // Scaffold.of(context).showBottomSheet<void>(((context) {
+    showModalBottomSheet(context: context, builder: (BuildContext context) {
       return InkWell(
         onTap: () {
           Navigator.push(
@@ -446,7 +447,7 @@ class MapState extends State<Map> {
           ),
         ),
       );
-    }));
+    });
   }
 
   Container bottomSheetWidgetContainer(Venue venue, BuildContext context) {

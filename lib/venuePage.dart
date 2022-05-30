@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter_applicationdemo/Venue.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
@@ -29,13 +30,12 @@ class _VenuePageState extends State<VenuePage> {
   @override
   void initState() {
     refreshWeather();
-    gatherVenueInfo();
   }
 
   Future gatherVenueInfo() async {
     VenueInfo vu = VenueInfo();
     venueInfo = vu;
-    venueInfo = await vu.getVenueInfo(venue.venueName);
+    venueInfo = await vu.getVenueInfo(venue);
   }
 
   Future refreshWeather() async {
@@ -74,11 +74,13 @@ class _VenuePageState extends State<VenuePage> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return SingleChildScrollView(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.center,
-                        child: buildPageContentColumn(),
+                      child: Expanded(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          alignment: Alignment.center,
+                          child: buildPageContentColumn(),
+                        ),
                       ),
                     );
                   } else {
@@ -102,6 +104,7 @@ class _VenuePageState extends State<VenuePage> {
       ]),
       Row(children: [buildNameAndAddress(), buildWeatherInfo()]),
       AboutTheSpotTable(venueInfo: venueInfo),
+      //Expanded(child: AboutTheSpotTable(venueInfo: venueInfo)),
     ]);
   }
 
@@ -239,27 +242,26 @@ class ShareButton extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
- /* Future<void> share() async {
-    await FlutterShare.share(
-        title: 'Share this place',
-        text: 'Share this place',
-        linkUrl: 'https://flutter.dev/',
-        chooserTitle: 'Example Chooser Title');
-  }
-*/
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
         children: <Widget>[
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {shareVenue();},
             icon: const Icon(Icons.share),
             label: const Text('Share'),
           ),
         ],
       ),
     );
+  }
+
+  void shareVenue() {
+
+    Share.share('Share this venue', subject: 'Subject venue');
+
   }
 
 }
