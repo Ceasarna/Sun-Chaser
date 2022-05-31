@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_applicationdemo/Venue.dart';
 import 'package:flutter/material.dart';
@@ -253,7 +252,7 @@ class LikeVenueButton extends StatelessWidget {
         primary: const Color(0xff4f6272),
       ),
     ),
-    ) : Expanded(
+    ) : globals.LOGGED_IN_USER.userID != 0 ? Expanded(
         child: TextButton.icon(
           onPressed: () {
             globals.LOGGED_IN_USER.likedVenuesList.add(venue);
@@ -267,7 +266,42 @@ class LikeVenueButton extends StatelessWidget {
           style: TextButton.styleFrom(
             primary: Color(0xff4f6272),
           ),
-        ));
+        )): Expanded(
+          child: TextButton.icon(
+            onPressed: () async{
+              await notLoggedInError(context);
+            },
+            icon: const Icon(
+            Icons.favorite_border_outlined,
+            color: Colors.grey,
+            ),
+            label: const Text('Like place'),
+            style: TextButton.styleFrom(
+            primary: Color(0xff4f6272),
+            ),
+    ));
+  }
+
+  notLoggedInError(BuildContext context) {
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () => Navigator.pop(context, 'OK'),
+    );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Can\'t like venue"),
+      content: Text("You need to be logged in to like venues."),
+      actions: [
+        okButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
 

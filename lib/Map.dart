@@ -159,6 +159,7 @@ class MapState extends State<Map> {
       body: Stack (
         children: [
           GoogleMap(
+            zoomControlsEnabled: true,
             cameraTargetBounds: CameraTargetBounds(LatLngBounds(
                 northeast: const LatLng(59.3474696569038, 18.1001602476002147),
                 southwest: const LatLng(59.297332547922636, 17.999522500277884))),
@@ -188,17 +189,6 @@ class MapState extends State<Map> {
          // ElevatedButton(onPressed: () {} //_handelPressButton
         //  ,child: const Text("Search Placses"))
         ],
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 100.0),
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()));
-          },
-          backgroundColor: Colors.purple,
-          child: const Icon(Icons.filter_alt),
-        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );

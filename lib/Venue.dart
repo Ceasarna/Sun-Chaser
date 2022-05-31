@@ -29,22 +29,6 @@ class Venue {
     LatLng tempPosition = LatLng(double.parse(splitArr[1]), double.parse(splitArr[0]));
 
 
-/*    print(splitArr[0].toString() + ' : ' + splitArr[1].toString());
-    print('Coordinates: ' + tempCoordinates);
-    print('Parsed: ' + double.parse(splitArr[0]).toString());
-    print(LatLng(double.parse(splitArr[1]), double.parse(splitArr[0])));
-    print(tempAddress + tempName);
-    print(tempPosition.latitude.toString() + " " + splitArr[0]);*/
-
-    // print('Json-Object:');
-    // print(json);
-
-    // print(venues);
-    // print(json['name']);
-    // print(json['address']);
-    // print(json['streetNo']);
-    // print(json['coordinates']);
-
     if (tempName != null &&
         tempAddress != null &&
         tempStreetNo != null &&
