@@ -444,20 +444,21 @@ class MapState extends State<Map> {
                 ],
               ),
               // columnCoveringRating(),
+
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               Column(
                 children: const [
                   weatherIconRow(),
                   weatherStatusRow(),
                 ],
               ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
               columnHandlingReadMoreButton(context, venue),
             ],
           )
@@ -487,7 +488,7 @@ class MapState extends State<Map> {
     return ElevatedButton(
       child: const Text(
         'Read More',
-        style: TextStyle(fontSize: 18),
+        style: TextStyle(fontSize: 16),
       ),
       onPressed: () {
         Navigator.push(
@@ -509,7 +510,7 @@ class MapState extends State<Map> {
               textStyle: const TextStyle(
             color: Colors.black87,
             fontWeight: FontWeight.bold,
-            fontSize: 26,
+            fontSize: 20,
           )),
         ),
         Text(
@@ -518,7 +519,7 @@ class MapState extends State<Map> {
               textStyle: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w300,
-            fontSize: 20,
+            fontSize: 14,
           )),
         )
       ],

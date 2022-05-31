@@ -190,14 +190,19 @@ class _AboutTheSpotTableState extends State<AboutTheSpotTable> {
                   label: Text('About the spot',
                       style: GoogleFonts.roboto(
                           textStyle: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
                           )))),
               const DataColumn(label: Text('', style: TextStyle())),
             ],
             rows: [
-              const DataRow(cells: [
-                DataCell(Text('Type of venue')),
-                DataCell(Text('Restaurant')),
+              DataRow(cells: [
+                DataCell(Text('Open?')),
+                DataCell(Text(widget.venueInfo.getOpenStatus())),
+              ]),
+               DataRow(cells: [
+                DataCell(Text('Popularity')),
+                DataCell(Text(widget.venueInfo.getPopularity())),
               ]),
               DataRow(cells: [
                 const DataCell(Text('Pricing')),
@@ -210,9 +215,9 @@ class _AboutTheSpotTableState extends State<AboutTheSpotTable> {
                     widget.venueInfo.getTotalRatings().toString() +
                     ' ratings)')),
               ]),
-              const DataRow(cells: [
-                DataCell(Text('Current activity')),
-                DataCell(Text('Moderate')),
+               DataRow(cells: [
+                DataCell(Text('Popular hours')),
+                DataCell(Text(widget.venueInfo.getPopularHoursToday())),
               ]),
               DataRow(cells: [
                 const DataCell(Text('Opening hours')),
