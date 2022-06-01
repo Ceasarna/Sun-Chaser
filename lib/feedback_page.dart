@@ -76,25 +76,6 @@ class FormForFeedbackState extends State<FormForFeedback> {
       resizeToAvoidBottomInset: true, //för att undvika RenderFlex overflow när man får upp skrivbordet
       appBar: AppBar(
         backgroundColor: buttonColor,
-        title: Row(
-          children: <Widget>[
-
-            FlatButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => BottomNavPage()),
-                );
-              },
-
-              child: Text("Close",
-                style: TextStyle(
-                    fontSize: 25,
-                    color: appBarColor),
-              ),
-            ),
-          ],
-        ),
       ),
 
       body: SingleChildScrollView(

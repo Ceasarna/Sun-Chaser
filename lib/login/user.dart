@@ -33,9 +33,6 @@ class User{
           }
         }
       });
-      for(Venue venue in likedVenuesList){
-        print(venue.venueName);
-      }
     });
   }
 }

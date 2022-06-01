@@ -1,12 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_applicationdemo/bottom_nav_page.dart';
 import 'package:flutter_applicationdemo/login/encrypt_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_applicationdemo/mysql.dart';
-
-import 'package:flutter_applicationdemo/home_page.dart';
 import '../globals.dart' as globals;
 import '../reusables/input_field.dart';
 import 'user.dart';
@@ -29,15 +26,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: globals.PINKBACKGROUND,
-        leading: ReturnButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => BottomNavPage()),
-            );
-          },
-        ),
+        backgroundColor: const Color.fromARGB(204, 172, 123, 132),
       ),
       backgroundColor: pinkBackgroundColor,
 
@@ -115,9 +104,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         if (userInput.isValid) {
           await createUserInSQL(emailController.text, userNameController.text,
               passwordController.text);
-          Navigator.push(
+          Navigator.pop(
             context,
-            MaterialPageRoute(builder: (context) => BottomNavPage()),
           );
         } else {
           createUserError(userInput.errorMessage);
@@ -140,7 +128,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       String sql =
           "INSERT INTO maen0574.user (id, email, password, username) VALUES (null, '$email', '$password', '$username');";
       await conn.query(sql);
-
       sql =
           "Select id, email, username from maen0574.user where email = '$email'";
       await conn.query(sql).then((results) {

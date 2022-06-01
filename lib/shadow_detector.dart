@@ -8,9 +8,8 @@ class ShadowDetector {
 
   List<Venue> venuesInShade = [];
 
-  ShadowDetector() {
+  ShadowDetector();
 
-  }
   //Called like "new ShadowDetector.fromShadowDetector(List of venues here);"
   ShadowDetector.fromShadowDetector(venues) {
     evaluateShadowsForAllVenues(venues);

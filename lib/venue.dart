@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/shadow_detector.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_applicationdemo/globals.dart' as globals;
+
+import 'mysql.dart';
 
 class Venue {
   int venueID;
@@ -28,22 +30,6 @@ class Venue {
     splitArr = tempCoordinates.toString().split(';');
     LatLng tempPosition = LatLng(double.parse(splitArr[1]), double.parse(splitArr[0]));
 
-
-/*    print(splitArr[0].toString() + ' : ' + splitArr[1].toString());
-    print('Coordinates: ' + tempCoordinates);
-    print('Parsed: ' + double.parse(splitArr[0]).toString());
-    print(LatLng(double.parse(splitArr[1]), double.parse(splitArr[0])));
-    print(tempAddress + tempName);
-    print(tempPosition.latitude.toString() + " " + splitArr[0]);*/
-
-    // print('Json-Object:');
-    // print(json);
-
-    // print(venues);
-    // print(json['name']);
-    // print(json['address']);
-    // print(json['streetNo']);
-    // print(json['coordinates']);
 
     if (tempName != null &&
         tempAddress != null &&
@@ -119,6 +105,25 @@ class Venue {
         ', ' +
         'coordinates: ' +
         position.toString();
+  }
+
+  void likeVenue() {
+    globals.LOGGED_IN_USER.likedVenuesList.add(this);
+    var db = mysql();
+    db.getConnection().then((conn) {
+      String sql =
+          "INSERT INTO maen0574.userFavorites (user_id, venue_id) VALUES (${globals.LOGGED_IN_USER.userID}, $venueID);";
+      conn.query(sql);
+    });
+  }
+  void unlikeVenue(){
+    globals.LOGGED_IN_USER.likedVenuesList.remove(this);
+    var db = mysql();
+    db.getConnection().then((conn) {
+      String sql =
+          "DELETE FROM maen0574.userFavorites WHERE user_id = '${globals.LOGGED_IN_USER.userID}' and venue_id = $venueID;";
+      conn.query(sql);
+    });
   }
 }
 

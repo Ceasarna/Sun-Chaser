@@ -2,23 +2,18 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_applicationdemo/shadow_detector.dart';
 import 'package:flutter_applicationdemo/login/google_sign_in_provider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter_applicationdemo/login/google_sign_in_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 import 'bottom_nav_page.dart';
-import 'map.dart';
 import 'weather_data.dart';
 import 'venue.dart';
 import 'mysql.dart';
-import 'package:flutter_applicationdemo/login/user.dart';
-import 'login/user.dart';
 import 'globals.dart' as globals;
 
 void main() async {

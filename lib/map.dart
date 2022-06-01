@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_applicationdemo/bottom_nav_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
-import 'login/user.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:location/location.dart';
-import 'package:flutter_applicationdemo/login/user.dart';
-import 'settings_page.dart';
 import 'venue_page.dart';
 import 'venue.dart';
+import 'login/user.dart';
 import 'globals.dart' as globals;
-
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-
+import 'package:flutter_applicationdemo/manage_account_page.dart';
 import 'feedback_page.dart';
 import 'login/create_account_page.dart';
 import 'login/sign_in_page.dart';
@@ -151,17 +147,6 @@ class MapState extends State<Map> {
             },
           ),
         ],
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(top: 100.0),
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()));
-          },
-          backgroundColor: Colors.purple,
-          child: const Icon(Icons.filter_alt),
-        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
@@ -546,21 +531,9 @@ Widget buildDrawerSignedIn(BuildContext context) {
             ],
           ),
         ),
-        ListTile(
-          leading: Icon(Icons.logout),
-          title: Text('Sign out'),
-          onTap: () {
-            globals.LOGGED_IN_USER = User(0, "", "");
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      BottomNavPage()), //Replace Container() with call to Map-page.
-            );
-          },
-        ),
         giveFeedbackTile(context),
         settingsTile(context),
+        signOutTile(context),
       ],
     ),
   );
@@ -575,7 +548,6 @@ Widget buildDrawerSignedOut(BuildContext context) {
         createAccountTile(context),
         logInTile(context),
         giveFeedbackTile(context),
-        settingsTile(context),
       ],
     ),
   );
@@ -599,14 +571,28 @@ DrawerHeader drawerHeader() {
 ListTile settingsTile(BuildContext context) {
   return ListTile(
     leading: Icon(Icons.settings),
-    title: Text('Settings'),
+    title: Text('Change password'),
     onTap: () {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SettingsPage(),
+          builder: (context) => ManageAccountPage(),
         ),
       );
+    },
+  );
+}
+
+ListTile signOutTile(BuildContext context) {
+  return ListTile(
+    leading: Icon(Icons.logout),
+    title: Text('Sign out'),
+    onTap: () {
+      globals.LOGGED_IN_USER = User(0, "", "");
+      Navigator.pop(
+        context,
+      );
+      (context as Element).reassemble();
     },
   );
 }
@@ -630,13 +616,14 @@ ListTile logInTile(BuildContext context) {
   return ListTile(
     leading: Icon(Icons.login),
     title: Text('Sign in'),
-    onTap: () {
-      Navigator.push(
+    onTap: () async{
+      await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => SignInPage(),
         ),
       );
+      (context as Element).reassemble();
     },
   );
 }
@@ -645,13 +632,14 @@ ListTile createAccountTile(BuildContext context) {
   return ListTile(
     leading: Icon(Icons.account_box_rounded),
     title: Text('Create account'),
-    onTap: () {
-      Navigator.push(
+    onTap: () async {
+      await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => CreateAccountPage(),
         ),
       );
+      (context as Element).reassemble();
     },
   );
 }

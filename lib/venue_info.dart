@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:html/dom.dart' as dom;
 import 'package:intl/intl.dart';
 import 'dart:io';
 

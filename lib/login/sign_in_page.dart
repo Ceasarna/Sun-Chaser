@@ -1,11 +1,7 @@
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/login/encrypt_data.dart';
 import 'package:flutter_applicationdemo/bottom_nav_page.dart';
 import '../mysql.dart';
-import '../home_page.dart';
-import '../main.dart';
 import 'user.dart';
 import '../reusables/input_field.dart';
 import '../reusables/return_button.dart';
@@ -48,15 +44,7 @@ class _SignInPageState extends State<SignInPage> {
       backgroundColor: globals.PINKBACKGROUND,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: globals.PINKBACKGROUND,
-        leading: ReturnButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => BottomNavPage()),
-            );
-          },
-        ),
+        backgroundColor: const Color.fromARGB(204, 172, 123, 132),
       ),
       body: Center(child: SingleChildScrollView(
         child: Column(
@@ -144,21 +132,16 @@ class _SignInPageState extends State<SignInPage> {
       onPressed: () async {
         if (emailController.text.contains("'") ||
             passwordController.text.contains("'")) {
-          print("1");
           loginError();
           return;
         }
         await loginVerification(emailController.text, passwordController.text);
         if (globals.LOGGED_IN_USER.userID != 0) {
           globals.LOGGED_IN_USER = loggedInUser;
-          Navigator.push(
+          Navigator.pop(
             context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    BottomNavPage()), //Replace Container() with call to account-page.
           );
         } else {
-          print(globals.LOGGED_IN_USER.userID);
           loginError();
         }
         //print(loggedInUser.email + " " + loggedInUser.userID.toString());
