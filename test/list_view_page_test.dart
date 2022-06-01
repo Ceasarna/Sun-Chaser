@@ -1,6 +1,3 @@
-
-import 'dart:math';
-
 import 'package:flutter_applicationdemo/list_view_page.dart';
 import 'package:flutter_applicationdemo/venue.dart';
 import 'package:flutter_applicationdemo/globals.dart' as globals;
@@ -12,7 +9,8 @@ void main() {
   test('Test ListViewPage can access venues', () {
     // ListViewPage listViewPage = const ListViewPage();
     ListViewPageState listViewPage = ListViewPageState();
-    globals.VENUES.add(Venue(00, 'Aira', 'Biskopsudden', '9', const LatLng(59.354823, 19.29485)));
+    globals.VENUES.add(Venue(
+        00, 'Aira', 'Biskopsudden', '9', const LatLng(59.354823, 19.29485)));
 
     expect(globals.VENUES.first, listViewPage.allVenues.first);
   });
