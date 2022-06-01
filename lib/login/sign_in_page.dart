@@ -1,17 +1,17 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_applicationdemo/login/EncryptData.dart';
-import 'package:flutter_applicationdemo/BottomNavPage.dart';
+import 'package:flutter_applicationdemo/login/encrypt_data.dart';
+import 'package:flutter_applicationdemo/bottom_nav_page.dart';
 import '../mysql.dart';
-import '../HomePage.dart';
+import '../home_page.dart';
 import '../main.dart';
-import 'User.dart';
-import '../reusables/InputField.dart';
-import '../reusables/returnButton.dart';
+import 'user.dart';
+import '../reusables/input_field.dart';
+import '../reusables/return_button.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'GoogleSignInProvider.dart';
-import 'CreateAccountPage.dart';
+import 'google_sign_in_provider.dart';
+import 'create_account_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_applicationdemo/globals.dart' as globals;
 

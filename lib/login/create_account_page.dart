@@ -1,16 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_applicationdemo/BottomNavPage.dart';
-import 'package:flutter_applicationdemo/login/EncryptData.dart';
+import 'package:flutter_applicationdemo/bottom_nav_page.dart';
+import 'package:flutter_applicationdemo/login/encrypt_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_applicationdemo/mysql.dart';
 
-import 'package:flutter_applicationdemo/HomePage.dart';
+import 'package:flutter_applicationdemo/home_page.dart';
 import '../globals.dart' as globals;
-import '../reusables/InputField.dart';
-import 'User.dart';
-import '../reusables/returnButton.dart';
+import '../reusables/input_field.dart';
+import 'user.dart';
+import '../reusables/return_button.dart';
 
 class CreateAccountPage extends StatefulWidget {
   _CreateAccountPageState createState() => _CreateAccountPageState();

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'Map.dart';
-import 'FavoritePage.dart';
-import 'SettingsPage.dart';
+import 'map.dart';
+import 'favorite_page.dart';
+import 'settings_page.dart';
 import 'globals.dart' as globals;
-import 'ListViewPage.dart';
+import 'list_view_page.dart';
 
 class BottomNavPage extends StatefulWidget {
   @override

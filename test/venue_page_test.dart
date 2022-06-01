@@ -1,6 +1,6 @@
-import 'package:flutter_applicationdemo/Venue.dart';
-import 'package:flutter_applicationdemo/WeatherData.dart';
-import 'package:flutter_applicationdemo/venuePage.dart';
+import 'package:flutter_applicationdemo/venue.dart';
+import 'package:flutter_applicationdemo/weather_data.dart';
+import 'package:flutter_applicationdemo/venue_page.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test/test.dart';
 

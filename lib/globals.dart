@@ -1,14 +1,14 @@
-import 'package:flutter_applicationdemo/WeatherData.dart';
+import 'package:flutter_applicationdemo/weather_data.dart';
 
-import 'Venue.dart';
-import 'package:flutter_applicationdemo/login/User.dart';
-import '../login/User.dart';
+import 'venue.dart';
+import 'package:flutter_applicationdemo/login/user.dart';
+import '../login/user.dart';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'HomePage.dart';
-import 'Venue.dart';
+import 'home_page.dart';
+import 'venue.dart';
 import 'main.dart';
 
 User LOGGED_IN_USER = User(0, "", "");
