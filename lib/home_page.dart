@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'BottomNavPage.dart';
-import 'login/CreateAccountPage.dart';
-import 'login/signInPage.dart';
-import 'package:flutter_applicationdemo/login/User.dart' as User;
+import 'bottom_nav_page.dart';
+import 'login/create_account_page.dart';
+import 'login/sign_in_page.dart';
+import 'package:flutter_applicationdemo/login/user.dart' as User;
 import 'globals.dart' as globals;
 
 
