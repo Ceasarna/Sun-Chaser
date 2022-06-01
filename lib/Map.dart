@@ -389,6 +389,7 @@ class MapState extends State<Map> {
 
   void addMarkersInRange() {
     for(int i = 0; i< globals.VENUES.length; i++){
+      print(globals.VENUES[i].venueName + " " + globals.VENUES[i].venueID.toString());
       if(!globals.VENUES[i].isShownOnMap && (globals.VENUES[i].position.longitude - _currentCameraPosition.target.longitude < 0.02 && globals.VENUES[i].position.latitude - _currentCameraPosition.target.latitude < 0.02)){
         Marker marker = Marker(
             markerId: MarkerId(globals.VENUES[i].venueID.toString()),

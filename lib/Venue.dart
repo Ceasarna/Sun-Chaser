@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/ShadowDetector.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_applicationdemo/globals.dart' as globals;
+
+import 'mysql.dart';
 
 class Venue {
   int venueID;
@@ -103,6 +106,25 @@ class Venue {
         ', ' +
         'coordinates: ' +
         position.toString();
+  }
+
+  void likeVenue() {
+    globals.LOGGED_IN_USER.likedVenuesList.add(this);
+    var db = mysql();
+    db.getConnection().then((conn) {
+      String sql =
+          "INSERT INTO maen0574.userFavorites (user_id, venue_id) VALUES (${globals.LOGGED_IN_USER.userID}, $venueID);";
+      conn.query(sql);
+    });
+  }
+  void unlikeVenue(){
+    globals.LOGGED_IN_USER.likedVenuesList.remove(this);
+    var db = mysql();
+    db.getConnection().then((conn) {
+      String sql =
+          "DELETE FROM maen0574.userFavorites WHERE user_id = '${globals.LOGGED_IN_USER.userID}' and venue_id = $venueID;";
+      conn.query(sql);
+    });
   }
 }
 

@@ -143,7 +143,7 @@ class _VenuePageState extends State<VenuePage> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(4.0),
+          padding: EdgeInsets.all(4.0),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Column(
@@ -193,7 +193,7 @@ class _AboutTheSpotTableState extends State<AboutTheSpotTable> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           )))),
-              const DataColumn(label: Text('', style: TextStyle())),
+              DataColumn(label: Text('', style: TextStyle())),
             ],
             rows: [
               DataRow(cells: [
@@ -245,7 +245,7 @@ class LikeVenueButton extends StatelessWidget {
     return alreadyLiked? Expanded(
     child: TextButton.icon(
       onPressed: () {
-        globals.LOGGED_IN_USER.likedVenuesList.remove(venue);
+        venue.unlikeVenue();
         (context as Element).reassemble();
       },
       icon: const Icon(
@@ -260,7 +260,7 @@ class LikeVenueButton extends StatelessWidget {
     ) : globals.LOGGED_IN_USER.userID != 0 ? Expanded(
         child: TextButton.icon(
           onPressed: () {
-            globals.LOGGED_IN_USER.likedVenuesList.add(venue);
+            venue.likeVenue();
             (context as Element).reassemble();
           },
           icon: const Icon(

@@ -24,8 +24,8 @@ import 'globals.dart' as globals;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await loadAllVenues();
-  await fetchWeather();
+  //await loadAllVenues();
+  //await fetchWeather();
   await loadAllVenuesSQL();
 
   runApp(MyApp());
@@ -77,7 +77,7 @@ Future loadAllVenues() async {
     // var sd = ShadowDetector();
     // await sd.evaluateShadowsForAllVenues(seventyFiveVenues);
   } else {
-    throw const HttpException("Problem fetching the venue data");
+    //throw const HttpException("Problem fetching the venue data");
   }
 }
 

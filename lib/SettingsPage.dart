@@ -272,7 +272,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BottomNavPage()),
+                                builder: (context) => ManageAccountPage()),
                           );
                         },
                         child: Container(
@@ -282,7 +282,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           width: 175,
                           child: const Center(
                             child: Text(
-                              'Manage account',
+                              'Change password',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight. bold,

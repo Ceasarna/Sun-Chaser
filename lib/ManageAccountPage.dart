@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import 'package:flutter_applicationdemo/login/EncryptData.dart';
 import 'package:flutter_applicationdemo/reusables/InputField.dart';
-
+import 'package:flutter_applicationdemo/globals.dart' as globals;
 import 'package:flutter_applicationdemo/mysql.dart';
 import 'HomePage.dart';
 
@@ -12,36 +13,27 @@ class ManageAccountPage extends StatefulWidget {
 
 class ManageAccountPageState extends State<ManageAccountPage> {
   var db = mysql();
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController previousPasswordController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
   UserInput userInput = UserInput(isValid: false, errorMessage: "");
 
-  Widget _buildNameFiled() {
+  Widget _buildPasswordFiled(TextEditingController controller) {
     return InputField(
-      text: "new UserName", 
-      isPassword: false, 
-      icon: const Icon(Icons.person), 
-      controller: userNameController
-      );
-  }
-
-  Widget _buildEmailFiled() {
-   return InputField(
-      text: "current Email", 
-      isPassword: false, 
-      icon: const Icon(Icons.email), 
-      controller: emailController
-      );
-  }
-
-  Widget _buildPasswordFiled() {
-    return InputField(
-      text: "new Password", 
+      text: "New password",
       isPassword: true, 
       icon: const Icon(Icons.lock), 
-      controller: passwordController
+      controller: controller
       );
+  }
+  Widget _buildOldPasswordFiled() {
+    return InputField(
+        text: "Previous password",
+        isPassword: true,
+        icon: const Icon(Icons.lock),
+        controller: previousPasswordController
+    );
   }
 
   @override
@@ -59,23 +51,23 @@ class ManageAccountPageState extends State<ManageAccountPage> {
               children: <Widget>[
                 const Text('Update user data' ,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
                 const SizedBox(height: 50),
-                _buildEmailFiled(),
-                _buildNameFiled(),
-                _buildPasswordFiled(),
+                _buildOldPasswordFiled(),
+                _buildPasswordFiled(passwordController),
+                _buildPasswordFiled(confirmPasswordController),
                 ElevatedButton(
                   onPressed: () async {
-                    await verifyUserInput(userNameController.text, emailController.text,passwordController.text, userInput);
+                    await verifyUserInput(previousPasswordController.text, passwordController.text, confirmPasswordController.text);
                     if(userInput.isValid) {
-                      await updateUserInSQL(emailController.text, userNameController.text, passwordController.text);
+                      await updateUserInSQL(previousPasswordController.text, confirmPasswordController.text);
                       Navigator.push(
                         context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
+                          MaterialPageRoute(builder: (context) => BottomNavPage()),
                         );
                     } else {
                     createUserError(userInput.errorMessage);
                     }
                   }, 
-                  child: const Text('Update'),
+                  child: const Text('Change password'),
                   style: ElevatedButton.styleFrom(
                     primary:  const Color.fromARGB(255, 190, 146, 160)
                   ),
@@ -87,55 +79,34 @@ class ManageAccountPageState extends State<ManageAccountPage> {
     );
   }
 
-Future<void> verifyUserInput(String userName, String email , String password,userInput) async {
-  var result = false;
-  await db.getConnection().then((conn) async {
-      String sql = "SELECT email from maen0574.user where email = '$email';";
-      var results = await conn.query(sql);
-
-      if(results.toString() == "()") {
-        result = true;
-      }
-    });
-
-    if (result == true) {
-      userInput.errorMessage = "email incorrect!";
+Future<void> verifyUserInput(String previous, String newPassword , String confirmedPassword) async {
+    String result = userInputResult(previous, newPassword, confirmedPassword);
+    if(result.isNotEmpty){
+      userInput = UserInput(isValid: false, errorMessage: result);
       return;
-    } else if (email.contains("'") || !email.contains("@") || email.length < 5) {
-      userInput.errorMessage = "Incorrect email format";
-      return;
-    } else if (userName.contains("'") || userName.length < 6) {
-      userInput.errorMessage =
-          "Incorrect username. \nCharacters limited to a-z, A-Z, 0-9.";
-      return;
-    } else if (password.contains("'") || password.length < 6) {
-      userInput.errorMessage =
-          "Incorrect password. \nPassword can't contain ' and needs to be atleast 6 characters long";
-      return;
-    }else {
-      userInput.isValid = true;
+    }else{
+      userInput = UserInput(isValid: true, errorMessage: "");
     }
-
   }
 
 
-String userInputResult(String userName, String email , String password) {
+String userInputResult(String previousPassword, String newPassword, String confirmedPassword) {
   String message  = userInput.errorMessage;
 
-  if (email.contains("'") || !email.contains("@") || email.length < 5) {
-      message = "Incorrect email format";
+  if (previousPassword.contains("'") ){
+      message = "Incorrect previous password";
       return message;
-    } else if (userName.contains("'") || userName.length < 6) {
+  } else if (newPassword.contains("'") || newPassword.length < 6) {
       message =
-          "Incorrect username. \nCharacters limited to a-z, A-Z, 0-9.";
+          "Incorrect new password. \nCharacters limited to a-z, A-Z, 0-9 and needs to be atleast 6 characters long";
       return message;
-    } else if (password.contains("'") || password.length < 6) {
+  } else if (confirmedPassword.contains("'") || confirmedPassword.length < 6) {
       message =
-          "Incorrect password. \nPassword can't contain ' and needs to be atleast 6 characters long";
+          "Incorrect confirmed password. \nPassword can't contain ' and needs to be atleast 6 characters long";
       return message;
-    } else {
+  } else {
       return "";
-    }
+  }
 
 }
 
@@ -155,12 +126,29 @@ void createUserError(String stringContext) {
     );
   }
 
-  Future<void> updateUserInSQL(String email, String username, String password) async {
-    password = EncryptData.encryptAES(password);
+  Future<void> updateUserInSQL(String previousPassword, String newPassword) async {
+    previousPassword = EncryptData.encryptAES(previousPassword);
+    newPassword = EncryptData.encryptAES(newPassword);
   await db.getConnection().then((conn) async {
-      String sql = "UPDATE maen0574.user set password = '$password', username = '$username' where email = '$email';";
-      await conn.query(sql);
+    String sql =
+    "Select id from maen0574.user where id = ${globals.LOGGED_IN_USER.userID} and password = '$previousPassword'";
+    userInput = UserInput(isValid: false, errorMessage: "Incorrect previous password");
+    await conn.query(sql).then((results) {
+      for (var row in results) {
+        setState(() {});
+        userInput = UserInput(isValid: true, errorMessage: "");
+      }
     });
+    });
+  if(!userInput.isValid){
+    createUserError(userInput.errorMessage);
+    return;
+  }
+    await db.getConnection().then((conn) async {
+      String sql =
+          "UPDATE maen0574.user SET password = $newPassword WHERE id = ${globals.LOGGED_IN_USER.userID}";
+      conn.query(sql);
+      });
   }
   
 }

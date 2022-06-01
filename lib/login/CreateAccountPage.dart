@@ -140,7 +140,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       String sql =
           "INSERT INTO maen0574.user (id, email, password, username) VALUES (null, '$email', '$password', '$username');";
       await conn.query(sql);
-
       sql =
           "Select id, email, username from maen0574.user where email = '$email'";
       await conn.query(sql).then((results) {
