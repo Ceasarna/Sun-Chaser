@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Map.dart';
 import 'FavoritePage.dart';
-import 'SettingsPage.dart';
 import 'globals.dart' as globals;
 import 'ListViewPage.dart';
 

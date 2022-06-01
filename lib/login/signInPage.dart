@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/login/EncryptData.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import '../mysql.dart';
-import '../HomePage.dart';
 import '../main.dart';
 import 'User.dart';
 import '../reusables/InputField.dart';
@@ -13,6 +12,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'GoogleSignInProvider.dart';
 import 'CreateAccountPage.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_applicationdemo/Map.dart' as map;
 import 'package:flutter_applicationdemo/globals.dart' as globals;
 
 class SignInPage extends StatefulWidget {
@@ -48,15 +48,7 @@ class _SignInPageState extends State<SignInPage> {
       backgroundColor: globals.PINKBACKGROUND,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: globals.PINKBACKGROUND,
-        leading: ReturnButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => BottomNavPage()),
-            );
-          },
-        ),
+        backgroundColor: const Color.fromARGB(204, 172, 123, 132),
       ),
       body: Center(child: SingleChildScrollView(
         child: Column(
@@ -151,11 +143,8 @@ class _SignInPageState extends State<SignInPage> {
         await loginVerification(emailController.text, passwordController.text);
         if (globals.LOGGED_IN_USER.userID != 0) {
           globals.LOGGED_IN_USER = loggedInUser;
-          Navigator.push(
+          Navigator.pop(
             context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    BottomNavPage()), //Replace Container() with call to account-page.
           );
         } else {
           print(globals.LOGGED_IN_USER.userID);

@@ -4,7 +4,6 @@ import 'package:flutter_applicationdemo/login/EncryptData.dart';
 import 'package:flutter_applicationdemo/reusables/InputField.dart';
 import 'package:flutter_applicationdemo/globals.dart' as globals;
 import 'package:flutter_applicationdemo/mysql.dart';
-import 'HomePage.dart';
 
 class ManageAccountPage extends StatefulWidget {
   @override
@@ -43,38 +42,37 @@ class ManageAccountPageState extends State<ManageAccountPage> {
         //title: const Text('ManageAccountPage'),
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
-      body: Container(
-        margin: EdgeInsets.all(24),
-        child: Form(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('Update user data' ,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-                const SizedBox(height: 50),
-                _buildOldPasswordFiled(),
-                _buildPasswordFiled(passwordController),
-                _buildPasswordFiled(confirmPasswordController),
-                ElevatedButton(
-                  onPressed: () async {
-                    await verifyUserInput(previousPasswordController.text, passwordController.text, confirmPasswordController.text);
-                    if(userInput.isValid) {
-                      await updateUserInSQL(previousPasswordController.text, confirmPasswordController.text);
-                      Navigator.push(
-                        context,
-                          MaterialPageRoute(builder: (context) => BottomNavPage()),
-                        );
-                    } else {
-                    createUserError(userInput.errorMessage);
-                    }
-                  }, 
-                  child: const Text('Change password'),
-                  style: ElevatedButton.styleFrom(
-                    primary:  const Color.fromARGB(255, 190, 146, 160)
-                  ),
-                  )
-              ],
+      body: Center(
+        child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text('Update user data' ,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                  const SizedBox(height: 50),
+                  _buildOldPasswordFiled(),
+                  _buildPasswordFiled(passwordController),
+                  _buildPasswordFiled(confirmPasswordController),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await verifyUserInput(previousPasswordController.text, passwordController.text, confirmPasswordController.text);
+                      if(userInput.isValid) {
+                        await updateUserInSQL(previousPasswordController.text, confirmPasswordController.text);
+                        Navigator.push(
+                          context,
+                            MaterialPageRoute(builder: (context) => BottomNavPage()),
+                          );
+                      } else {
+                      createUserError(userInput.errorMessage);
+                      }
+                    },
+                    child: const Text('Change password'),
+                    style: ElevatedButton.styleFrom(
+                      primary:  const Color.fromARGB(255, 190, 146, 160)
+                    ),
+                    )
+                ],
             ),
-          ),
+        ),
       ),
     );
   }

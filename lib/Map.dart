@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import 'package:flutter_applicationdemo/ListViewPage.dart';
+import 'package:flutter_applicationdemo/ManageAccountPage.dart';
 import 'package:flutter_applicationdemo/WeatherData.dart';
 import 'package:flutter_applicationdemo/WebScraper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_applicationdemo/HomePage.dart';
 import 'dart:async';
 import 'login/User.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,14 +18,10 @@ import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_applicationdemo/login/User.dart';
-import 'SettingsPage.dart';
 import 'venuePage.dart';
 import 'Venue.dart';
 import 'globals.dart' as globals;
-
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-
-import 'HomePage.dart';
 import 'FeedbackPage.dart';
 import 'login/CreateAccountPage.dart';
 import 'login/signInPage.dart';
@@ -632,17 +628,6 @@ Widget buildDrawerSignedIn(BuildContext context) {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.logout),
-          title: Text('Sign out'),
-          onTap: () {
-            globals.LOGGED_IN_USER = User(0, "", "");
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => BottomNavPage()), //Replace Container() with call to Map-page.
-            );
-          },
-        ),
-        ListTile(
           leading: Icon(Icons.thumb_up_alt),
           title: Text('Give feedback'),
           onTap: () {
@@ -656,14 +641,25 @@ Widget buildDrawerSignedIn(BuildContext context) {
         ),
         ListTile(
           leading: Icon(Icons.settings),
-          title: Text('Settings'),
+          title: Text('Change password'),
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SettingsPage(),
+                builder: (context) => ManageAccountPage(),
               ),
             );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text('Sign out'),
+          onTap: () {
+            globals.LOGGED_IN_USER = User(0, "", "");
+            Navigator.pop(
+              context,
+            );
+            (context as Element).reassemble();
           },
         ),
       ],
@@ -692,25 +688,27 @@ Widget buildDrawerSignedOut(BuildContext context) {
         ListTile(
           leading: Icon(Icons.account_box_rounded),
           title: Text('Create account'),
-          onTap: () {
-            Navigator.push(
+          onTap: () async{
+            await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => CreateAccountPage(),
               ),
             );
+            (context as Element).reassemble();
           },
         ),
         ListTile(
           leading: Icon(Icons.login),
           title: Text('Sign in'),
-          onTap: () {
-            Navigator.push(
+          onTap: () async {
+            await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => SignInPage(),
               ),
             );
+            (context as Element).reassemble();
           },
         ),
         ListTile(
@@ -721,18 +719,6 @@ Widget buildDrawerSignedOut(BuildContext context) {
               context,
               MaterialPageRoute(
                 builder: (context) => FormForFeedback(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Settings'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingsPage(),
               ),
             );
           },

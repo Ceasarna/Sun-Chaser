@@ -87,11 +87,12 @@ class _FavoritePageState extends State<FavoritePage> {
                     primary: globals.BUTTONCOLOR,
                     elevation: 100,
                   ),
-                  onPressed: () {
-                    Navigator.push(
+                  onPressed: () async{
+                    await Navigator.push(
                       context, //SignInPage()
                       MaterialPageRoute(builder: (context) =>SignInPage()), //Replace Container() with call to Map-page.
                     );
+                    (context as Element).reassemble();
                   },
                   child: Text('Sign in',
                       style: TextStyle(

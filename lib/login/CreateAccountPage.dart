@@ -5,8 +5,6 @@ import 'package:flutter_applicationdemo/BottomNavPage.dart';
 import 'package:flutter_applicationdemo/login/EncryptData.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_applicationdemo/mysql.dart';
-
-import 'package:flutter_applicationdemo/HomePage.dart';
 import '../globals.dart' as globals;
 import '../reusables/InputField.dart';
 import 'User.dart';
@@ -29,15 +27,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: globals.PINKBACKGROUND,
-        leading: ReturnButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => BottomNavPage()),
-            );
-          },
-        ),
+        backgroundColor: const Color.fromARGB(204, 172, 123, 132),
       ),
       backgroundColor: pinkBackgroundColor,
 
@@ -115,9 +105,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         if (userInput.isValid) {
           await createUserInSQL(emailController.text, userNameController.text,
               passwordController.text);
-          Navigator.push(
+          Navigator.pop(
             context,
-            MaterialPageRoute(builder: (context) => BottomNavPage()),
           );
         } else {
           createUserError(userInput.errorMessage);
