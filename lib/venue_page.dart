@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:share_plus/share_plus.dart';
-import 'package:flutter_applicationdemo/Venue.dart';
+import 'package:flutter_applicationdemo/venue.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'VenueInfo.dart';
-import 'WeatherData.dart';
+import 'venue_info.dart';
+import 'weather_data.dart';
 import 'globals.dart' as globals;
-import 'Venue.dart';
+import 'venue.dart';
 
 // Color _backgroundColor = const Color(0xffac7b84);
 
@@ -38,9 +38,9 @@ class VenuePageState extends State<VenuePage> {
   }
 
   Future gatherVenueInfo() async {
-    VenueInfo vu = VenueInfo();
-    venueInfo = vu;
-    venueInfo = await vu.getVenueInfo(venue);
+    VenueInfo vi = VenueInfo();
+    venueInfo = vi;
+    venueInfo = await vi.getVenueInfo(venue);
   }
 
   Future refreshWeather() async {
@@ -264,7 +264,7 @@ class LikeVenueButton extends StatelessWidget {
           ),
           label: const Text('Like place'),
           style: TextButton.styleFrom(
-            primary: Color(0xff4f6272),
+            primary: const Color(0xff4f6272),
           ),
         ));
   }

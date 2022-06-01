@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_applicationdemo/login/EncryptData.dart';
-import 'package:flutter_applicationdemo/reusables/InputField.dart';
+import 'package:flutter_applicationdemo/login/encrypt_data.dart';
+import 'package:flutter_applicationdemo/reusables/input_field.dart';
 
 import 'package:flutter_applicationdemo/mysql.dart';
-import 'HomePage.dart';
+import 'home_page.dart';
 
 class ManageAccountPage extends StatefulWidget {
   @override

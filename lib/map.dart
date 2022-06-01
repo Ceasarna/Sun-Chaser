@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_applicationdemo/BottomNavPage.dart';
-import 'package:flutter_applicationdemo/WebScraper.dart';
+import 'package:flutter_applicationdemo/bottom_nav_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
-import 'login/User.dart';
+import 'login/user.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:location/location.dart';
-import 'package:flutter_applicationdemo/login/User.dart';
-import 'SettingsPage.dart';
-import 'venuePage.dart';
-import 'Venue.dart';
+import 'package:flutter_applicationdemo/login/user.dart';
+import 'settings_page.dart';
+import 'venue_page.dart';
+import 'venue.dart';
 import 'globals.dart' as globals;
 
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-import 'FeedbackPage.dart';
-import 'login/CreateAccountPage.dart';
-import 'login/signInPage.dart';
+import 'feedback_page.dart';
+import 'login/create_account_page.dart';
+import 'login/sign_in_page.dart';
 
 class Map extends StatefulWidget {
   @override
@@ -61,25 +60,6 @@ class MapState extends State<Map> {
 
   initialize() {
     hiddenVenues.addAll(globals.VENUES);
-  }
-
-  void createBottomSheet(String venueName) async {
-    var webScraper = WebScraper();
-    await webScraper.getWebsiteData(venueName);
-    Scaffold.of(context).showBottomSheet<void>(((context) {
-      return Container(
-        height: 420,
-        color: Colors.white,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(webScraper.openingHoursThisWeek.length.toString()),
-          ],
-        )),
-      );
-    }));
   }
 
   Future<LocationData> _getLocationPermission() async {
@@ -170,8 +150,6 @@ class MapState extends State<Map> {
               closeBottomSheetIfOpen();
             },
           ),
-          // ElevatedButton(onPressed: () {} //_handelPressButton
-          //  ,child: const Text("Search Placses"))
         ],
       ),
       floatingActionButton: Padding(
@@ -362,7 +340,7 @@ class MapState extends State<Map> {
         Marker marker = Marker(
             markerId: MarkerId(globals.VENUES[i].venueID.toString()),
             position: globals.VENUES[i].position,
-            onTap: () => createBottomDrawer(globals.VENUES[i]),
+            onTap: () => createBottomSheet(globals.VENUES[i]),
             icon: globals.VENUES[i].drawIconColor());
         globals.VENUES[i].isShownOnMap = true;
         closeByMarkersList.add(marker);
@@ -370,7 +348,7 @@ class MapState extends State<Map> {
     }
   }
 
-  createBottomDrawer(Venue venue) async {
+  createBottomSheet(Venue venue) async {
     _bottomSheetIsOpen = true;
     // Scaffold.of(context).showBottomSheet<void>(((context) {
     showModalBottomSheet(

@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'globals.dart' as globals;
-import 'package:flutter_applicationdemo/Venue.dart';
-import 'VenuePage.dart';
+import 'package:flutter_applicationdemo/venue.dart';
+import 'venue_page.dart';
 
 class ListViewPage extends StatefulWidget {
   const ListViewPage({Key? key}) : super(key: key);

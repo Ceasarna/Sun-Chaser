@@ -1,14 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_applicationdemo/BottomNavPage.dart';
-import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
+import 'package:flutter_applicationdemo/bottom_nav_page.dart';
+import 'package:flutter_applicationdemo/login/google_sign_in_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'ManageAccountPage.dart';
-import 'login/GoogleSignInProvider.dart';
+import 'manage_account_page.dart';
+import 'login/google_sign_in_provider.dart';
 import 'package:provider/provider.dart';
-import 'FeedbackPage.dart';
+import 'feedback_page.dart';
 
 // Standard color of app
 Color _backgroundColor = const Color.fromARGB(255, 190, 146, 160);
