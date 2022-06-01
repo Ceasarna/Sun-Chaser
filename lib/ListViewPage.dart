@@ -11,10 +11,11 @@ class ListViewPage extends StatefulWidget {
   const ListViewPage({Key? key}) : super(key: key);
 
   @override
-  State<ListViewPage> createState() => _ListViewPageState();
+  State<ListViewPage> createState() => ListViewPageState();
 }
 
-class _ListViewPageState extends State<ListViewPage> {
+@visibleForTesting
+class ListViewPageState extends State<ListViewPage> {
   final List<Venue> allVenues = globals.VENUES;
 
   @override

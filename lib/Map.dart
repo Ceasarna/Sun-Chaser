@@ -1,22 +1,12 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_applicationdemo/BottomNavPage.dart';
-import 'package:flutter_applicationdemo/ListViewPage.dart';
-import 'package:flutter_applicationdemo/WeatherData.dart';
 import 'package:flutter_applicationdemo/WebScraper.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_applicationdemo/HomePage.dart';
 import 'dart:async';
 import 'login/User.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/retry.dart';
-import 'package:intl/number_symbols.dart';
 import 'package:location/location.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_applicationdemo/login/User.dart';
 import 'SettingsPage.dart';
 import 'venuePage.dart';
@@ -25,7 +15,6 @@ import 'globals.dart' as globals;
 
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
-import 'HomePage.dart';
 import 'FeedbackPage.dart';
 import 'login/CreateAccountPage.dart';
 import 'login/signInPage.dart';
@@ -37,7 +26,7 @@ class Map extends StatefulWidget {
 
 const kGoogleApiKey = "AIzaSyAUmhd6Xxud8SwgDxJ4LlYlcntm01FGoSk";
 
-final homeSacffoldKey = GlobalKey<ScaffoldState>();
+final homeScaffoldKey = GlobalKey<ScaffoldState>();
 
 late CameraPosition _currentCameraPosition;
 
@@ -77,8 +66,7 @@ class MapState extends State<Map> {
   void createBottomSheet(String venueName) async {
     var webScraper = WebScraper();
     await webScraper.getWebsiteData(venueName);
-    Scaffold.of(context).showBottomSheet<void>(
-        ((context) {
+    Scaffold.of(context).showBottomSheet<void>(((context) {
       return Container(
         height: 420,
         color: Colors.white,
@@ -87,13 +75,7 @@ class MapState extends State<Map> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            /*const Text('BottomSheet'),
-                        ElevatedButton(
-                          child: const Text('Close BottomSheet'),
-                          onPressed: () {Navigator.pop(context);})*/
-            Container(
-              child: Text(webScraper.openingHoursThisWeek.length.toString()),
-            ),
+            Text(webScraper.openingHoursThisWeek.length.toString()),
           ],
         )),
       );
@@ -139,6 +121,7 @@ class MapState extends State<Map> {
   final Mode _mode = Mode.fullscreen;
 
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     _currentCameraPosition = _stockholmCity;
@@ -146,27 +129,29 @@ class MapState extends State<Map> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Sun chasers"),
-        key: homeSacffoldKey,
+        key: homeScaffoldKey,
         actions: <Widget>[createFilterMenuButton()],
         backgroundColor: const Color.fromARGB(255, 190, 146, 160),
       ),
-      drawer : Drawer(
+      drawer: Drawer(
         child: Container(
-          child: globals.LOGGED_IN_USER.userID == 0 ? buildDrawerSignedOut(context) : buildDrawerSignedIn(context),
+          child: globals.LOGGED_IN_USER.userID == 0
+              ? buildDrawerSignedOut(context)
+              : buildDrawerSignedIn(context),
         ),
       ),
-
-      body: Stack (
+      body: Stack(
         children: [
           GoogleMap(
             cameraTargetBounds: CameraTargetBounds(LatLngBounds(
                 northeast: const LatLng(59.3474696569038, 18.1001602476002147),
-                southwest: const LatLng(59.297332547922636, 17.999522500277884))),
+                southwest:
+                    const LatLng(59.297332547922636, 17.999522500277884))),
             minMaxZoomPreference: MinMaxZoomPreference(12.5, 18.5),
-            onCameraMove: (CameraPosition camera){
+            onCameraMove: (CameraPosition camera) {
               _currentCameraPosition = camera;
             },
-            onCameraIdle: (){
+            onCameraIdle: () {
               (context as Element).reassemble();
               removeMarkersOutOfRange();
               addMarkersInRange();
@@ -185,8 +170,8 @@ class MapState extends State<Map> {
               closeBottomSheetIfOpen();
             },
           ),
-         // ElevatedButton(onPressed: () {} //_handelPressButton
-        //  ,child: const Text("Search Placses"))
+          // ElevatedButton(onPressed: () {} //_handelPressButton
+          //  ,child: const Text("Search Placses"))
         ],
       ),
       floatingActionButton: Padding(
@@ -298,8 +283,8 @@ class MapState extends State<Map> {
                         ));
                   }),
                 ],
-    ),
-  )));
+              ),
+            )));
   }
 
   PopupMenuItem<dynamic> createPriceSlider() {
@@ -339,43 +324,6 @@ class MapState extends State<Map> {
         CameraPosition(target: LatLng(lat, lng), zoom: 14.5)));
   }
 
-  Widget _boxes(double lat, double lng, String restaurantName) {
-    return GestureDetector(
-      onTap: () {
-        _gotoLocation(lat, lng);
-      },
-      child: Container(
-          child: FittedBox(
-        child: Material(
-          color: Colors.white,
-          elevation: 14.0,
-          borderRadius: BorderRadius.circular(24.0),
-          shadowColor: Color(0x802196F3),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                width: 250,
-                height: 200,
-                child: ClipRRect(
-                  borderRadius: new BorderRadius.circular(24.0),
-                  child:
-                      const Image(image: AssetImage('assets/images/bild.png')),
-                ),
-              ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(restaurantName),
-                ),
-              )
-            ],
-          ),
-        ),
-      )),
-    );
-  }
-
   Future<void> _goToCurrentPosition(LatLng latlng) async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
@@ -386,26 +334,36 @@ class MapState extends State<Map> {
   }
 
   void removeMarkersOutOfRange() {
-    for(int i = 0; i<closeByMarkersList.length; i++){
+    for (int i = 0; i < closeByMarkersList.length; i++) {
       Marker marker = closeByMarkersList[i];
-      globals.venueAlreadyAdded(globals.getVenueByID(int.parse(marker.markerId.value))!.venueName);
-      if(marker.position.longitude - _currentCameraPosition.target.longitude > 0.02 || marker.position.latitude - _currentCameraPosition.target.latitude > 0.02){
+      globals.venueAlreadyAdded(
+          globals.getVenueByID(int.parse(marker.markerId.value))!.venueName);
+      if (marker.position.longitude - _currentCameraPosition.target.longitude >
+              0.02 ||
+          marker.position.latitude - _currentCameraPosition.target.latitude >
+              0.02) {
         closeByMarkersList.remove(marker);
-        globals.getVenueByID(int.parse(marker.markerId.value))?.isShownOnMap = false;
+        globals.getVenueByID(int.parse(marker.markerId.value))?.isShownOnMap =
+            false;
         i--;
       }
     }
   }
 
   void addMarkersInRange() {
-    for(int i = 0; i< globals.VENUES.length; i++){
-      if(!globals.VENUES[i].isShownOnMap && (globals.VENUES[i].position.longitude - _currentCameraPosition.target.longitude < 0.02 && globals.VENUES[i].position.latitude - _currentCameraPosition.target.latitude < 0.02)){
+    for (int i = 0; i < globals.VENUES.length; i++) {
+      if (!globals.VENUES[i].isShownOnMap &&
+          (globals.VENUES[i].position.longitude -
+                      _currentCameraPosition.target.longitude <
+                  0.02 &&
+              globals.VENUES[i].position.latitude -
+                      _currentCameraPosition.target.latitude <
+                  0.02)) {
         Marker marker = Marker(
             markerId: MarkerId(globals.VENUES[i].venueID.toString()),
             position: globals.VENUES[i].position,
             onTap: () => createBottomDrawer(globals.VENUES[i]),
-            icon: globals.VENUES[i].drawIconColor()
-        );
+            icon: globals.VENUES[i].drawIconColor());
         globals.VENUES[i].isShownOnMap = true;
         closeByMarkersList.add(marker);
       }
@@ -415,27 +373,29 @@ class MapState extends State<Map> {
   createBottomDrawer(Venue venue) async {
     _bottomSheetIsOpen = true;
     // Scaffold.of(context).showBottomSheet<void>(((context) {
-    showModalBottomSheet(context: context, builder: (BuildContext context) {
-      return InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => VenuePage(venue)),
-          );
-        },
-        child: Container(
-          height: 175,
-          color: const Color(0xFFF5F5F5),
-          child: Center(
-            child: Column(
-              children: [
-                bottomSheetWidgetContainer(venue, context),
-              ],
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => VenuePage(venue)),
+              );
+            },
+            child: Container(
+              height: 175,
+              color: const Color(0xFFF5F5F5),
+              child: Center(
+                child: Column(
+                  children: [
+                    bottomSheetWidgetContainer(venue, context),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-      );
-    });
+          );
+        });
   }
 
   Container bottomSheetWidgetContainer(Venue venue, BuildContext context) {
@@ -454,7 +414,6 @@ class MapState extends State<Map> {
                 ],
               ),
               // columnCoveringRating(),
-
             ],
           ),
           const SizedBox(
@@ -465,8 +424,8 @@ class MapState extends State<Map> {
             children: [
               Column(
                 children: const [
-                  weatherIconRow(),
-                  weatherStatusRow(),
+                  WeatherIconRow(),
+                  WeatherStatusRow(),
                 ],
               ),
               columnHandlingReadMoreButton(context, venue),
@@ -544,45 +503,14 @@ class MapState extends State<Map> {
   }
 
   void setAllMarkersAsInvisible() {
-    for(Venue venue in hiddenVenues){
+    for (Venue venue in hiddenVenues) {
       venue.isShownOnMap = false;
     }
   }
-/*
- Future<void> _handelPressButton() async {
-    Prediction? p = await PlacesAutocomplete.show(
-                          context: context,
-                          apiKey: kGoogleApiKey,
-                          mode: _mode, // Mode.fullscreen
-                          language: "en",
-                          strictbounds: false,
-                          decoration: InputDecoration(
-                            hintText:'serach',
-                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: Colors.white))
-                          ),
-                          types: [""],
-                          components: [Component(Component.country, "se")]);
-    if (p != null) {
-      displayPrediction(p,homeSacffoldKey.currentState);
-    }
-  }
-  Future<void> displayPrediction(Prediction p, ScaffoldState? currentState) async {
-    GoogleMapsPlaces places = GoogleMapsPlaces(
-      apiKey: kGoogleApiKey,
-      apiHeaders: await const GoogleApiHeaders().getHeaders()
-    );
-    PlacesDetailsResponse detail = await places.getDetailsByPlaceId(p.placeId!);
-    final lat = detail.result.geometry!.location.lat;
-    final lng = detail.result.geometry!.location.lng;
-    markersList.clear();
-    markersList.add(Marker(markerId: const MarkerId("0"), position: LatLng(lat, lng), infoWindow: InfoWindow(title: detail.result.name)));
-    setState(() {});
-    googleMapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat,lng), 14.0));
-  }*/
 }
 
-class weatherIconRow extends StatelessWidget {
-  const weatherIconRow({
+class WeatherIconRow extends StatelessWidget {
+  const WeatherIconRow({
     Key? key,
   }) : super(key: key);
 
@@ -600,8 +528,8 @@ class weatherIconRow extends StatelessWidget {
   }
 }
 
-class weatherStatusRow extends StatelessWidget {
-  const weatherStatusRow({
+class WeatherStatusRow extends StatelessWidget {
+  const WeatherStatusRow({
     Key? key,
   }) : super(key: key);
 
@@ -647,34 +575,14 @@ Widget buildDrawerSignedIn(BuildContext context) {
             globals.LOGGED_IN_USER = User(0, "", "");
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BottomNavPage()), //Replace Container() with call to Map-page.
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.thumb_up_alt),
-          title: Text('Give feedback'),
-          onTap: () {
-            Navigator.push(
-              context,
               MaterialPageRoute(
-                builder: (context) => FormForFeedback(),
-              ),
+                  builder: (context) =>
+                      BottomNavPage()), //Replace Container() with call to Map-page.
             );
           },
         ),
-        ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Settings'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingsPage(),
-              ),
-            );
-          },
-        ),
+        giveFeedbackTile(context),
+        settingsTile(context),
       ],
     ),
   );
@@ -685,76 +593,87 @@ Widget buildDrawerSignedOut(BuildContext context) {
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
-        DrawerHeader(
-          decoration:
-              const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
-          child: Column(
-            children: const <Widget>[
-              Text(
-                'Sun Chaser',
-                style: TextStyle(fontSize: 32),
-              ),
-              SizedBox(height: 30),
-            ],
-          ),
-        ),
-        ListTile(
-          leading: Icon(Icons.account_box_rounded),
-          title: Text('Create account'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreateAccountPage(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.login),
-          title: Text('Sign in'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SignInPage(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.thumb_up_alt),
-          title: Text('Give feedback'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FormForFeedback(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Settings'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingsPage(),
-              ),
-            );
-          },
-        ),
+        drawerHeader(),
+        createAccountTile(context),
+        logInTile(context),
+        giveFeedbackTile(context),
+        settingsTile(context),
       ],
     ),
   );
 }
 
-class _Marker {
-  var Plats_1;
-  var Gatunr_1;
-  var coordinates;
+DrawerHeader drawerHeader() {
+  return DrawerHeader(
+    decoration: const BoxDecoration(color: Color.fromARGB(255, 190, 146, 160)),
+    child: Column(
+      children: const <Widget>[
+        Text(
+          'Sun Chaser',
+          style: TextStyle(fontSize: 32),
+        ),
+        SizedBox(height: 30),
+      ],
+    ),
+  );
+}
 
-  _Marker(this.Plats_1, this.Gatunr_1, this.coordinates);
+ListTile settingsTile(BuildContext context) {
+  return ListTile(
+    leading: Icon(Icons.settings),
+    title: Text('Settings'),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SettingsPage(),
+        ),
+      );
+    },
+  );
+}
+
+ListTile giveFeedbackTile(BuildContext context) {
+  return ListTile(
+    leading: Icon(Icons.thumb_up_alt),
+    title: Text('Give feedback'),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FormForFeedback(),
+        ),
+      );
+    },
+  );
+}
+
+ListTile logInTile(BuildContext context) {
+  return ListTile(
+    leading: Icon(Icons.login),
+    title: Text('Sign in'),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SignInPage(),
+        ),
+      );
+    },
+  );
+}
+
+ListTile createAccountTile(BuildContext context) {
+  return ListTile(
+    leading: Icon(Icons.account_box_rounded),
+    title: Text('Create account'),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CreateAccountPage(),
+        ),
+      );
+    },
+  );
 }

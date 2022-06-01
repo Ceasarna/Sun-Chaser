@@ -19,24 +19,18 @@ class VenuePage extends StatefulWidget {
   final Venue venue;
 
   @override
-  State<VenuePage> createState() => _VenuePageState(venue);
+  State<VenuePage> createState() => VenuePageState(venue);
 }
 
-class _VenuePageState extends State<VenuePage> {
+@visibleForTesting
+class VenuePageState extends State<VenuePage> {
   late WeatherData currentWeather;
   final String imageLink = '';
   late final Venue venue;
   late VenueInfo venueInfo;
 
-  _VenuePageState(this.venue);
+  VenuePageState(this.venue);
 
-  validateAndGetImageLink() {
-    if (imageLink == '') {
-      return 'https://live.staticflickr.com/6205/6081773215_19444220b6_b.jpg';
-    } else {
-      return imageLink;
-    }
-  }
 
   @override
   void initState() {
@@ -64,7 +58,7 @@ class _VenuePageState extends State<VenuePage> {
 
       setState(() {
         globals.forecast = tempWeather;
-        currentWeather = tempWeather; //Could be a widget instead??
+        currentWeather = tempWeather;
       });
     } else {
       throw const HttpException("Problem fetching the weather data");
