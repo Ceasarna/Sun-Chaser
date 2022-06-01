@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_applicationdemo/venuePage.dart';
-import 'Venue.dart';
+import 'package:flutter_applicationdemo/venue_page.dart';
+import 'venue.dart';
 import 'globals.dart' as globals;
-import 'login/signInPage.dart';
+import 'login/sign_in_page.dart';
 import 'mysql.dart';
 
 

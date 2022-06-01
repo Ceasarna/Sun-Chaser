@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import 'globals.dart' as globals;
-import 'package:flutter_applicationdemo/Venue.dart';
-import 'VenuePage.dart';
+import 'package:flutter_applicationdemo/venue.dart';
+import 'venue_page.dart';
 
 class ListViewPage extends StatefulWidget {
   const ListViewPage({Key? key}) : super(key: key);
 
   @override
-  State<ListViewPage> createState() => _ListViewPageState();
+  State<ListViewPage> createState() => ListViewPageState();
 }
 
-class _ListViewPageState extends State<ListViewPage> {
+@visibleForTesting
+class ListViewPageState extends State<ListViewPage> {
   final List<Venue> allVenues = globals.VENUES;
 
   @override

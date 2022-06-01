@@ -4,25 +4,33 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_applicationdemo/login/GoogleSignInProvider.dart';
+import 'package:flutter_applicationdemo/shadow_detector.dart';
+import 'package:flutter_applicationdemo/login/google_sign_in_provider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
-import 'BottomNavPage.dart';
-import 'WeatherData.dart';
-import 'Venue.dart';
+import 'bottom_nav_page.dart';
+import 'weather_data.dart';
+import 'venue.dart';
 import 'mysql.dart';
 import 'globals.dart' as globals;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //await loadAllVenues();
-  //await fetchWeather();
+  // await loadAllVenues();
+  // await fetchWeather();
+  await weatherInstance();
   await loadAllVenuesSQL();
 
   runApp(MyApp());
+}
+
+Future weatherInstance() async{
+  WeatherData weather = WeatherData(3, 12);
+  globals.forecast = weather;
+
 }
 
 Future fetchWeather() async {
@@ -71,7 +79,7 @@ Future loadAllVenues() async {
     // var sd = ShadowDetector();
     // await sd.evaluateShadowsForAllVenues(seventyFiveVenues);
   } else {
-    //throw const HttpException("Problem fetching the venue data");
+    throw const HttpException("Problem fetching the venue data");
   }
 }
 

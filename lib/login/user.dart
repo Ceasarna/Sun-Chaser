@@ -1,4 +1,4 @@
-import 'package:flutter_applicationdemo/Venue.dart';
+import 'package:flutter_applicationdemo/venue.dart';
 import 'package:flutter_applicationdemo/mysql.dart';
 import 'package:flutter_applicationdemo/globals.dart' as globals;
 
@@ -33,9 +33,6 @@ class User{
           }
         }
       });
-      for(Venue venue in likedVenuesList){
-        print(venue.venueName);
-      }
     });
   }
 }

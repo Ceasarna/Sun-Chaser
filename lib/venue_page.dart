@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:share_plus/share_plus.dart';
-import 'package:flutter_applicationdemo/Venue.dart';
+import 'package:flutter_applicationdemo/venue.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'VenueInfo.dart';
-import 'WeatherData.dart';
+import 'venue_info.dart';
+import 'weather_data.dart';
 import 'globals.dart' as globals;
-import 'Venue.dart';
+import 'venue.dart';
 
 // Color _backgroundColor = const Color(0xffac7b84);
 
@@ -18,24 +18,18 @@ class VenuePage extends StatefulWidget {
   final Venue venue;
 
   @override
-  State<VenuePage> createState() => _VenuePageState(venue);
+  State<VenuePage> createState() => VenuePageState(venue);
 }
 
-class _VenuePageState extends State<VenuePage> {
+@visibleForTesting
+class VenuePageState extends State<VenuePage> {
   late WeatherData currentWeather;
   final String imageLink = '';
   late final Venue venue;
   late VenueInfo venueInfo;
 
-  _VenuePageState(this.venue);
+  VenuePageState(this.venue);
 
-  validateAndGetImageLink() {
-    if (imageLink == '') {
-      return 'https://live.staticflickr.com/6205/6081773215_19444220b6_b.jpg';
-    } else {
-      return imageLink;
-    }
-  }
 
   @override
   void initState() {
@@ -43,9 +37,9 @@ class _VenuePageState extends State<VenuePage> {
   }
 
   Future gatherVenueInfo() async {
-    VenueInfo vu = VenueInfo();
-    venueInfo = vu;
-    venueInfo = await vu.getVenueInfo(venue);
+    VenueInfo vi = VenueInfo();
+    venueInfo = vi;
+    venueInfo = await vi.getVenueInfo(venue);
   }
 
   Future refreshWeather() async {
@@ -63,7 +57,7 @@ class _VenuePageState extends State<VenuePage> {
 
       setState(() {
         globals.forecast = tempWeather;
-        currentWeather = tempWeather; //Could be a widget instead??
+        currentWeather = tempWeather;
       });
     } else {
       throw const HttpException("Problem fetching the weather data");
@@ -269,7 +263,7 @@ class LikeVenueButton extends StatelessWidget {
           ),
           label: const Text('Like place'),
           style: TextButton.styleFrom(
-            primary: Color(0xff4f6272),
+            primary: const Color(0xff4f6272),
           ),
         )): Expanded(
           child: TextButton.icon(

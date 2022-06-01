@@ -1,14 +1,10 @@
-import 'package:flutter_applicationdemo/WeatherData.dart';
-
-import 'Venue.dart';
-import 'package:flutter_applicationdemo/login/User.dart';
-import '../login/User.dart';
+import 'package:flutter_applicationdemo/weather_data.dart';
+import 'venue.dart';
+import 'package:flutter_applicationdemo/login/user.dart';
+import '../login/user.dart';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-import 'Venue.dart';
-import 'main.dart';
 
 User LOGGED_IN_USER = User(0, "", "");
 Color BACKGROUNDCOLOR = const Color.fromARGB(255, 190, 146, 160);

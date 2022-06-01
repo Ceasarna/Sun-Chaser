@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_applicationdemo/mysql.dart';
-import 'BottomNavPage.dart';
+import 'bottom_nav_page.dart';
 import 'package:flutter/material.dart';
-import 'Form.dart';
+import 'form.dart';
 
 
 Color _backgroundColor = const Color.fromARGB(255, 190, 146, 160);

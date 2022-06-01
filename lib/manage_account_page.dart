@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_applicationdemo/BottomNavPage.dart';
-import 'package:flutter_applicationdemo/login/EncryptData.dart';
-import 'package:flutter_applicationdemo/reusables/InputField.dart';
+import 'package:flutter_applicationdemo/login/encrypt_data.dart';
+import 'package:flutter_applicationdemo/reusables/input_field.dart';
 import 'package:flutter_applicationdemo/globals.dart' as globals;
 import 'package:flutter_applicationdemo/mysql.dart';
+
+import 'bottom_nav_page.dart';
 
 class ManageAccountPage extends StatefulWidget {
   @override
@@ -21,8 +22,8 @@ class ManageAccountPageState extends State<ManageAccountPage> {
   Widget _buildPasswordFiled(TextEditingController controller) {
     return InputField(
       text: "New password",
-      isPassword: true, 
-      icon: const Icon(Icons.lock), 
+      isPassword: true,
+      icon: const Icon(Icons.lock),
       controller: controller
       );
   }

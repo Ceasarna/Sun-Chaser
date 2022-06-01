@@ -1,11 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:html/dom.dart' as dom;
 import 'package:intl/intl.dart';
 import 'dart:io';
 
-import 'Venue.dart';
+import 'venue.dart';
 
 class VenueInfo {
 
@@ -65,55 +64,6 @@ class VenueInfo {
       throw const HttpException("No connection to api.foursquare.com");
     }
 }
-
-  /*Future getVenueInfo(String venueName) async {
-
-    final fourSquareURL =
-    Uri.parse('https://foursquare.com/explore?mode=url&near=Stockholm%2C%20Sweden&nearGeoId=72057594040601666&q=$venueName');
-
-    final response1 = await http.get(fourSquareURL);
-    if(response1.statusCode == 200) {
-      dom.Document html = dom.Document.html(response1.body);
-
-      var fsqId = html.getElementsByClassName('card singleRecommendation hasPhoto tipWithLogging leftPhotoLayout').map((e) => e.attributes['data-id']).toList()[0];
-
-      final response2 = await http.get(
-        Uri.parse('https://api.foursquare.com/v3/places/$fsqId?fields=price%2Crating%2Cphotos%2Chours%2Cstats%2Ctastes'),
-        headers: {
-          HttpHeaders.authorizationHeader: 'fsq3LBbeZ8imQK8X1hov7DTb9F64Xs1fs2bojHQ99QNm4TE='
-        },
-      );
-
-      if(response2.statusCode == 200) {
-        Map data = jsonDecode(response2.body);
-        if(data['price'] != null) {
-          _priceClass = data['price'];
-        }
-        if(data['rating'] != null) {
-          _rating = data['rating'];
-        }
-        if(data['photos'][0] != null) {
-          _photos = data['photos'][0];
-        }
-        if(data['hours']['open now'] != null) {
-          _openNow = data['hours']['open_now'];
-        }
-        if(data['stats']['total_ratings'] != null) {
-          _totalRatings = data['stats']['total_ratings'];
-        }
-        if(data['hours']['display'] != null) {
-          _openHoursToday = data['hours']['display'];
-        }
-      }
-      else {
-        throw const HttpException("No connection to api.foursquare.com");
-      }
-    }
-    else {
-      throw const HttpException("No connection to foursquare.com");
-    }
-  }*/
-
 
   String getPopularHoursToday() {
     var today = DateFormat('EEEE').format(DateTime.now());
@@ -189,17 +139,4 @@ class VenueInfo {
   String getVenueURL () {
     return 'https://api.foursquare.com$_fsqLink';
   }
-
-}
-
-
-enum WeekDays {
-  monday,
-  tuesday,
-  wednesday,
-  thursday,
-  friday,
-  saturday,
-  sunday,
-
 }

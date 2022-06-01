@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:flutter_applicationdemo/ManageAccountPage.dart';
+import 'package:flutter_applicationdemo/manage_account_page.dart';
 
 void main() {
   group('ManageAccountPage', () {
