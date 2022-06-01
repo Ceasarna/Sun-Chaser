@@ -1,5 +1,5 @@
-import 'package:flutter_applicationdemo/ListViewPage.dart';
-import 'package:flutter_applicationdemo/Venue.dart';
+import 'package:flutter_applicationdemo/list_view_page.dart';
+import 'package:flutter_applicationdemo/venue.dart';
 import 'package:flutter_applicationdemo/globals.dart' as globals;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
