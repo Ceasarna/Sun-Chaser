@@ -24,11 +24,18 @@ import 'globals.dart' as globals;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await loadAllVenues();
-  await fetchWeather();
+  // await loadAllVenues();
+  // await fetchWeather();
+  await weatherInstance();
   await loadAllVenuesSQL();
 
   runApp(MyApp());
+}
+
+Future weatherInstance() async{
+  WeatherData weather = WeatherData(3, 12);
+  globals.forecast = weather;
+
 }
 
 Future fetchWeather() async {
