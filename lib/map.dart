@@ -26,7 +26,7 @@ final homeScaffoldKey = GlobalKey<ScaffoldState>();
 late CameraPosition _currentCameraPosition;
 
 class MapState extends State<Map> {
-  bool _bottomSheetIsOpen = false;
+  // bool _bottomSheetIsOpen = false;
 
   final Completer<GoogleMapController> _controller = Completer();
   bool? _barFilterValue = true;
@@ -143,7 +143,7 @@ class MapState extends State<Map> {
             },
             markers: closeByMarkersList.map((e) => e).toSet(),
             onTap: (LatLng) {
-              closeBottomSheetIfOpen();
+              // closeBottomSheetIfOpen();
             },
           ),
         ],
@@ -334,7 +334,6 @@ class MapState extends State<Map> {
   }
 
   createBottomSheet(Venue venue) async {
-    _bottomSheetIsOpen = true;
     // Scaffold.of(context).showBottomSheet<void>(((context) {
     showModalBottomSheet(
         context: context,
@@ -425,7 +424,6 @@ class MapState extends State<Map> {
       onPressed: () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => VenuePage(venue)));
-        _bottomSheetIsOpen = false;
       },
       style: ElevatedButton.styleFrom(
         primary: globals.BUTTONCOLOR,
@@ -458,12 +456,12 @@ class MapState extends State<Map> {
     );
   }
 
-  closeBottomSheetIfOpen() {
+/*  closeBottomSheetIfOpen() {
     if (_bottomSheetIsOpen) {
       Navigator.pop(context);
       _bottomSheetIsOpen = false;
     }
-  }
+  }*/
 
   void setAllMarkersAsInvisible() {
     for (Venue venue in hiddenVenues) {

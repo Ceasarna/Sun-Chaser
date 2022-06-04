@@ -21,7 +21,7 @@ void main() async {
   await Firebase.initializeApp();
   await loadAllVenues();
   await fetchWeather();
-  await weatherInstance();
+  // await weatherInstance();
   await loadAllVenuesSQL();
 
   runApp(MyApp());
